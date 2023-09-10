@@ -1,1 +1,4 @@
-print("Let's make my own config, no frameworks!")
+print("Mi propia configuración se viene")
+
+
+require("daviddeadly")
