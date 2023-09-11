@@ -1,3 +1,5 @@
 return {
-	"theprimeagen/vim-be-good"
+	"theprimeagen/vim-be-good",
+
+	{ "JoosepAlviste/nvim-ts-context-commentstring", lazy = true }
 }

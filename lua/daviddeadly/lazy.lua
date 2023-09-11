@@ -13,3 +13,5 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup("daviddeadly.plugins")
+
+vim.keymap.set('n', '<leader>l', vim.cmd.Lazy, { desc = 'open lazy' })
