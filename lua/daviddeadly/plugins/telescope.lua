@@ -10,7 +10,7 @@ return {
 			find_files = {
 				prompt_prefix = '🔍 ',
 			}
-		}
+		},
 	},
 	keys = {
 		{  '<leader>ff', '<cmd>Telescope find_files<cr>', desc = '[f]ind [f]iles' },
@@ -23,5 +23,5 @@ return {
 		{  '<leader>fc', '<cmd>Telescope colorscheme<cr>', desc = '[f]ind [c]olorscheme' },
 		{  '<leader>ltb', '<cmd>Telescope builtin<cr>', desc = '[l]ist [t]elescope [b]uiltin' },
 		{  '<leader>ks', '<cmd>Telescope keymaps<cr>', desc = '[k]ey[m]aps' },
-	}
+	},
 }
