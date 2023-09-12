@@ -1,16 +1,12 @@
 return {
   'theprimeagen/harpoon',
-  event = { "BufReadPre", "BufNewFile" },
-  config = function()
-    local mark = require('harpoon.mark')
-    local ui = require('harpoon.ui')
+  keys = {
+    { '<A-a>', function() require('harpoon.mark').add_file() end, desc = 'harpoon file' },
+    { '<C-e>', function() require('harpoon.ui').toggle_quick_menu() end, desc = 'harpoon menu' },
 
-    vim.keymap.set('n', '<A-a>', mark.add_file, { desc = 'harpoon file' })
-    vim.keymap.set('n', '<C-e>', ui.toggle_quick_menu, { desc = 'harpoon menu' })
-
-    vim.keymap.set('n', '<C-1>', function() ui.nav_file(1) end, { desc = 'harpoon first file' })
-    vim.keymap.set('n', '<C-2>', function() ui.nav_file(2) end, { desc = 'harpoon second file' })
-    vim.keymap.set('n', '<C-3>', function() ui.nav_file(3) end, { desc = 'harpoon third file' })
-    vim.keymap.set('n', '<C-4>', function() ui.nav_file(4) end, { desc = 'harpoon fourth file' })
-  end,
+    { '<C-1>', function() require('harpoon.ui').nav_file(1) end, desc = 'harpoon first file' },
+    { '<C-2>', function() require('harpoon.ui').nav_file(2) end, desc = 'harpoon second file' },
+    { '<C-3>', function() require('harpoon.ui').nav_file(3) end, desc = 'harpoon third file' },
+    { '<C-4>', function() require('harpoon.ui').nav_file(4) end, desc = 'harpoon fourth file' },
+  },
 }

@@ -34,7 +34,6 @@ end
 
 return {
   "folke/flash.nvim",
-  event = "VeryLazy",
   opts = {},
   -- stylua: ignore
   keys = {

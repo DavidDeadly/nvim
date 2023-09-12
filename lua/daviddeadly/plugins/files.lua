@@ -1,5 +1,6 @@
 return {
   'echasnovski/mini.files', version = '*',
+  dependencies = { 'nvim-tree/nvim-web-devicons', opt = true },
   opts = {
     options = {
       permanent_delete = true,
