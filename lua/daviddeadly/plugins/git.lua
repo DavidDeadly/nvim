@@ -24,6 +24,11 @@ return {
       on_attach = function(bufnr)
         local gs = package.loaded.gitsigns
 
+        local stage_selected_line = function() gs.stage_hunk {vim.fn.line('.'), vim.fn.line('v')} end
+        local reset_selected_line = function() gs.reset_hunk {vim.fn.line('.'), vim.fn.line('v')} end
+        local full_git_blame = function() gs.blame_line{full=true} end
+        local remote_gitdiff = function() gs.diffthis('~') end
+
         local function map(mode, l, r, opts)
           opts = opts or {}
           opts.buffer = bufnr
@@ -47,15 +52,15 @@ return {
         map('n', '<leader>hs', gs.stage_hunk, { desc = 'Stage hunk' })
         map('n', '<leader>hr', gs.reset_hunk, { desc = 'Reset hunk' })
         map('n', '<leader>hu', gs.undo_stage_hunk, { desc = 'Undo Stage hunk' })
-        map('v', '<leader>hs', function() gs.stage_hunk {vim.fn.line('.'), vim.fn.line('v')} end, { desc = 'Stage line' })
-        map('v', '<leader>hr', function() gs.reset_hunk {vim.fn.line('.'), vim.fn.line('v')} end, { desc = 'Reset line' })
+        map('v', '<leader>hs', stage_selected_line, { desc = 'Stage line' })
+        map('v', '<leader>hr', reset_selected_line, { desc = 'Reset line' })
         map('n', '<leader>hS', gs.stage_buffer, { desc = 'Stage buffer' })
         map('n', '<leader>hR', gs.reset_buffer, { desc = 'Reset buffer' })
         map('n', '<leader>hp', gs.preview_hunk, { desc = 'Preview hunk' })
-        map('n', '<leader>hb', function() gs.blame_line{full=true} end, { desc = 'Full git blame line' })
+        map('n', '<leader>hb', full_git_blame, { desc = 'Full git blame line' })
         map('n', '<leader>tb', gs.toggle_current_line_blame, { desc = 'Toggle current line git blame' })
         map('n', '<leader>hd', gs.diffthis, { desc = 'Local git diff current buffer' })
-        map('n', '<leader>hD', function() gs.diffthis('~') end, { desc = 'Remote git diff current buffer' })
+        map('n', '<leader>hD', remote_gitdiff, { desc = 'Remote git diff current buffer' })
         map('n', '<leader>td', gs.toggle_deleted, { desc = 'Toggle git deletions' })
 
         -- Text object
