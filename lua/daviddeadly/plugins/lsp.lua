@@ -44,6 +44,10 @@ return {
       nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
       nmap('<C-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
 
+      nmap('<leader>vws', vim.lsp.buf.workspace_symbol, '[V]iew [W]orkspace [S]ymbols')
+      nmap('<leader>vd', function() vim.diagnostic.open_float() end, '[V]iew [D]iagnostic float')
+      nmap('[d', function() vim.diagnostic.goto_next() end, 'Next diagnostic')
+      nmap(']d', function() vim.diagnostic.goto_prev() end, 'Previous diagnostic')
       -- Lesser used LSP functionality
       nmap('gD', vim.lsp.buf.declaration, '[g]oto [D]eclaration')
       nmap('<leader>wa', vim.lsp.buf.add_workspace_folder, '[w]orkspace [a]dd Folder')
