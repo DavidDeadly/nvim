@@ -1,5 +1,9 @@
 return {
 	'xiyaowong/nvim-transparent',
+  cmd = "TransparentToggle",
+  init = function ()
+    vim.cmd("TransparentToggle")
+  end,
   opts = {
     extra_groups = {
       "NormalFloat"
