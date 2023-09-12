@@ -12,6 +12,8 @@ return {
     }
   },
 
+	{ "JoosepAlviste/nvim-ts-context-commentstring", lazy = true },
+
   {
     "folke/todo-comments.nvim",
     cmd = { "TodoTrouble", "TodoTelescope" },
