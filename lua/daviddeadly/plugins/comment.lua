@@ -1,7 +1,7 @@
 return {
   {
     'echasnovski/mini.comment',
-    event = "VeryLazy",
+    event = { "BufReadPre", "BufNewFile" },
     version = '*',
     opts = {
       options = {
