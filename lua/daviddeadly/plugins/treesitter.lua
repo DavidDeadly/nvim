@@ -40,10 +40,10 @@ return {
           -- You can use the capture groups defined in textobjects.scm
           ['aa'] = '@parameter.outer',
           ['ia'] = '@parameter.inner',
+          ['ic'] = '@class.inner',
           ['af'] = '@function.outer',
           ['if'] = '@function.inner',
           ['ac'] = '@class.outer',
-          ['ic'] = '@class.inner',
         },
       },
       move = {
