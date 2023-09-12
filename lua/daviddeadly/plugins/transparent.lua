@@ -1,6 +1,6 @@
 return {
 	'xiyaowong/nvim-transparent',
-	keys = {
-		{ "<S-t>", '<cmd>TransparentToggle<cr>', desc = "[T]ranparency toggle" }
-	}
+  config = function ()
+    vim.keymap.set('n', '<A-t>', vim.cmd.TransparentToggle, { desc = '[t]ranparency toggle' })
+  end
 }
