@@ -11,5 +11,9 @@ return {
     dependencies = {
       "nvim-lua/plenary.nvim",
     },
+    keys = {
+      { '<leader>gg', vim.cmd.LazyGitCurrentFile, desc = '[G]it root directory' },
+      { '<leader>gG', vim.cmd.LazyGit, desc = '[G]it current directory' },
+    }
   },
 }
