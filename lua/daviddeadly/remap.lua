@@ -21,8 +21,11 @@ vim.keymap.set('i', '<C-c>', '<Esc>')
 -- I'll make my own
 -- vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
 
-vim.keymap.set('n', '<C-k>', '<cmd>cnext<CR>zz')
-vim.keymap.set('n', '<C-j>', '<cmd>cprev<CR>zz')
+vim.keymap.set('n', '<C-t>', '<cmd>tab split<cr>')
+vim.keymap.set('n', '<C-t><C-n>', '<cmd>tabclose<cr>')
+
+vim.keymap.set('n', '<leader>K', '<cmd>cnext<CR>zz')
+vim.keymap.set('n', '<leader>J', '<cmd>cprev<CR>zz')
 vim.keymap.set('n', '<leader>k', '<cmd>lnext<CR>zz')
 vim.keymap.set('n', '<leader>j', '<cmd>lprev<CR>zz')
 
