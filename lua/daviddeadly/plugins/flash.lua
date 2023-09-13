@@ -33,22 +33,24 @@ local telescope_integration = function (_, opts)
 end
 
 return {
-  "folke/flash.nvim",
-  opts = {},
-  -- stylua: ignore
-  keys = {
-    { "<A-s>", mode = { "n", "o", "x" }, function() require("flash").jump() end, desc = "Flash" },
-    { "<A-S>", mode = { "n", "o", "x" }, function() require("flash").treesitter() end, desc = "Flash Treesitter" },
-    { "<A-r>", mode = "o", function() require("flash").remote() end, desc = "Remote Flash" },
-    { "<A-R>", mode = { "o", "x" }, function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
-    { "<C-s>", mode = { "c" }, function() require("flash").toggle() end, desc = "Toggle Flash Search" },
-    { "<A-w>", function() require("flash").jump({ pattern = vim.fn.expand("<cword>") }) end, desc = "Flash current word" }
+  {
+    "folke/flash.nvim",
+    opts = {},
+    event = "VeryLazy",
+    -- stylua: ignore
+    keys = {
+      { "<A-s>", mode = { "n", "o", "x" }, function() require("flash").jump() end, desc = "Flash" },
+      { "<A-S>", mode = { "n", "o", "x" }, function() require("flash").treesitter() end, desc = "Flash Treesitter" },
+      { "<A-r>", mode = "o", function() require("flash").remote() end, desc = "Remote Flash" },
+      { "<A-R>", mode = { "o", "x" }, function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
+      { "<C-s>", mode = { "c" }, function() require("flash").toggle() end, desc = "Toggle Flash Search" },
+      { "<A-w>", function() require("flash").jump({ pattern = vim.fn.expand("<cword>") }) end, desc = "Flash current word" }
+    },
   },
-  dependencies = {
-    {
-      "nvim-telescope/telescope.nvim",
-      optional = true,
-      opts = telescope_integration
-    }
+
+  {
+    "nvim-telescope/telescope.nvim",
+    optional = true,
+    opts = telescope_integration
   }
 }

@@ -12,6 +12,18 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-require("lazy").setup("daviddeadly.plugins")
+require("lazy").setup("daviddeadly.plugins", {
+  install = {
+    missing = true,
+    colorscheme = { 'catppuccin' },
+  },
+  checker = {
+    enabled = true,
+    notify = false,
+  },
+  change_detection = {
+    notify = false
+  }
+})
 
 vim.keymap.set('n', '<leader>l', vim.cmd.Lazy, { desc = 'open lazy' })
