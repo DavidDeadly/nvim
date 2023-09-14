@@ -1,15 +1,16 @@
 return {
 	'xiyaowong/nvim-transparent',
-  cmd = "TransparentToggle",
+  cmd = 'TransparentToggle',
   init = function ()
     vim.cmd("TransparentToggle")
   end,
   opts = {
-    extra_groups = {
-      "NormalFloat"
-    }
+    groups = {
+      'Normal',
+      'NormalFloat',
+    },
   },
-  config = function ()
-    vim.keymap.set('n', '<A-t>', vim.cmd.TransparentToggle, { desc = '[t]ranparency toggle' })
-  end
+  keys = {
+    { '<A-t>', vim.cmd.TransparentToggle, desc = '[t]ranparency toggle'},
+  },
 }

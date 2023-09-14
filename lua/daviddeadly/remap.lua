@@ -1,11 +1,11 @@
-vim.keymap.set('n', '<leader>E', vim.cmd.Ex, { desc = '[e]xplorer' })
+vim.keymap.set('n', '<A-e>', vim.cmd.Ex, { desc = '[e]xplorer' })
 
-vim.keymap.set('n', '<A-k>', '<cmd>m .-2<cr>==', { desc = 'Move up' })
 vim.keymap.set('n', '<A-j>', '<cmd>m .+1<cr>==', { desc = 'Move down' })
+vim.keymap.set('n', '<A-k>', '<cmd>m .-2<cr>==', { desc = 'Move up' })
 vim.keymap.set('i', '<A-j>', '<esc><cmd>m .+1<cr>==gi', { desc = 'Move down' })
 vim.keymap.set('i', '<A-k>', '<esc><cmd>m .-2<cr>==gi', { desc = 'Move up' })
 vim.keymap.set('v', '<A-j>', [[:m '>+1<CR>gv=gv]], { desc = 'Move down' })
-vim.keymap.set('v', '<A-j>', [[:m '<-2<CR>gv=gv]], { desc = 'Move up' })
+vim.keymap.set('v', '<A-k>', [[:m '<-2<CR>gv=gv]], { desc = 'Move up' })
 
 vim.keymap.set('n', '<C-Up>', '<cmd>resize +2<cr>', { desc = 'Increase window height' })
 vim.keymap.set('n', '<C-Down>', '<cmd>resize -2<cr>', { desc = 'Decrease window height' })
