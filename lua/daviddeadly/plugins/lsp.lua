@@ -9,46 +9,7 @@ return {
     -- Useful status updates for LSP
     -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
     { 'j-hui/fidget.nvim', tag = 'legacy', opts = {} },
-    {
-      'onsails/lspkind.nvim',
-      -- opts = {
-      --   -- defines how annotations are shown
-      --   -- default: symbol
-      --   -- options: 'text', 'text_symbol', 'symbol_text', 'symbol'
-      --   mode = 'symbol_text',
-      --   preset = 'codicons',
-      --
-      --   symbol_map = {
-      --     Text = "󰉿",
-      --     Method = "󰆧",
-      --     Function = "󰊕",
-      --     Constructor = "",
-      --     Field = "󰜢",
-      --     Variable = "󰀫",
-      --     Class = "󰠱",
-      --     Interface = "",
-      --     Module = "",
-      --     Property = "󰜢",
-      --     Unit = "󰑭",
-      --     Value = "󰎠",
-      --     Enum = "",
-      --     Keyword = "󰌋",
-      --     Snippet = "",
-      --     Color = "󰏘",
-      --     File = "󰈙",
-      --     Reference = "󰈇",
-      --     Folder = "󰉋",
-      --     EnumMember = "",
-      --     Constant = "󰏿",
-      --     Struct = "󰙅",
-      --     Event = "",
-      --     Operator = "󰆕",
-      --     TypeParameter = "",
-      --     Copilot = ""
-      --   }
-      -- },
-      -- config = function (_, opts) require('lspkind').init(opts) end
-    },
+    { 'onsails/lspkind.nvim' },
 
     -- Additional lua configuration, makes nvim stuff amazing!
     'folke/neodev.nvim',
