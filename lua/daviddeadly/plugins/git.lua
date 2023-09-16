@@ -7,6 +7,19 @@ return {
   },
 
   {
+    'ThePrimeagen/git-worktree.nvim',
+    opts = {},
+    keys = {
+      { '<leader>gw', function() require("telescope").extensions.git_worktree.git_worktrees() end, desc = 'Git worktree' },
+      { '<leader>wc', function() require("telescope").extensions.git_worktree.create_git_worktree() end, desc = 'Git worktree' }
+    },
+    config = function (_, opts)
+      require('git-worktree').setup(opts)
+      require("telescope").load_extension("git_worktree")
+    end
+  },
+
+  {
     'lewis6991/gitsigns.nvim',
     event = { "BufReadPre", "BufNewFile" },
     opts = {

@@ -68,7 +68,7 @@ return {
           select = false
         },
         ['<Tab>'] = cmp.mapping(function(fallback)
-          if 
+          if
             cmp.visible()
             -- and has_words_before()  -- fix for copilot completion
           then
