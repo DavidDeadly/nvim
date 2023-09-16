@@ -6,7 +6,10 @@ local height = 20
 return {
   {
     'echasnovski/mini.files', version = '*',
-    dependencies = { 'nvim-tree/nvim-web-devicons', opt = true },
+    dependencies = {
+      { 'nvim-tree/nvim-web-devicons', opt = true },
+      { 'antosha417/nvim-lsp-file-operations' }
+    },
     opts = {
       options = {
         permanent_delete = false,
@@ -24,6 +27,9 @@ return {
 
   {
     'nvim-tree/nvim-tree.lua',
+    dependencies = {
+      { 'antosha417/nvim-lsp-file-operations' }
+    },
     opts = {
       sort_by = "case_sensitive",
       view = {

@@ -11,6 +11,15 @@ return {
     { 'j-hui/fidget.nvim', tag = 'legacy', opts = {} },
     { 'onsails/lspkind.nvim' },
 
+    {
+      "SmiteshP/nvim-navbuddy",
+      dependencies = {
+        "SmiteshP/nvim-navic",
+        "MunifTanjim/nui.nvim"
+      },
+      opts = { lsp = { auto_attach = true } }
+    },
+
     -- Additional lua configuration, makes nvim stuff amazing!
     'folke/neodev.nvim',
   },
@@ -39,7 +48,8 @@ return {
       nmap('gr', require('telescope.builtin').lsp_references, '[g]oto [r]eferences')
       nmap('gI', require('telescope.builtin').lsp_implementations, '[g]oto [I]mplementation')
       nmap('<leader>D', vim.lsp.buf.type_definition, 'Type [D]efinition')
-      nmap('<leader>ds', require('telescope.builtin').lsp_document_symbols, '[d]ocument [s]ymbols')
+      nmap('<leader>dS', require('telescope.builtin').lsp_document_symbols, '[d]ocument [s]ymbols')
+      nmap('<leader>ds', require("nvim-navbuddy").open, '[w]orspaces [s]ymbols')
       nmap('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[w]orkspace [s]ymbols')
 
       -- See `:help K` for why this keymap
