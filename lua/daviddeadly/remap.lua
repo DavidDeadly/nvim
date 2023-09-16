@@ -32,6 +32,8 @@ vim.keymap.set('i', '<C-c>', '<Esc>', { desc = 'Normal mode' })
 
 vim.keymap.set('n', '<C-t>', '<cmd>tab split<cr>', { desc = 'Current buffer on new tab' })
 vim.keymap.set('n', '<C-t><C-n>', '<cmd>tabclose<cr>', { desc = 'Close tab' })
+vim.keymap.set('n', '<Tab>', '<cmd>tabnext<cr>', { desc = 'Next tab' })
+vim.keymap.set('n', '<S-Tab>', '<cmd>tabprevious<cr>', { desc = 'Previous tab' })
 
 vim.keymap.set('n', '<leader>xq', '<cmd>copen<cr>', { desc = 'Quickfix List' })
 vim.keymap.set('n', '<leader>K', '<cmd>cnext<CR>zz', { desc = 'Next quickfix list' })
