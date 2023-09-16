@@ -25,11 +25,14 @@ end
 local call_wakatime = function()
   local Job = require('plenary.job')
 
-  Job:new({
-    command = 'wakatime-cli',
-    args = { '--today' },
-    on_exit = today_time_to_lualine
-  }):start()
+  pcall(function()
+    Job:new({
+      command = 'wakatime-cli',
+      args = { '--today' },
+      on_exit = today_time_to_lualine,
+      on_stderr = function() end
+    }):start()
+  end)
 end
 
 return {
