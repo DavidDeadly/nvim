@@ -39,7 +39,10 @@ return {
   'wakatime/vim-wakatime',
   event = 'VeryLazy',
   init = function ()
+    local wakatime = vim.api.nvim_create_augroup('Wakatime', { clear = true })
+
     vim.api.nvim_create_autocmd({ 'BufReadPost', 'BufNewFile' }, {
+      group = wakatime,
       callback = call_wakatime,
     })
   end
