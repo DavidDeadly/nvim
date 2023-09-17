@@ -1,0 +1,46 @@
+local lazy = require('lazy.util');
+
+local function lazy_git()
+  local hasLazyGit = vim.fn.executable('lazygit') == 1;
+
+  if hasLazyGit ~= true then
+    print("Please install LazyGit to use this command")
+    return
+  end
+
+  lazy.float_term('lazygit', {
+    size = { width = 0.8, height = 0.8 }
+  })
+end
+
+vim.keymap.set('n', '<leader>gG', lazy_git, { desc = 'Lazygit' })
+
+local function lazy_git()
+  return require('Fterm'):new({
+    cmd = "lazygit",
+    dimensions = {
+      height = 0.8,
+      width = 0.8
+    }
+  })
+end
+
+return {
+  'numToStr/FTerm.nvim',
+  opts = {},
+  keys = {
+    '<leader>gg',
+    { '<A-ñ>', '<CMD>lua require("FTerm").toggle()<CR>', desc = 'toggle FTerminal' },
+    { '<A-ñ>', '<C-\\><C-n><CMD>lua require("FTerm").toggle()<CR>', mode = 't', desc = 'toggle FTerminal' },
+    { '<A-c>', '<C-\\><C-n><CMD>lua require("FTerm").exit()<CR>', mode = 't', desc = 'toggle FTerminal' },
+  },
+  config = function (_, opts)
+    local fterm = require('FTerm')
+
+    fterm.setup(opts);
+    local lazygit = lazy_git()
+
+    vim.keymap.set('n', '<leader>gg', function() lazygit:toggle() end, { desc = 'Lazygit' })
+    vim.keymap.set('n', '<leader>gg', function() lazygit:toggle() end, { desc = 'Lazygit' })
+  end
+}
