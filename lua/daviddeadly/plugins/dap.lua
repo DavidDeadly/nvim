@@ -1,3 +1,11 @@
+local dap_icons = {
+  Stopped = { "󰁕 ", "DapStopped" },
+  Breakpoint = { " ", "DapBreakpoint" },
+  BreakpointCondition = { " ", "DapBreakpoint" },
+  BreakpointRejected = { " ", "DapBreakpoint" },
+  LogPoint = { ".>", "DapLogPoint" },
+}
+
 return {
   'mfussenegger/nvim-dap',
   keys = {
@@ -116,5 +124,13 @@ return {
   opts = {},
   config = function()
     vim.api.nvim_set_hl(0, "DapStoppedLine", { default = true, link = "Visual" })
+
+    for name, sign in pairs(dap_icons) do
+      sign = type(sign) == "table" and sign or { sign }
+      vim.fn.sign_define(
+        "Dap" .. name,
+        { text = sign[1], texthl = sign[2] or "DiagnosticInfo", linehl = sign[2], numhl = sign[2] }
+      )
+    end
   end,
 }

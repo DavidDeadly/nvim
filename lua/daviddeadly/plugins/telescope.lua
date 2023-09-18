@@ -15,20 +15,21 @@ return {
     {
       "ahmedkhalf/project.nvim",
       config = function(_, opts)
+        require('telescope').load_extension('projects')
         require("project_nvim").setup(opts)
       end,
     }
   },
   opts = {
-    defaults = {
-      file_ignore_patterns = { 'node_modules' }
+      defaults = {
+        file_ignore_patterns = { 'node_modules' }
+      },
+      pickers = {
+        find_files = {
+          prompt_prefix = '🔍 ',
+        }
+      },
     },
-    pickers = {
-      find_files = {
-        prompt_prefix = '🔍 ',
-      }
-    },
-  },
   keys = {
     {  '<leader>ff', '<cmd>Telescope find_files<cr>', desc = '[f]ind [f]iles' },
     {  '<leader>fF', '<cmd>Telescope find_files hidden=true no_ignore=true<cr>', desc = '[f]ind All [F]iles' },

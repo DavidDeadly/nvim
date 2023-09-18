@@ -1,25 +1,8 @@
 return {
   {
     "zbirenbaum/copilot-cmp",
-    event = 'VeryLazy',
+    event = { 'BufReadPost', 'BufNewFile' },
     dependencies = {
-      {
-        "jonahgoldwastaken/copilot-status.nvim",
-        lazy = true,
-        event = "BufReadPost",
-        opts = {
-          icons = {
-            idle = "-<",
-            error = "-<",
-            offline = "-<",
-            warning = "-<𥉉",
-            loading = "-<",
-          }
-        },
-        config = function(_, opts)
-          require("copilot_status").setup(opts)
-        end,
-      },
       {
         "zbirenbaum/copilot.lua",
         cmd = "Copilot",
