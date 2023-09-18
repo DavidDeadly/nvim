@@ -2,14 +2,14 @@ return {
   'wakatime/vim-wakatime',
   event = 'VeryLazy',
   init = function()
-    local wakatime = vim.api.nvim_create_augroup('Wakatime', { clear = true })
     local lualine = require('lualine')
+    local Job = require('plenary.job')
     local lualine_conf = lualine.get_config() or {}
 
+    local wakatime = vim.api.nvim_create_augroup('Wakatime', { clear = true })
     vim.api.nvim_create_autocmd({ 'BufReadPost', 'BufNewFile' }, {
       group = wakatime,
       callback = function ()
-        local Job = require('plenary.job')
 
         pcall(function()
           Job:new({

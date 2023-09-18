@@ -14,8 +14,14 @@ return {
     {
       "SmiteshP/nvim-navbuddy",
       dependencies = {
-        "SmiteshP/nvim-navic",
-        "MunifTanjim/nui.nvim"
+        {
+          "SmiteshP/nvim-navic",
+          opts = {
+            highlight = true,
+            depth_limit = 5,
+          }
+        },
+        { "MunifTanjim/nui.nvim" }
       },
       opts = { lsp = { auto_attach = true } },
       keys = {
@@ -28,8 +34,8 @@ return {
   },
 
   config = function()
-    --  This function gets run when an LSP connects to a particular buffer.
     local on_attach = function(client, bufnr)
+
       local navic = require("nvim-navic")
       navic.attach(client, bufnr)
 

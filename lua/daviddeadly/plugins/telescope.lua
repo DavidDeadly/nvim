@@ -20,7 +20,10 @@ return {
       end,
     }
   },
-  opts = {
+  opts = function()
+    require("telescope").load_extension("notify")
+
+    return {
       defaults = {
         file_ignore_patterns = { 'node_modules' }
       },
@@ -29,7 +32,8 @@ return {
           prompt_prefix = '🔍 ',
         }
       },
-    },
+    }
+  end,
   keys = {
     {  '<leader>ff', '<cmd>Telescope find_files<cr>', desc = '[f]ind [f]iles' },
     {  '<leader>fF', '<cmd>Telescope find_files hidden=true no_ignore=true<cr>', desc = '[f]ind All [F]iles' },
