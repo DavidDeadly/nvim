@@ -1,26 +1,35 @@
 return {
-  {
-    'rose-pine/neovim',
-    lazy = true,
-    name = 'rose-pine'
-  },
+	{
+		"rose-pine/neovim",
+    event = 'VeryLazy',
+		name = "rose-pine",
+	},
 
-  {
-    "catppuccin/nvim",
-    name = "catppuccin",
-    opts = {
-      flavour = "mocha",
-      dim_inactive = {
-        enabled = true
-      },
-      integrations = {
-        mini = true
-      }
-    },
-    lazy = false,
-    priority = 1000,
-    config = function()
-      vim.cmd('colorscheme catppuccin-mocha')
-    end,
-  }
+	{
+		"catppuccin/nvim",
+		name = "catppuccin",
+		opts = {
+			flavour = "mocha",
+      term_colors = true,
+			dim_inactive = {
+				enabled = true,
+			},
+			integrations = {
+        cmp = true,
+        mini = true,
+        gitsigns = true,
+        nvimtree = true,
+        which_key = true,
+        treesitter = true,
+        treesitter_context = true,
+			},
+		},
+		lazy = false,
+		priority = 1000,
+		config = function(_, opts)
+      require("catppuccin").setup(opts)
+
+			vim.cmd("colorscheme catppuccin-mocha")
+		end,
+	},
 }

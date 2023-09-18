@@ -32,3 +32,6 @@ vim.opt.colorcolumn = "80"
 vim.opt.cursorline = true
 
 vim.opt.laststatus = 3
+
+vim.opt.spelllang = 'en_us,es'
+vim.opt.spell = true
