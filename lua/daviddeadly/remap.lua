@@ -12,6 +12,9 @@ vim.keymap.set('n', '<C-Down>', '<cmd>resize -2<cr>', { desc = 'Decrease window 
 vim.keymap.set('n', '<C-Left>', '<cmd>vertical resize -2<cr>', { desc = 'Decrease window width' })
 vim.keymap.set('n', '<C-Right>', '<cmd>vertical resize +2<cr>', { desc = 'Increase window width' })
 
+vim.keymap.set('n', '<S-l>', 'zL', { desc = 'Scoll half screen to the left' })
+vim.keymap.set('n', '<S-h>', 'zH', { desc = 'Scoll half screen to the right' })
+
 vim.keymap.set('n', 'J', 'mzJ`z', { desc = 'Keep course on lines stacking' })
 vim.keymap.set('n', '<C-d>', '<C-d>zz', { desc = 'Scroll half page down (keep mouse center)' })
 vim.keymap.set('n', '<C-u>', '<C-u>zz', { desc = 'Scroll half page up (keep mouse center)' })

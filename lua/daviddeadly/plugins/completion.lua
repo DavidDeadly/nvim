@@ -11,7 +11,6 @@ return {
     -- Snippet Engine & its associated nvim-cmp source
     'L3MON4D3/LuaSnip',
     'saadparwaiz1/cmp_luasnip',
-    'hrsh7th/cmp-nvim-lsp-signature-help',
 
     -- Adds LSP completion capabilities
     'hrsh7th/cmp-nvim-lsp',
@@ -94,7 +93,6 @@ return {
         { name = 'nvim_lsp', group_index = 2 },
         { name = 'luasnip', group_index = 2 },
         { name = 'path', group_index = 2 },
-        { name = 'nvim_lsp_signature_help' },
         { name = 'buffer', keyword_length = 5, max_item_count = 5 },
       },
       sorting = {

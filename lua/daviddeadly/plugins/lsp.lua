@@ -6,6 +6,17 @@ return {
     { 'williamboman/mason.nvim', config = true },
     'williamboman/mason-lspconfig.nvim',
 
+    'hrsh7th/cmp-nvim-lsp',
+    'hrsh7th/cmp-buffer',
+    'hrsh7th/cmp-path',
+    'hrsh7th/cmp-cmdline',
+
+    {
+      "ray-x/lsp_signature.nvim",
+      opts = {},
+      main = 'lsp_signature'
+    },
+
     -- Useful status updates for LSP
     -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
     { 'j-hui/fidget.nvim', tag = 'legacy', opts = {} },
@@ -37,14 +48,25 @@ return {
     local on_attach = function(client, bufnr)
 
       local navic = require("nvim-navic")
+      local signature = require("lsp_signature")
+      signature.on_attach({
+        bind = true, -- This is mandatory, otherwise border config won't get registered.
+        toggle_key = '<M-x>',
+        toggle_key_flip_floatwin_setting = true,
+        noice = true,
+        handler_opts = {
+          border = "rounded"
+        },
+      }, bufnr)
+
       navic.attach(client, bufnr)
 
-      local nmap = function(keys, func, desc)
+      local nmap = function(keys, func, desc, modes)
         if desc then
           desc = 'LSP: ' .. desc
         end
 
-        vim.keymap.set('n', keys, func, { buffer = bufnr, desc = desc })
+        vim.keymap.set(modes or 'n', keys, func, { buffer = bufnr, desc = desc })
       end
 
       nmap('<leader>rn', vim.lsp.buf.rename, '[r]e[n]ame')
@@ -60,7 +82,7 @@ return {
 
       -- See `:help K` for why this keymap
       nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
-      nmap('<C-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
+      nmap('<C-k>', signature.toggle_float_win, 'Toggle Signature Documentation')
 
       nmap('<leader>vws', vim.lsp.buf.workspace_symbol, '[V]iew [W]orkspace [S]ymbols')
       nmap('<leader>vd', function() vim.diagnostic.open_float() end, '[V]iew [D]iagnostic float')
