@@ -64,7 +64,7 @@ return {
           })
         end, desc = '[f]ind [e]xplorer on current buffer' }
       },
-    },
+    }
   },
   config = function (_, opts)
     require('telescope').setup(opts)
@@ -86,7 +86,7 @@ return {
     {  '<leader>ltb', '<cmd>Telescope builtin<cr>', desc = '[l]ist [t]elescope [b]uiltin' },
     {  '<leader>ks', '<cmd>Telescope keymaps<cr>', desc = '[k]ey[m]aps' },
     {  '<leader>fr', '<cmd>Telescope resume<cr>', desc = '[r]esume telescope' },
-    {  '<leader><c-space>', '<cmd>Telescope oldfiles<cr>', desc = '[?] recently open files' },
+    {  '<leader><C-space>', '<cmd>Telescope oldfiles<cr>', desc = '[?] recently open files' },
     {  '<leader><space>', '<cmd>Telescope oldfiles only_cwd=true<cr>', desc = '[?] recently open files (cwd)' },
     {  '<leader>/', find_in_current_buffer, desc = '[/] Search in current buffer' },
   },

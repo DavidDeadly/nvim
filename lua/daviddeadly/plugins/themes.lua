@@ -22,6 +22,15 @@ return {
         which_key = true,
         treesitter = true,
         treesitter_context = true,
+        navic = {
+          enabled = true,
+          custom_bg = "lualine"
+        },
+        mason = true,
+        flash = true,
+        noice = true,
+        telescope = true,
+        notify = true,
 			},
 		},
 		lazy = false,
