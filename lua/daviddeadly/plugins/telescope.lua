@@ -10,29 +10,68 @@ end
 return {
   'nvim-telescope/telescope.nvim',
   branch = '0.1.x',
+  opts = {
+    defaults = {
+      file_ignore_patterns = { 'node_modules' },
+      mappings = {
+        i = {
+          ['<M-p>'] = require('telescope.actions.layout').toggle_preview
+        },
+        n = {
+          ["<M-p>"] = require('telescope.actions.layout').toggle_preview
+        },
+      },
+      preview = {
+        hide_on_startup = true
+      },
+    },
+    pickers = {
+      find_files = {
+        prompt_prefix = '🔍 ',
+      },
+    },
+    extensions = {
+      file_browser = {
+        theme = 'dropdown',
+        hijack_netrw = true,
+      },
+    },
+  },
   dependencies = {
-    'nvim-lua/plenary.nvim',
+    { 'nvim-lua/plenary.nvim' },
+
     {
       "ahmedkhalf/project.nvim",
-      config = function(_, opts)
-        require('telescope').load_extension('projects')
-        require("project_nvim").setup(opts)
-      end,
-    }
-  },
-  opts = function()
-    require("telescope").load_extension("notify")
+      main = "project_nvim",
+      keys = {
+        { "<leader>fp", function() require('telescope').extensions.projects.projects() end, desc = "Projects" },
+      },
+    },
 
-    return {
-      defaults = {
-        file_ignore_patterns = { 'node_modules' }
+    {
+      "nvim-telescope/telescope-file-browser.nvim",
+      dependencies = { "antosha417/nvim-lsp-file-operations" },
+      keys = {
+        { '<leader>fE', '<cmd>Telescope file_browser<cr>', desc = '[f]ind [e]xplorer' },
+        { '<leader>fe', function()
+          require("telescope").extensions.file_browser.file_browser({
+            path = "%:p:h",
+            cwd = vim.fn.expand("%:p:h"),
+            select_buffer = true,
+            respect_git_ignore = false,
+            grouped = true,
+            hidden = true,
+          })
+        end, desc = '[f]ind [e]xplorer on current buffer' }
       },
-      pickers = {
-        find_files = {
-          prompt_prefix = '🔍 ',
-        }
-      },
-    }
+    },
+  },
+  config = function (_, opts)
+    require('telescope').setup(opts)
+
+    require("telescope").load_extension("notify")
+    require("telescope").load_extension("file_browser")
+    require('telescope').load_extension('projects')
   end,
   keys = {
     {  '<leader>ff', '<cmd>Telescope find_files<cr>', desc = '[f]ind [f]iles' },
@@ -50,6 +89,5 @@ return {
     {  '<leader><c-space>', '<cmd>Telescope oldfiles<cr>', desc = '[?] recently open files' },
     {  '<leader><space>', '<cmd>Telescope oldfiles only_cwd=true<cr>', desc = '[?] recently open files (cwd)' },
     {  '<leader>/', find_in_current_buffer, desc = '[/] Search in current buffer' },
-    { "<leader>fp", "<Cmd>Telescope projects<CR>", desc = "Projects" },
   },
 }
