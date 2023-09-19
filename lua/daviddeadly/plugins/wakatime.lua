@@ -1,7 +1,7 @@
 return {
   'wakatime/vim-wakatime',
   event = 'VeryLazy',
-  init = function()
+  config = function()
     local lualine = require('lualine')
     local Job = require('plenary.job')
     local lualine_conf = lualine.get_config() or {}
