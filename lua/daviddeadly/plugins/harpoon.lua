@@ -1,7 +1,7 @@
 return {
   'theprimeagen/harpoon',
   keys = {
-    { '<A-a>', function() require('harpoon.mark').add_file() end, desc = 'harpoon file' },
+    { '<M-a>', function() require('harpoon.mark').add_file() end, desc = 'harpoon file' },
     { '<C-e>', function() require('harpoon.ui').toggle_quick_menu() end, desc = 'harpoon menu' },
 
     { '<C-1>', function() require('harpoon.ui').nav_file(1) end, desc = 'harpoon first file' },

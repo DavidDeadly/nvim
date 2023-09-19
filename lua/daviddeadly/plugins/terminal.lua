@@ -19,10 +19,10 @@ return {
     return {}
   end,
   keys = {
-    { '<A-g><A-g>', '<CMD>LazyGit<CR>', desc = 'toggle LazyGit' },
-    { '<A-g><A-g>', '<C-\\><C-n><CMD>LazyGit<CR>', mode = 't', desc = 'toggle LazyGit' },
-    { '<A-ñ>', '<CMD>lua require("FTerm").toggle()<CR>', desc = 'toggle FTerminal' },
-    { '<A-ñ>', '<C-\\><C-n><CMD>lua require("FTerm").toggle()<CR>', mode = 't', desc = 'toggle FTerminal' },
-    { '<A-c>', '<C-\\><C-n><CMD>lua require("FTerm").exit()<CR>', mode = 't', desc = 'toggle FTerminal' },
+    { '<M-g><M-g>', '<CMD>LazyGit<CR>', desc = 'toggle LazyGit' },
+    { '<M-g><M-g>', '<C-\\><C-n><CMD>LazyGit<CR>', mode = 't', desc = 'toggle LazyGit' },
+    { '<M-ñ>', '<CMD>lua require("FTerm").toggle()<CR>', desc = 'toggle FTerminal' },
+    { '<M-ñ>', '<C-\\><C-n><CMD>lua require("FTerm").toggle()<CR>', mode = 't', desc = 'toggle FTerminal' },
+    { '<M-c>', '<C-\\><C-n><CMD>lua require("FTerm").exit()<CR>', mode = 't', desc = 'toggle FTerminal' },
   }
 }

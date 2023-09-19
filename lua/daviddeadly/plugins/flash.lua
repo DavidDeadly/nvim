@@ -39,12 +39,12 @@ return {
     event = "VeryLazy",
     -- stylua: ignore
     keys = {
-      { "<A-s>", mode = { "n", "o", "x" }, function() require("flash").jump() end, desc = "Flash" },
-      { "<A-S>", mode = { "n", "o", "x" }, function() require("flash").treesitter() end, desc = "Flash Treesitter" },
-      { "<A-r>", mode = "o", function() require("flash").remote() end, desc = "Remote Flash" },
-      { "<A-R>", mode = { "o", "x" }, function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
+      { "<M-s>", mode = { "n", "o", "x" }, function() require("flash").jump() end, desc = "Flash" },
+      { "<M-S>", mode = { "n", "o", "x" }, function() require("flash").treesitter() end, desc = "Flash Treesitter" },
+      { "<M-r>", mode = "o", function() require("flash").remote() end, desc = "Remote Flash" },
+      { "<M-R>", mode = { "o", "x" }, function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
       { "<C-s>", mode = { "c" }, function() require("flash").toggle() end, desc = "Toggle Flash Search" },
-      { "<A-w>", function() require("flash").jump({ pattern = vim.fn.expand("<cword>") }) end, desc = "Flash current word" }
+      { "<M-w>", function() require("flash").jump({ pattern = vim.fn.expand("<cword>") }) end, desc = "Flash current word" }
     },
   },
 

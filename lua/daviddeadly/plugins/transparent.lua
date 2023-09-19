@@ -11,6 +11,6 @@ return {
     },
   },
   keys = {
-    { '<A-t>', vim.cmd.TransparentToggle, desc = '[t]ranparency toggle'},
+    { '<M-t>', vim.cmd.TransparentToggle, desc = '[t]ranparency toggle'},
   },
 }
