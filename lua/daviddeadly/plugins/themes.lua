@@ -30,7 +30,6 @@ return {
         flash = true,
         noice = true,
         telescope = true,
-        notify = true,
 			},
 		},
 		lazy = false,
