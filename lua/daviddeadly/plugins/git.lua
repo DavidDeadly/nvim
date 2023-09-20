@@ -13,7 +13,7 @@ return {
       { '<leader>gw', function() require("telescope").extensions.git_worktree.git_worktrees() end, desc = 'List git worktrees' },
       { '<leader>wc', function() require("telescope").extensions.git_worktree.create_git_worktree() end, desc = 'Create git worktree' }
     },
-    config = function (_, opts)
+    config = function(_, opts)
       require('git-worktree').setup(opts)
       require("telescope").load_extension("git_worktree")
     end
@@ -26,9 +26,9 @@ return {
       on_attach = function(bufnr)
         local gs = package.loaded.gitsigns
 
-        local stage_selected_line = function() gs.stage_hunk {vim.fn.line('.'), vim.fn.line('v')} end
-        local reset_selected_line = function() gs.reset_hunk {vim.fn.line('.'), vim.fn.line('v')} end
-        local full_git_blame = function() gs.blame_line{full=true} end
+        local stage_selected_line = function() gs.stage_hunk { vim.fn.line('.'), vim.fn.line('v') } end
+        local reset_selected_line = function() gs.reset_hunk { vim.fn.line('.'), vim.fn.line('v') } end
+        local full_git_blame = function() gs.blame_line { full = true } end
         local remote_gitdiff = function() gs.diffthis('~') end
 
         local function map(mode, l, r, opts)
@@ -42,13 +42,13 @@ return {
           if vim.wo.diff then return ']c' end
           vim.schedule(function() gs.next_hunk() end)
           return '<Ignore>'
-        end, {expr=true})
+        end, { expr = true, desc = 'Next hunk' })
 
         map('n', '[c', function()
           if vim.wo.diff then return '[c' end
           vim.schedule(function() gs.prev_hunk() end)
           return '<Ignore>'
-        end, {expr=true})
+        end, { expr = true, desc = 'Previous hunk' })
 
         -- Actions
         map('n', '<leader>hs', gs.stage_hunk, { desc = 'Stage hunk' })
@@ -66,7 +66,7 @@ return {
         map('n', '<leader>td', gs.toggle_deleted, { desc = 'Toggle git deletions' })
 
         -- Text object
-        map({'o', 'x'}, 'ih', ':<C-U>Gitsigns select_hunk<CR>')
+        map({ 'o', 'x' }, 'ih', ':<C-U>Gitsigns select_hunk<CR>')
       end
     },
   }

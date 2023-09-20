@@ -43,6 +43,9 @@ return {
 				},
 			},
       lualine_y = {
+        {
+          'overseer'
+        },
 				{
 					function()
 						return "  " .. require("dap").status()

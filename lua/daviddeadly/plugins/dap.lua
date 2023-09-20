@@ -73,7 +73,7 @@ return {
 
             config.adapters = {
               type = "server",
-              host = "localhost",
+              host = "127.0.0.1",
               port = "${port}",
               executable = {
                 command = "node",
