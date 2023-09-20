@@ -15,7 +15,8 @@ return {
       file_ignore_patterns = { 'node_modules' },
       mappings = {
         i = {
-          ['<M-p>'] = require('telescope.actions.layout').toggle_preview
+          ['<M-p>'] = require('telescope.actions.layout').toggle_preview,
+          ["<C-h>"] = "which_key"
         },
         n = {
           ["<M-p>"] = require('telescope.actions.layout').toggle_preview
@@ -32,8 +33,14 @@ return {
     },
     extensions = {
       file_browser = {
-        theme = 'dropdown',
         hijack_netrw = true,
+        layout_strategy = "horizontal",
+        layout_config = {
+          horizontal = {
+            prompt_position = "top",
+          },
+        },
+        sorting_strategy = "ascending",
       },
     },
   },

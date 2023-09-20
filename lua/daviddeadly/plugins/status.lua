@@ -32,26 +32,6 @@ return {
 					hide_filename_extension = true,
 				},
       },
-			lualine_b = {
-				{
-					function()
-						return require("noice").api.status.mode.get()
-					end,
-					cond = function()
-						return package.loaded["noice"] and require("noice").api.status.mode.has()
-					end,
-					color = fg("Constant"),
-				},
-        {
-          function()
-            return require('noice').api.status.search.get()
-          end,
-					cond = function()
-						return package.loaded["noice"] and require("noice").api.status.search.has()
-					end,
-					color = fg("Constant"),
-        }
-			},
 			lualine_c = {
 				{
 					function()
@@ -83,15 +63,6 @@ return {
 				"selectioncount",
 			},
 			lualine_x = {
-				{
-					function()
-						return require("noice").api.status.command.get()
-					end,
-					cond = function()
-						return package.loaded["noice"] and require("noice").api.status.command.has()
-					end,
-					color = fg("Statement"),
-				},
 				{
 					lazy_status.updates,
 					cond = lazy_status.has_updates,

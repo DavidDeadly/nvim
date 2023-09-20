@@ -1,8 +1,8 @@
 return {
 	'xiyaowong/nvim-transparent',
-  cmd = 'TransparentToggle',
+  cmd = 'TransparentEnable',
   init = function ()
-    vim.cmd("TransparentToggle")
+    vim.cmd("TransparentEnable")
   end,
   opts = {
     groups = {

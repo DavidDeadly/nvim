@@ -51,7 +51,7 @@ return {
       local signature = require("lsp_signature")
       signature.on_attach({
         bind = true, -- This is mandatory, otherwise border config won't get registered.
-        toggle_key = '<M-x>',
+        toggle_key = '<C-k>',
         toggle_key_flip_floatwin_setting = true,
         noice = true,
         handler_opts = {
