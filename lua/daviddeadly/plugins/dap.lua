@@ -51,78 +51,9 @@ return {
       end,
     },
 
-    {
-      "jay-babu/mason-nvim-dap.nvim",
-      dependencies = "mason.nvim",
-      cmd = { "DapInstall", "DapUninstall" },
-      opts = {
-        automatic_installation = true,
-        ensure_installed = {
-          "js-debug-adapter",
-          'debugpy'
-        },
-        handlers = {
-          function(config)
-            -- all sources with no handler get passed here
-
-            -- Keep original functionality
-            require('mason-nvim-dap').default_setup(config)
-          end,
-          js = function (config)
-            config.name = 'pwa-node'
-
-            config.adapters = {
-              type = "server",
-              host = "127.0.0.1",
-              port = "${port}",
-              executable = {
-                command = "node",
-                args = {
-                  require("mason-registry").get_package("js-debug-adapter"):get_install_path()
-                    .. "/js-debug/src/dapDebugServer.js",
-                  "${port}"
-                },
-              },
-            }
-
-            config.configurations = {
-              {
-                type = "pwa-node",
-                request = "launch",
-                name = "Launch file",
-                program = "${file}",
-                cwd = "${workspaceFolder}",
-              },
-              {
-                type = "pwa-node",
-                request = "attach",
-                name = "Attach",
-                processId = require("dap.utils").pick_process,
-                cwd = "${workspaceFolder}",
-              },
-            }
-
-            config.filetypes = { 'javascriptreact', 'typescriptreact', 'typescript', 'javascript' }
-
-            require('mason-nvim-dap').default_setup(config) -- don't forget this!
-          end,
-          python = function(config)
-            config.adapters = {
-              type = "executable",
-              command = "/usr/bin/python3",
-              args = {
-                "-m",
-                require("mason-registry").get_package("debugpy"):get_install_path() .. '/debugpy'
-              },
-            }
-            require('mason-nvim-dap').default_setup(config) -- don't forget this!
-          end,
-        },
-      }
-    }
   },
   opts = {},
-  config = function()
+  init = function ()
     vim.api.nvim_set_hl(0, "DapStoppedLine", { default = true, link = "Visual" })
 
     for name, sign in pairs(dap_icons) do
@@ -131,6 +62,47 @@ return {
         "Dap" .. name,
         { text = sign[1], texthl = sign[2] or "DiagnosticInfo", linehl = sign[2], numhl = sign[2] }
       )
+    end
+  end,
+  config = function()
+    local dap = require("dap")
+
+    dap.adapters["pwa-node"] = {
+      type = "server",
+      host = "127.0.0.1",
+      port = "${port}",
+      executable = {
+        command = "node",
+        args = {
+          require("mason-registry").get_package("js-debug-adapter"):get_install_path()
+            .. "/js-debug/src/dapDebugServer.js",
+          "${port}"
+        },
+      },
+    }
+
+    local node_filetypes = { 'javascriptreact', 'typescriptreact', 'typescript', 'javascript' }
+    for _, language in ipairs(node_filetypes) do
+      if not dap.configurations[language] then
+
+        dap.configurations[language] = {
+          {
+            type = "pwa-node",
+            request = "launch",
+            name = "Launch file",
+            program = "${file}",
+            cwd = "${workspaceFolder}",
+          },
+          {
+            type = "pwa-node",
+            request = "attach",
+            name = "Attach",
+            processId = require("dap.utils").pick_process,
+            skipFiles = { "<node_internals>/**" },
+            cwd = "${workspaceFolder}",
+          }
+        }
+      end
     end
   end,
 }
