@@ -1,12 +1,5 @@
 return {
   {
-    'echasnovski/mini.animate',
-    event = 'VeryLazy',
-    version = '*',
-    opts = {}
-  },
-
-  {
     'stevearc/dressing.nvim',
     event = 'VeryLazy',
     opts = {
@@ -90,8 +83,6 @@ return {
       fancy = {
         enable = true,
       },
-      flyin_effect = 'top',
-      speed = 1
     }
   }
 }

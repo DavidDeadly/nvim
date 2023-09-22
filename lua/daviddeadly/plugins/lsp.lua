@@ -59,7 +59,9 @@ return {
         },
       }, bufnr)
 
-      navic.attach(client, bufnr)
+      if client.server_capabilities.documentSymbolProvider then
+        navic.attach(client, bufnr)
+      end
 
       local nmap = function(keys, func, desc, modes)
         if desc then

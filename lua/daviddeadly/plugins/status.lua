@@ -44,7 +44,10 @@ return {
 			},
       lualine_y = {
         {
-          'overseer'
+          function() return "overseer" end,
+          cond = function()
+						return package.loaded["overseer"]
+					end
         },
 				{
 					function()
@@ -87,8 +90,7 @@ return {
 						local status = require("copilot.api").status.data
 						return colors[status.status] or colors[""]
 					end,
-				},
-				{ "filetype", icon_only = true, separator = "" },
+				}
 			},
 			lualine_z = {
 				"location",

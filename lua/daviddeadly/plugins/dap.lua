@@ -6,6 +6,8 @@ local dap_icons = {
   LogPoint = { ".>", "DapLogPoint" },
 }
 
+local node_filetypes = { 'javascriptreact', 'typescriptreact', 'typescript', 'javascript' }
+
 return {
   'mfussenegger/nvim-dap',
   keys = {
@@ -37,6 +39,7 @@ return {
         local dap = require("dap")
         local dapui = require("dapui")
 
+        require("overseer").patch_dap(true)
         dapui.setup(opts)
 
         dap.listeners.after.event_initialized["dapui_config"] = function()
@@ -51,8 +54,91 @@ return {
       end,
     },
 
+    {
+      "mxsdev/nvim-dap-vscode-js",
+      ft = node_filetypes,
+      dependencies = {
+        {
+          "microsoft/vscode-js-debug",
+          version = "1.x",
+          build = "npm install --legacy-peer-deps && npx gulp vsDebugServerBundle && mv dist out"
+        }
+      },
+      opts = {
+        debugger_path = lazypath .. "/vscode-js-debug",
+        adapters = { 'pwa-node', 'pwa-chrome', 'pwa-msedge', 'node-terminal', 'pwa-extensionHost' },
+      },
+      config = function (_, opts)
+        local dap = require('dap')
+        require('dap-vscode-js').setup(opts)
+
+        for _, language in ipairs(node_filetypes) do
+          if not dap.configurations[language] then
+
+            dap.configurations[language] = {
+              {
+                type = "pwa-node",
+                request = "launch",
+                name = "Launch file",
+                program = "${file}",
+                cwd = '${workspaceFolder}',
+                skipFiles = { '<node_internals>/**' },
+              },
+              {
+                type = "pwa-node",
+                request = "attach",
+                name = "Attach",
+                processId = require("dap.utils").pick_process,
+                cwd = "${workspaceFolder}",
+                skipFiles = { '<node_internals>/**' },
+              },
+              {
+                type = "pwa-chrome",
+                request = "launch",
+                name = "Launch chromium",
+                url = "http://localhost:5173",
+                preLaunchTask = 'Inspect Start',
+                sourceMaps = true,
+                webRoot = "${workspaceFolder}/code",
+                protocol = "inspector",
+                port = 9222,
+                skipFiles = { "**/node_modules/**/*", "**/@vite/*", "**/src/client/*", "**/src/*" }
+              },
+              {
+                name = "Deno debug restricted",
+                type = 'pwa-node',
+                request = 'launch',
+                runtimeExecutable = "deno",
+                runtimeArgs = {
+                  "run",
+                  "--inspect-wait",
+                },
+                program = "${file}",
+                cwd = "${workspaceFolder}",
+                attachSimplePort = 9229,
+              },
+              {
+                name = "Deno debug",
+                type = 'pwa-node',
+                request = 'launch',
+                runtimeExecutable = "deno",
+                runtimeArgs = {
+                  "run",
+                  "--inspect-wait",
+                  "--allow-all"
+                },
+                program = "${file}",
+                cwd = "${workspaceFolder}",
+                attachSimplePort = 9229,
+              }
+            }
+          end
+        end
+
+      end
+    }
+
   },
-  opts = {},
   init = function ()
     vim.api.nvim_set_hl(0, "DapStoppedLine", { default = true, link = "Visual" })
 
@@ -62,47 +148,6 @@ return {
         "Dap" .. name,
         { text = sign[1], texthl = sign[2] or "DiagnosticInfo", linehl = sign[2], numhl = sign[2] }
       )
-    end
-  end,
-  config = function()
-    local dap = require("dap")
-
-    dap.adapters["pwa-node"] = {
-      type = "server",
-      host = "127.0.0.1",
-      port = "${port}",
-      executable = {
-        command = "node",
-        args = {
-          require("mason-registry").get_package("js-debug-adapter"):get_install_path()
-            .. "/js-debug/src/dapDebugServer.js",
-          "${port}"
-        },
-      },
-    }
-
-    local node_filetypes = { 'javascriptreact', 'typescriptreact', 'typescript', 'javascript' }
-    for _, language in ipairs(node_filetypes) do
-      if not dap.configurations[language] then
-
-        dap.configurations[language] = {
-          {
-            type = "pwa-node",
-            request = "launch",
-            name = "Launch file",
-            program = "${file}",
-            cwd = "${workspaceFolder}",
-          },
-          {
-            type = "pwa-node",
-            request = "attach",
-            name = "Attach",
-            processId = require("dap.utils").pick_process,
-            skipFiles = { "<node_internals>/**" },
-            cwd = "${workspaceFolder}",
-          }
-        }
-      end
     end
   end,
 }

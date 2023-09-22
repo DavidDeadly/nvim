@@ -59,7 +59,7 @@ return {
       "nvim-telescope/telescope-file-browser.nvim",
       dependencies = { "antosha417/nvim-lsp-file-operations" },
       keys = {
-        { '<leader>fE', '<cmd>Telescope file_browser<cr>', desc = '[f]ind [e]xplorer' },
+        { '<leader>fE', function() require("telescope").extensions.file_browser.file_browser() end, desc = '[f]ind [e]xplorer' },
         { '<leader>fe', function()
           require("telescope").extensions.file_browser.file_browser({
             path = "%:p:h",
@@ -76,8 +76,9 @@ return {
   config = function (_, opts)
     require('telescope').setup(opts)
 
-    require("telescope").load_extension("file_browser")
+    require("telescope").load_extension("notify")
     require('telescope').load_extension('projects')
+    require("telescope").load_extension("file_browser")
   end,
   keys = {
     {  '<leader>ff', '<cmd>Telescope find_files<cr>', desc = '[f]ind [f]iles' },

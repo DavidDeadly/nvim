@@ -1,4 +1,6 @@
-local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+lazypath = vim.fn.stdpath("data") .. "/lazy"
+local lazy = lazypath .. "/lazy.nvim"
+
 if not vim.loop.fs_stat(lazypath) then
   vim.fn.system({
     "git",
@@ -6,10 +8,10 @@ if not vim.loop.fs_stat(lazypath) then
     "--filter=blob:none",
     "https://github.com/folke/lazy.nvim.git",
     "--branch=stable", -- latest stable release
-    lazypath,
+    lazy
   })
 end
-vim.opt.rtp:prepend(lazypath)
+vim.opt.rtp:prepend(lazy)
 
 require("lazy").setup("daviddeadly.plugins", {
   install = {
