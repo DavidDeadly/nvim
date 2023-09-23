@@ -17,6 +17,16 @@ return {
       main = 'lsp_signature'
     },
 
+    {
+      'creativenull/efmls-configs-nvim',
+      version = 'v1.x.x', -- tag is optional, but recommended
+    },
+
+    {
+      "lukas-reineke/lsp-format.nvim",
+      opts = {}
+    },
+
     -- Useful status updates for LSP
     -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
     { 'j-hui/fidget.nvim', tag = 'legacy', opts = {} },
@@ -30,6 +40,7 @@ return {
           opts = {
             highlight = true,
             depth_limit = 5,
+            lsp = { auto_attach = true } 
           }
         },
         { "MunifTanjim/nui.nvim" }
@@ -45,9 +56,8 @@ return {
   },
 
   config = function()
-    local on_attach = function(client, bufnr)
+    local on_attach = function(_, bufnr)
 
-      local navic = require("nvim-navic")
       local signature = require("lsp_signature")
       signature.on_attach({
         bind = true, -- This is mandatory, otherwise border config won't get registered.
@@ -59,9 +69,9 @@ return {
         },
       }, bufnr)
 
-      if client.server_capabilities.documentSymbolProvider then
-        navic.attach(client, bufnr)
-      end
+      -- if client.server_capabilities.documentSymbolProvider then
+      --   navic.attach(client, bufnr)
+      -- end
 
       local nmap = function(keys, func, desc, modes)
         if desc then
@@ -72,7 +82,7 @@ return {
       end
 
       nmap('<leader>rn', vim.lsp.buf.rename, '[r]e[n]ame')
-      nmap('<leader>ca', vim.lsp.buf.code_action, '[c]ode [a]ction')
+      nmap('<leader>ca', vim.lsp.buf.code_action, '[c]ode [a]ction', { 'n', 'v' })
 
       nmap('gd', vim.lsp.buf.definition, '[g]oto [d]efinition')
       nmap('gr', require('telescope.builtin').lsp_references, '[g]oto [r]eferences')
@@ -98,10 +108,6 @@ return {
         print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
       end, '[w]orkspace [l]ist Folders')
 
-      -- Create a command `:Format` local to the LSP buffer
-      vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
-        vim.lsp.buf.format()
-      end, { desc = 'Format current buffer with LSP' })
     end
 
     -- Enable the following language servers
@@ -112,6 +118,18 @@ return {
     --
     --  If you want to override the default filetypes that your language server will attach to you can
     --  define the property 'filetypes' to the map in question.
+    local eslint = require('efmls-configs.linters.eslint')
+    local prettier = require('efmls-configs.formatters.prettier')
+    local stylua = require('efmls-configs.formatters.stylua')
+
+    local languages = {
+      typescript = { eslint, prettier },
+      javascript = { eslint, prettier },
+      jsx = { eslint, prettier },
+      tsx = { eslint, prettier },
+      lua = { stylua },
+    }
+
     local servers = {
       pyright = {},
       tsserver = {},
@@ -123,6 +141,22 @@ return {
           telemetry = { enable = false },
         },
       },
+
+      efm = {
+        filetypes = vim.tbl_keys(languages),
+        settings = {
+          rootMarkers = { '.git/' },
+          languages = languages,
+        },
+        init_options = {
+          documentFormatting = true,
+          documentRangeFormatting = true,
+          hover = true,
+          documentSymbol = false,
+          codeAction = true,
+          completion = true
+        }
+      }
     }
 
     -- Setup neovim lua configuration
@@ -141,6 +175,15 @@ return {
 
     mason_lspconfig.setup_handlers {
       function(server_name)
+        if server_name == 'efm' then
+          require('lspconfig')[server_name].setup(vim.tbl_extend('force', servers[server_name], {
+            on_attach = on_attach,
+            capabilities = capabilities,
+          }))
+
+          return
+        end
+
         require('lspconfig')[server_name].setup {
           capabilities = capabilities,
           on_attach = on_attach,

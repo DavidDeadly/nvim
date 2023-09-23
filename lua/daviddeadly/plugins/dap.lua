@@ -60,12 +60,13 @@ return {
       dependencies = {
         {
           "microsoft/vscode-js-debug",
-          version = "1.x",
+          version = "1.76.1",
           build = "npm install --legacy-peer-deps && npx gulp vsDebugServerBundle && mv dist out"
         }
       },
       opts = {
         debugger_path = lazypath .. "/vscode-js-debug",
+        debugger_cmd = { "vsDebugServer" },
         adapters = { 'pwa-node', 'pwa-chrome', 'pwa-msedge', 'node-terminal', 'pwa-extensionHost' },
       },
       config = function (_, opts)

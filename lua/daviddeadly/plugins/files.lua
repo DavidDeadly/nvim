@@ -2,7 +2,7 @@ return {
   {
     'echasnovski/mini.files', version = '*',
     dependencies = {
-      { 'nvim-tree/nvim-web-devicons', opt = true },
+      { 'nvim-tree/nvim-web-devicons' },
       { 'antosha417/nvim-lsp-file-operations' }
     },
     opts = {
