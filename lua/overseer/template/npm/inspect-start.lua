@@ -6,7 +6,23 @@ return {
     return {
       cmd = { 'npm' },
       args = { "--node-options", "--inspect", "start" },
-      name = "node --inspect start"
+      name = "node --inspect start",
+      components = {
+        {
+          "on_output_parse",
+          problem_matcher = {
+            base = "$tsc",
+            background = {
+              beginsPattern = "ng serve",
+              endsPattern = "Compiled successfully",
+            }
+          },
+        },
+        {
+          "on_exit_set_status",
+          success_codes = { 0 }
+        }
+      }
     }
   end,
   desc = "Inpect on npm start",

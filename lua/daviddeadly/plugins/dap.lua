@@ -96,12 +96,13 @@ return {
                 type = "pwa-chrome",
                 request = "launch",
                 name = "Launch chromium",
-                url = "http://localhost:5173",
-                preLaunchTask = 'Inspect Start',
+                url = "http://localhost:4200",
+                preLaunchTask = "npm: start",
                 sourceMaps = true,
                 webRoot = "${workspaceFolder}/code",
                 protocol = "inspector",
                 port = 9222,
+                runtimeExecutable = "/usr/bin/vivaldi-stable",
                 skipFiles = { "**/node_modules/**/*", "**/@vite/*", "**/src/client/*", "**/src/*" }
               },
               {
