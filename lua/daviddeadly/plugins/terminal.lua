@@ -1,5 +1,5 @@
 local function lazy_git()
-  local fterm = require('FTerm')
+  local fterm = require("FTerm")
 
   return fterm:new({
     cmd = "lazygit",
@@ -11,18 +11,18 @@ local function lazy_git()
 end
 
 return {
-  'numToStr/FTerm.nvim',
+  "numToStr/FTerm.nvim",
   opts = function()
     local lazygit = lazy_git()
-    vim.api.nvim_create_user_command('LazyGit', function() lazygit:toggle() end, { bang = true })
+    vim.api.nvim_create_user_command("LazyGit", function() lazygit:toggle() end, { bang = true })
 
     return {}
   end,
   keys = {
-    { '<M-g><M-g>', '<CMD>LazyGit<CR>', desc = 'toggle LazyGit' },
-    { '<M-g><M-g>', '<C-\\><C-n><CMD>LazyGit<CR>', mode = 't', desc = 'toggle LazyGit' },
-    { '<M-ñ>', '<CMD>lua require("FTerm").toggle()<CR>', desc = 'toggle FTerminal' },
-    { '<M-ñ>', '<C-\\><C-n><CMD>lua require("FTerm").toggle()<CR>', mode = 't', desc = 'toggle FTerminal' },
-    { '<M-c>', '<C-\\><C-n><CMD>lua require("FTerm").exit()<CR>', mode = 't', desc = 'toggle FTerminal' },
+    { "<M-g><M-g>", vim.cmd.LazyGit, desc = "toggle LazyGit" },
+    { "<M-g><M-g>", "<C-\\><C-n><CMD>LazyGit<CR>", mode = "t", desc = "toggle LazyGit" },
+    { "<M-ñ>", function() require("FTerm").toggle() end, desc = "toggle FTerminal" },
+    { "<M-ñ>", "<C-\\><C-n><CMD>lua require('FTerm').toggle()<CR>", mode = "t", desc = "toggle FTerminal" },
+    { "<M-c>", "<C-\\><C-n><CMD>lua require('FTerm').exit()<CR>", mode = "t", desc = "toggle FTerminal" },
   }
 }

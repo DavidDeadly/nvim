@@ -1,7 +1,7 @@
 local sn_frontend =  vim.fn.expand("$HOME/Dev/Sofka/Summa/summa-network-frontend")
 
 return {
-  'stevearc/overseer.nvim',
+  "stevearc/overseer.nvim",
   opts = function ()
     local overseer = require("overseer")
 
@@ -32,7 +32,7 @@ return {
     }
   end,
   keys = {
-    { '<leader>R', '<CMD>OverseerRun<CR>', desc = 'Run task' },
-    { '<leader>rT', '<CMD>OverseerToggle<CR>', desc = 'Run task' },
+    { "<leader>R", "<CMD>OverseerRun<CR>", desc = "Run task" },
+    { "<leader>rT", "<CMD>OverseerToggle<CR>", desc = "Run task" },
   }
 }

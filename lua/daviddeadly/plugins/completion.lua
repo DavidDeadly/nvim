@@ -5,37 +5,37 @@ local has_words_before = function()
 end
 
 return {
-  'hrsh7th/nvim-cmp',
-  event = 'InsertEnter',
+  "hrsh7th/nvim-cmp",
+  event = "InsertEnter",
   dependencies = {
     -- Snippet Engine & its associated nvim-cmp source
-    'L3MON4D3/LuaSnip',
-    'saadparwaiz1/cmp_luasnip',
+    "L3MON4D3/LuaSnip",
+    "saadparwaiz1/cmp_luasnip",
 
     -- Adds LSP completion capabilities
-    'hrsh7th/cmp-nvim-lsp',
-    'hrsh7th/cmp-buffer',
-    'hrsh7th/cmp-path',
-    'hrsh7th/cmp-cmdline',
+    "hrsh7th/cmp-nvim-lsp",
+    "hrsh7th/cmp-buffer",
+    "hrsh7th/cmp-path",
+    "hrsh7th/cmp-cmdline",
 
     -- Adds a number of user-friendly snippets
-    'rafamadriz/friendly-snippets',
+    "rafamadriz/friendly-snippets",
   },
 
   config = function()
-    local cmp = require 'cmp'
+    local cmp = require "cmp"
     local types = require("cmp.types")
     local str = require("cmp.utils.str")
 
-    local luasnip = require 'luasnip'
-    local lspkind = require 'lspkind'
-    local cmp_autopairs = require('nvim-autopairs.completion.cmp')
+    local luasnip = require "luasnip"
+    local lspkind = require "lspkind"
+    local cmp_autopairs = require("nvim-autopairs.completion.cmp")
 
-    require('luasnip.loaders.from_vscode').lazy_load()
+    require("luasnip.loaders.from_vscode").lazy_load()
     luasnip.config.setup {}
 
     cmp.event:on(
-      'confirm_done',
+      "confirm_done",
       cmp_autopairs.on_confirm_done()
     )
 
@@ -50,23 +50,23 @@ return {
         documentation = cmp.config.window.bordered(),
       },
       mapping = cmp.mapping.preset.insert {
-        ['<C-n>'] = cmp.mapping(
+        ["<C-n>"] = cmp.mapping(
           cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }),
           { "i", "s" }
         ),
-        ['<C-p>'] = cmp.mapping(
+        ["<C-p>"] = cmp.mapping(
           cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }),
           { "i", "s", "c" }
         ),
-        ['<C-d>'] = cmp.mapping.scroll_docs(-4),
-        ['<C-f>'] = cmp.mapping.scroll_docs(4),
-        ['<C-b>'] = cmp.mapping.abort(),
-        ['<C-Space>'] = cmp.mapping.complete {},
-        ['<CR>'] = cmp.mapping.confirm {
+        ["<C-d>"] = cmp.mapping.scroll_docs(-4),
+        ["<C-f>"] = cmp.mapping.scroll_docs(4),
+        ["<C-b>"] = cmp.mapping.abort(),
+        ["<C-Space>"] = cmp.mapping.complete {},
+        ["<CR>"] = cmp.mapping.confirm {
           behavior = cmp.ConfirmBehavior.Insert,
           select = false
         },
-        ['<Tab>'] = cmp.mapping(function(fallback)
+        ["<Tab>"] = cmp.mapping(function(fallback)
           if
             cmp.visible()
             -- and has_words_before()  -- fix for copilot completion
@@ -86,14 +86,14 @@ return {
           else
             fallback()
           end
-        end, { 'i', 's', 'c' }),
+        end, { "i", "s", "c" }),
       },
       sources = {
-        { name = 'copilot', group_index = 2 },
-        { name = 'nvim_lsp', group_index = 2 },
-        { name = 'luasnip', group_index = 2 },
-        { name = 'path', group_index = 2 },
-        { name = 'buffer', keyword_length = 5, max_item_count = 5 },
+        { name = "copilot", group_index = 2 },
+        { name = "nvim_lsp", group_index = 2 },
+        { name = "luasnip", group_index = 2 },
+        { name = "path", group_index = 2 },
+        { name = "buffer", keyword_length = 5, max_item_count = 5 },
       },
       sorting = {
         priority_weight = 2,
@@ -118,9 +118,9 @@ return {
           cmp.ItemField.Menu,
         },
         format = lspkind.cmp_format({
-          mode = 'symbol', -- show only symbol annotations
+          mode = "symbol", -- show only symbol annotations
           maxwidth = 50, -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
-          ellipsis_char = '...', -- when popup menu exceed maxwidth, the truncated part would show ellipsis_char instead (must define maxwidth first)
+          ellipsis_char = "...", -- when popup menu exceed maxwidth, the truncated part would show ellipsis_char instead (must define maxwidth first)
           symbol_map = { Copilot = "" },
           -- The function below will be called before any actual modifications from lspkind
           -- so that you can provide more controls on popup customization. (See [#30](https://github.com/onsails/lspkind-nvim/pull/30))
@@ -145,19 +145,19 @@ return {
       },
     }
 
-    cmp.setup.cmdline({ '/', '?' }, {
+    cmp.setup.cmdline({ "/", "?" }, {
       mapping = cmp.mapping.preset.cmdline(),
       sources = {
-        { name = 'buffer' }
+        { name = "buffer" }
       }
     })
 
-    cmp.setup.cmdline(':', {
+    cmp.setup.cmdline(":", {
       mapping = cmp.mapping.preset.cmdline(),
       sources = cmp.config.sources({
-        { name = 'path' }
+        { name = "path" }
       }, {
-          { name = 'cmdline', keyword_length = 2 }
+          { name = "cmdline", keyword_length = 2 }
         })
     })
   end

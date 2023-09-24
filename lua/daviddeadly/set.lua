@@ -14,7 +14,7 @@ vim.opt.wrap = false
 
 vim.opt.swapfile = false
 vim.opt.backup = false
-vim.opt.undodir = vim.fn.stdpath("data") .. '/vim/undodir'
+vim.opt.undodir = vim.fn.stdpath("data") .. "/vim/undodir"
 vim.opt.undofile = true
 
 vim.opt.termguicolors = true
@@ -23,7 +23,7 @@ vim.opt.hlsearch = false
 vim.opt.incsearch = true
 
 vim.opt.scrolloff = 8
-vim.opt.signcolumn = 'yes'
+vim.opt.signcolumn = "yes"
 
 vim.opt.updatetime = 50
 
@@ -33,5 +33,5 @@ vim.opt.cursorline = true
 
 vim.opt.laststatus = 3
 
-vim.opt.spelllang = 'en_us,es'
+vim.opt.spelllang = "en_us,es"
 vim.opt.spell = true

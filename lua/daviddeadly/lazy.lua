@@ -16,7 +16,7 @@ vim.opt.rtp:prepend(lazy)
 require("lazy").setup("daviddeadly.plugins", {
   install = {
     missing = true,
-    colorscheme = { 'catppuccin' },
+    colorscheme = { "catppuccin" },
   },
   checker = {
     enabled = true,
@@ -27,4 +27,4 @@ require("lazy").setup("daviddeadly.plugins", {
   }
 })
 
-vim.keymap.set('n', '<leader>l', vim.cmd.Lazy, { desc = 'open lazy' })
+vim.keymap.set("n", "<leader>l", vim.cmd.Lazy, { desc = "open lazy" })

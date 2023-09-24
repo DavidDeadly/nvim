@@ -6,13 +6,13 @@ local dap_icons = {
   LogPoint = { ".>", "DapLogPoint" },
 }
 
-local node_filetypes = { 'javascriptreact', 'typescriptreact', 'typescript', 'javascript' }
+local node_filetypes = { "javascriptreact", "typescriptreact", "typescript", "javascript" }
 
 return {
-  'mfussenegger/nvim-dap',
+  "mfussenegger/nvim-dap",
   keys = {
-    { "<leader>dB", function() require("dap").set_breakpoint(vim.fn.input('Breakpoint condition: ')) end, desc = "Breakpoint Condition" },
-    { '<leader>db', function() require("dap").toggle_breakpoint() end, desc = "Toggle Breakpoint" },
+    { "<leader>dB", function() require("dap").set_breakpoint(vim.fn.input("Breakpoint condition: ")) end, desc = "Breakpoint Condition" },
+    { "<leader>db", function() require("dap").toggle_breakpoint() end, desc = "Toggle Breakpoint" },
     { "<leader>dC", function() require("dap").run_to_cursor() end, desc = "Run to Cursor" },
     { "<leader>dc", function() require("dap").continue() end, desc = "Continue" },
     { "<leader>dt", function() require("dap").terminate() end, desc = "Terminate" },
@@ -29,10 +29,10 @@ return {
     },
 
     {
-      'rcarriga/nvim-dap-ui',
+      "rcarriga/nvim-dap-ui",
       keys = {
-        { '<leader>du', function() require("dapui").toggle({ }) end, desc = "Dap UI" },
-        { '<leader>dr', function() require("dapui").open({ reset = true }) end, desc = "Dap UI (reset)" },
+        { "<leader>du", function() require("dapui").toggle({ }) end, desc = "Dap UI" },
+        { "<leader>dr", function() require("dapui").open({ reset = true }) end, desc = "Dap UI (reset)" },
         { "<leader>de", function() require("dapui").eval() end, desc = "Eval", mode = {"n", "v"} },
       },
       config = function(_, opts)
@@ -67,11 +67,11 @@ return {
       opts = {
         debugger_path = lazypath .. "/vscode-js-debug",
         debugger_cmd = { "vsDebugServer" },
-        adapters = { 'pwa-node', 'pwa-chrome', 'pwa-msedge', 'node-terminal', 'pwa-extensionHost' },
+        adapters = { "pwa-node", "pwa-chrome", "pwa-msedge", "node-terminal", "pwa-extensionHost" },
       },
       config = function (_, opts)
-        local dap = require('dap')
-        require('dap-vscode-js').setup(opts)
+        local dap = require("dap")
+        require("dap-vscode-js").setup(opts)
 
         for _, language in ipairs(node_filetypes) do
           if not dap.configurations[language] then
@@ -82,8 +82,8 @@ return {
                 request = "launch",
                 name = "Launch file",
                 program = "${file}",
-                cwd = '${workspaceFolder}',
-                skipFiles = { '<node_internals>/**' },
+                cwd = "${workspaceFolder}",
+                skipFiles = { "<node_internals>/**" },
               },
               {
                 type = "pwa-node",
@@ -91,7 +91,7 @@ return {
                 name = "Attach",
                 processId = require("dap.utils").pick_process,
                 cwd = "${workspaceFolder}",
-                skipFiles = { '<node_internals>/**' },
+                skipFiles = { "<node_internals>/**" },
               },
               {
                 type = "pwa-chrome",
@@ -108,8 +108,8 @@ return {
               },
               {
                 name = "Deno debug restricted",
-                type = 'pwa-node',
-                request = 'launch',
+                type = "pwa-node",
+                request = "launch",
                 runtimeExecutable = "deno",
                 runtimeArgs = {
                   "run",
@@ -121,8 +121,8 @@ return {
               },
               {
                 name = "Deno debug",
-                type = 'pwa-node',
-                request = 'launch',
+                type = "pwa-node",
+                request = "launch",
                 runtimeExecutable = "deno",
                 runtimeArgs = {
                   "run",

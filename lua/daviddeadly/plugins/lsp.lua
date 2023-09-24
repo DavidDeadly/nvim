@@ -24,7 +24,7 @@ return {
     },
 
     -- Useful status updates for LSP
-    -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
+    -- NOTE: `opts = {}` is the same as calling `require("fidget").setup({})`
     { "j-hui/fidget.nvim",       tag = "legacy", opts = {} },
     { "onsails/lspkind.nvim" },
 
@@ -55,7 +55,7 @@ return {
     local on_attach = function(_, bufnr)
       local signature = require("lsp_signature")
       signature.on_attach({
-        bind = true, -- This is mandatory, otherwise border config won't get registered.
+        bind = true, -- This is mandatory, otherwise border config won"t get registered.
         toggle_key = "<C-k>",
         toggle_key_flip_floatwin_setting = true,
         noice = true,
@@ -123,7 +123,7 @@ return {
     --  the `settings` field of the server config. You must look up that documentation yourself.
     --
     --  If you want to override the default filetypes that your language server will attach to you can
-    --  define the property 'filetypes' to the map in question.
+    --  define the property "filetypes" to the map in question.
     local eslint_d = require("efmls-configs.linters.eslint_d")
     local prettier_d = require("efmls-configs.formatters.prettier_d")
     local luacheck = require("efmls-configs.linters.luacheck")

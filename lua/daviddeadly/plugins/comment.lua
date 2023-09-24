@@ -1,8 +1,8 @@
 return {
   {
-    'echasnovski/mini.comment',
+    "echasnovski/mini.comment",
     event = { "BufReadPre", "BufNewFile" },
-    version = '*',
+    version = "*",
     opts = {
       options = {
         custom_commentstring = function()

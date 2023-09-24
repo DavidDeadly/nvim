@@ -4,7 +4,7 @@ return {
   name = "Inspect Start",
   builder = function()
     return {
-      cmd = { 'npm' },
+      cmd = { "npm" },
       args = { "--node-options", "--inspect", "start" },
       name = "node --inspect start",
       components = {

@@ -1,12 +1,12 @@
 return {
   {
     "theprimeagen/vim-be-good",
-    cmd = 'VimBeGood'
+    cmd = "VimBeGood"
   },
 
   {
     "m4xshen/hardtime.nvim",
-    event = { 'BufReadPost', 'BufNewFile' },
+    event = { "BufReadPost", "BufNewFile" },
     dependencies = { "MunifTanjim/nui.nvim", "nvim-lua/plenary.nvim" },
     opts = {
       disabled_filetypes = { "FTerm", "netrw", "lazy", "mason" },
@@ -14,9 +14,9 @@ return {
   },
 
   {
-    'echasnovski/mini.move',
-    event = { 'BufReadPost', 'BufNewFile' },
-    version = '*',
+    "echasnovski/mini.move",
+    event = { "BufReadPost", "BufNewFile" },
+    version = "*",
     opts = {}
   },
 }

@@ -1,6 +1,6 @@
 return {
-	'echasnovski/mini.surround',
+	"echasnovski/mini.surround",
 	event = "InsertEnter",
-	version = '*',
+	version = "*",
 	opts = {}
 }

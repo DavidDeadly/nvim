@@ -1,7 +1,7 @@
 return {
-  'folke/twilight.nvim',
+  "folke/twilight.nvim",
   opts = {},
   keys = {
-    { '<leader>tt', vim.cmd.Twilight, desc = 'Toggle twilight' }
+    { "<leader>tt", vim.cmd.Twilight, desc = "Toggle twilight" }
   }
 }

@@ -1,6 +1,6 @@
 return {
   {
-    'echasnovski/mini.starter', version = '*',
+    "echasnovski/mini.starter", version = "*",
     opts = {}
   },
 

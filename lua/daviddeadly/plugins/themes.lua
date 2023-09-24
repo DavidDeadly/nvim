@@ -1,7 +1,7 @@
 return {
 	{
 		"rose-pine/neovim",
-    event = 'VeryLazy',
+    event = "VeryLazy",
 		name = "rose-pine",
 	},
 

@@ -1,5 +1,5 @@
 local telescope_integration = function (_, opts)
-  local hasFlash = require("lazy.core.config").spec.plugins['flash.nvim'] ~= nil;
+  local hasFlash = require("lazy.core.config").spec.plugins["flash.nvim"] ~= nil;
 
   if not hasFlash then
     return

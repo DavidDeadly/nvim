@@ -1,9 +1,9 @@
 return {
   {
-    'echasnovski/mini.files', version = '*',
+    "echasnovski/mini.files", version = "*",
     dependencies = {
-      { 'nvim-tree/nvim-web-devicons' },
-      { 'antosha417/nvim-lsp-file-operations' }
+      { "nvim-tree/nvim-web-devicons" },
+      { "antosha417/nvim-lsp-file-operations" }
     },
     opts = {
       options = {
@@ -16,7 +16,7 @@ return {
       }
     },
     keys = {
-      { '<leader>e', '<cmd>:lua MiniFiles.open()<cr>', desc = 'Mini [E]xplorer' }
+      { "<leader>e", "<cmd>:lua MiniFiles.open()<cr>", desc = "Mini [E]xplorer" }
     }
   }
 }
