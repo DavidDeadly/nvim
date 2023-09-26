@@ -1,3 +1,4 @@
+-- luacheck: globals vim
 local lazy_status = require("lazy.status")
 
 local function fg(name)
@@ -33,6 +34,11 @@ return {
 				},
       },
 			lualine_c = {
+        {
+          function() return require("noice").api.status.mode.get() end,
+          cond = function() return require("noice").api.status.mode.has() end,
+          color = { fg = "#ff9e64" },
+        },
 				{
 					function()
 						return require("nvim-navic").get_location()
@@ -69,6 +75,11 @@ return {
 				"selectioncount",
 			},
 			lualine_x = {
+        {
+          function() return require("noice").api.status.command.get() end,
+          cond = function() return require("noice").api.status.command.has() end,
+          color = { fg = "#ff9e64" },
+        },
 				{
 					lazy_status.updates,
 					cond = lazy_status.has_updates,

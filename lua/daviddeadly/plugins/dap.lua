@@ -44,6 +44,29 @@ local dap_icons = {
   LogPoint = { ".>", "DapLogPoint" },
 }
 
+local function dap_colors()
+  vim.api.nvim_set_hl(0, "DapStoppedLine", { default = true, link = "Visual" })
+
+  vim.api.nvim_set_hl(0, 'DapBreakpoint', { ctermbg = 0, fg = '#993939' })
+  vim.api.nvim_set_hl(0, 'DapLogPoint', { ctermbg = 0, fg = '#61afef' })
+  vim.api.nvim_set_hl(0, 'DapStopped', { ctermbg = 0, fg = '#98c379' })
+
+  for name, sign in pairs(dap_icons) do
+    sign = type(sign) == "table" and sign or { sign }
+    vim.fn.sign_define(
+      "Dap" .. name,
+      { text = sign[1], texthl = sign[2] or "DiagnosticInfo", linehl = sign[3], numhl = sign[3] }
+    )
+  end
+
+  vim.api.nvim_create_autocmd("ColorScheme", {
+    pattern = "*",
+    group = vim.api.nvim_create_augroup("DapColorscheme", { clear = true }),
+    desc = "prevent colorscheme clears self-defined DAP icon colors.",
+    callback = dap_colors,
+  })
+end
+
 local node_filetypes = { "javascriptreact", "typescriptreact", "typescript", "javascript" }
 
 return {
@@ -53,12 +76,20 @@ return {
     { "<leader>db", function() require("dap").toggle_breakpoint() end, desc = "Toggle Breakpoint" },
     { "<leader>dC", function() require("dap").run_to_cursor() end, desc = "Run to Cursor" },
     { "<leader>dc", function() require("dap").continue() end, desc = "Continue" },
+    { "<leader>d_", function() require("dap").run_last() end, desc = "Run last adapter" },
     { "<leader>dt", function() require("dap").terminate() end, desc = "Terminate" },
     { "<leader>di", function() require("dap").step_into() end, desc = "Step Into" },
     { "<leader>dO", function() require("dap").step_out() end, desc = "Step Out" },
     { "<leader>do", function() require("dap").step_over() end, desc = "Step Over" },
     { "<leader>dp", function() require("dap").pause() end, desc = "Pause" },
-    { "<leader>dr", function() require("dap").repl.toggle() end, desc = "Toggle REPL" },
+    { "<leader>de", function() require("dap").set_exception_breakpoints({ "all" }) end, desc = "Exception breakpoints all" },
+    { "<leader>dr", ':lua require"dap".repl.toggle({}, "vsplit")<CR><C-w>l', desc = "Toggle REPL" },
+    { "<leader>dk", ':lua require"dap".up()<CR>zz', desc = "Upstairs the callstack" },
+    { "<leader>dj", ':lua require"dap".down()<CR>zz', desc = "Downstairs the callstack" },
+    { "<leader>d?", function()
+      local widgets = require "dap.ui.widgets";
+      widgets.centered_float(widgets.scopes)
+    end, desc = "Show scopes" },
   },
   dependencies = {
     {
@@ -67,7 +98,13 @@ return {
     },
 
     {
+      "nvim-telescope/telescope.nvim",
+      branch = "0.1.x",
+    },
+
+    {
       "rcarriga/nvim-dap-ui",
+      enabled = false,
       keys = {
         { "<leader>du", function() require("dapui").toggle({ }) end, desc = "Dap UI" },
         { "<leader>dr", function() require("dapui").open({ reset = true }) end, desc = "Dap UI (reset)" },
@@ -77,12 +114,8 @@ return {
         local dap = require("dap")
         local dapui = require("dapui")
 
-        require("overseer").patch_dap(true)
         dapui.setup(opts)
 
-        dap.listeners.after.event_initialized["dapui_config"] = function()
-          dapui.open({})
-        end
         dap.listeners.before.event_terminated["dapui_config"] = function()
           dapui.close({})
         end
@@ -188,14 +221,8 @@ return {
     }
   },
   config = function ()
-    vim.api.nvim_set_hl(0, "DapStoppedLine", { default = true, link = "Visual" })
+    require("overseer").patch_dap(true)
 
-    for name, sign in pairs(dap_icons) do
-      sign = type(sign) == "table" and sign or { sign }
-      vim.fn.sign_define(
-        "Dap" .. name,
-        { text = sign[1], texthl = sign[2] or "DiagnosticInfo", linehl = sign[2], numhl = sign[2] }
-      )
-    end
-  end
+    dap_colors()
+  end,
 }

@@ -16,6 +16,7 @@ return {
         "dapui_stacks",
         "dapui_watches",
         "dapui_repl",
+        "dap-float",
         "FTerm",
         "netrw",
         "lazy",

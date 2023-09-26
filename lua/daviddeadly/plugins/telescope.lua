@@ -1,3 +1,4 @@
+-- luacheck globals vim
 local find_in_current_buffer = function ()
   local dropdown = require("telescope.themes").get_dropdown {
     winblend = 10,
@@ -56,6 +57,16 @@ return {
     },
 
     {
+      "nvim-telescope/telescope-dap.nvim",
+      keys = {
+        { "<leader>DB", function() require("telescope").extensions.dap.list_breakpoints() end, desc = "Dap - Breakpoints" },
+        { "<leader>dv", function() require("telescope").extensions.dap.variables() end, desc = "Dap - Variables" },
+        { "<leader>df", function() require("telescope").extensions.dap.frames() end, desc = "Dap - Frames" },
+        { "<leader>DC", function() require("telescope").extensions.dap.commands() end, desc = "Dap - Commands" },
+      }
+    },
+
+    {
       "nvim-telescope/telescope-file-browser.nvim",
       dependencies = { "antosha417/nvim-lsp-file-operations" },
       keys = {
@@ -76,6 +87,7 @@ return {
   config = function (_, opts)
     require("telescope").setup(opts)
 
+    require("telescope").load_extension("dap")
     require("telescope").load_extension("notify")
     require("telescope").load_extension("projects")
     require("telescope").load_extension("file_browser")
