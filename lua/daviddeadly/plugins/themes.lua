@@ -1,3 +1,4 @@
+-- luacheck: globals vim
 return {
 	{
 		"rose-pine/neovim",
@@ -5,9 +6,40 @@ return {
 		name = "rose-pine",
 	},
 
+  {
+    "navarasu/onedark.nvim",
+    event = "VeryLazy",
+    opts = {
+      transparent = vim.g.tranparend_enabled,
+      style = "deep",
+      toggle_style_key = "<F5>",
+      lualine = {
+        transparent = vim.g.tranparend_enabled,
+      },
+    },
+    config = function (_, opts)
+      require("onedark").setup(opts)
+    end
+  },
+
+  {
+    "folke/tokyonight.nvim",
+    lazy = false,
+    priority = 1000,
+    opts = {
+      style = "night"
+    },
+		config = function(_, opts)
+		    require("tokyonight").setup(opts)
+
+			vim.cmd[[colorscheme tokyonight-night]]
+		end,
+  },
+
 	{
 		"catppuccin/nvim",
 		name = "catppuccin",
+    event = "VeryLazy",
 		opts = {
 			flavour = "mocha",
       term_colors = true,
@@ -32,12 +64,5 @@ return {
         telescope = true,
 			},
 		},
-		lazy = false,
-		priority = 1000,
-		config = function(_, opts)
-      require("catppuccin").setup(opts)
-
-			vim.cmd("colorscheme catppuccin-mocha")
-		end,
-	},
+	}
 }

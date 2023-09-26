@@ -84,7 +84,7 @@ return {
 		{ "<leader>do", function() require("dap").step_over() end, desc = "Step Over" },
 		{ "<leader>dp", function() require("dap").pause() end, desc = "Pause" },
 		{ "<leader>dE", function() require("dap").set_exception_breakpoints({ "all" }) end, desc = "Exception breakpoints all" },
-		{ "<leader>dr", ':lua require"dap".repl.toggle({}, "vsplit")<CR><C-w>l', desc = "Toggle REPL" },
+    { "<leader>dr", ':lua require"dap".repl.toggle({}, "vsplit")<CR><C-w>l', desc = "Toggle REPL" },
 		{ "<leader>dk", ':lua require"dap".up()<CR>zz', desc = "Upstairs the callstack" },
 		{ "<leader>dj", ':lua require"dap".down()<CR>zz', desc = "Downstairs the callstack" },
 		{

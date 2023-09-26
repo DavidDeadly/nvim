@@ -1,3 +1,4 @@
+-- luacheck: globals vim lazypath
 lazypath = vim.fn.stdpath("data") .. "/lazy"
 local lazy = lazypath .. "/lazy.nvim"
 
@@ -16,7 +17,7 @@ vim.opt.rtp:prepend(lazy)
 require("lazy").setup("daviddeadly.plugins", {
   install = {
     missing = true,
-    colorscheme = { "catppuccin" },
+    colorscheme = { "tokyonight" },
   },
   checker = {
     enabled = true,

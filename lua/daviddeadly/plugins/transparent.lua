@@ -1,3 +1,4 @@
+-- luacheck: globals vim
 return {
 	"xiyaowong/nvim-transparent",
   cmd = "TransparentEnable",
