@@ -102,6 +102,25 @@ return {
 			opts = {},
 		},
 
+    {
+      "rcarriga/cmp-dap",
+      opts = {
+        enabled = function()
+          return vim.api.nvim_buf_get_option(0, "buftype") ~= "prompt"
+            or require("cmp_dap").is_dap_buffer()
+        end
+      },
+      config = function (_, opts)
+        require("cmp").setup(opts)
+
+        require("cmp").setup.filetype({ "dap-repl", "dapui_watches", "dapui_hover" }, {
+          sources = {
+            { name = "dap" },
+          },
+        })
+      end
+    },
+
 		{
 			"nvim-telescope/telescope.nvim",
 			branch = "0.1.x",

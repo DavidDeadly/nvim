@@ -1,5 +1,6 @@
 {
     "diagnostics.globals": [
-        "lazypath"
+        "lazypath",
+        "rainbow_delimiters"
     ]
 }

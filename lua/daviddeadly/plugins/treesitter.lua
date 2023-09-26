@@ -1,10 +1,42 @@
+-- luacheck: globals vim rainbow_delimiters
 return {
   "nvim-treesitter/nvim-treesitter",
   event = { "BufReadPost", "BufNewFile" },
   dependencies = {
     "nvim-treesitter/nvim-treesitter-textobjects",
 
-    "nvim-treesitter/nvim-treesitter-context"
+    "nvim-treesitter/nvim-treesitter-context",
+
+    {
+      "HiPhish/rainbow-delimiters.nvim",
+      opts =  function()
+        local rainbow_delimiters = require 'rainbow-delimiters';
+
+        return {
+          strategy = {
+            [''] = rainbow_delimiters.strategy['global'],
+            commonlisp = rainbow_delimiters.strategy['local'],
+          },
+          query = {
+            [''] = 'rainbow-delimiters',
+            latex = 'rainbow-blocks',
+          },
+          highlight = {
+            'RainbowDelimiterRed',
+            'RainbowDelimiterYellow',
+            'RainbowDelimiterBlue',
+            'RainbowDelimiterOrange',
+            'RainbowDelimiterGreen',
+            'RainbowDelimiterViolet',
+            'RainbowDelimiterCyan',
+          },
+          blacklist = {'c', 'cpp'},
+        }
+      end,
+      config = function (_, opts)
+        require"rainbow-delimiters.setup"(opts)
+      end
+    }
   },
   build = ":TSUpdate",
   ---@type TSConfig

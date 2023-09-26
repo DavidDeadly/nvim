@@ -1,4 +1,4 @@
--- luacheck globals vim
+-- luacheck: globals vim
 return {
   {
     "stevearc/dressing.nvim",
