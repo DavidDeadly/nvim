@@ -1,3 +1,41 @@
+-- luacheck: globals vim lazypath
+local localhost = {
+  "http://localhost:3000",
+  "http://localhost:8080",
+  "http://localhost:5173",
+  "http://localhost:4200",
+}
+
+local function pick_url()
+  local coro = assert(coroutine.running())
+
+  vim.schedule(function()
+    vim.ui.select(localhost, {
+      prompt = "Select URL: ",
+      telescope = require("telescope.themes").get_dropdown(),
+    }, function(choice)
+        if choice == nil then
+          vim.ui.input({
+            prompt = "Custom URL: ",
+          }, function (input)
+              if input == nil then
+                coroutine.resume(coro, localhost[1])
+                return
+              end
+
+              coroutine.resume(coro, input)
+            end)
+          return
+        end
+
+        coroutine.resume(coro, choice)
+      end)
+  end)
+
+  local url = coroutine.yield()
+  return url
+end
+
 local dap_icons = {
   Stopped = { "󰁕 ", "DapStopped" },
   Breakpoint = { " ", "DapBreakpoint" },
@@ -17,8 +55,8 @@ return {
     { "<leader>dc", function() require("dap").continue() end, desc = "Continue" },
     { "<leader>dt", function() require("dap").terminate() end, desc = "Terminate" },
     { "<leader>di", function() require("dap").step_into() end, desc = "Step Into" },
-    { "<leader>do", function() require("dap").step_out() end, desc = "Step Out" },
-    { "<leader>dO", function() require("dap").step_over() end, desc = "Step Over" },
+    { "<leader>dO", function() require("dap").step_out() end, desc = "Step Out" },
+    { "<leader>do", function() require("dap").step_over() end, desc = "Step Over" },
     { "<leader>dp", function() require("dap").pause() end, desc = "Pause" },
     { "<leader>dr", function() require("dap").repl.toggle() end, desc = "Toggle REPL" },
   },
@@ -97,13 +135,22 @@ return {
                 type = "pwa-chrome",
                 request = "launch",
                 name = "Launch chromium",
-                url = "http://localhost:4200",
-                preLaunchTask = "npm: start",
+                url = pick_url,
                 sourceMaps = true,
                 webRoot = "${workspaceFolder}/code",
                 protocol = "inspector",
                 port = 9222,
                 runtimeExecutable = "/usr/bin/vivaldi-stable",
+                skipFiles = { "**/node_modules/**/*", "**/@vite/*", "**/src/client/*", "**/src/*" }
+              },
+              {
+                type = "pwa-chrome",
+                request = "attach",
+                name = "Attach chromium",
+                sourceMaps = true,
+                webRoot = "${workspaceFolder}/code",
+                protocol = "inspector",
+                port = 9222,
                 skipFiles = { "**/node_modules/**/*", "**/@vite/*", "**/src/client/*", "**/src/*" }
               },
               {
@@ -139,9 +186,8 @@ return {
 
       end
     }
-
   },
-  init = function ()
+  config = function ()
     vim.api.nvim_set_hl(0, "DapStoppedLine", { default = true, link = "Visual" })
 
     for name, sign in pairs(dap_icons) do
@@ -151,5 +197,5 @@ return {
         { text = sign[1], texthl = sign[2] or "DiagnosticInfo", linehl = sign[2], numhl = sign[2] }
       )
     end
-  end,
+  end
 }

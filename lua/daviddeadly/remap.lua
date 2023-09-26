@@ -1,3 +1,5 @@
+-- luacheck: globals vim
+
 vim.keymap.set("n", "<M-e>", vim.cmd.Ex, { desc = "[e]xplorer" })
 
 vim.keymap.set("n", "<C-Up>", "<cmd>resize +2<cr>", { desc = "Increase window height" })

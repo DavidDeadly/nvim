@@ -9,7 +9,18 @@ return {
     event = { "BufReadPost", "BufNewFile" },
     dependencies = { "MunifTanjim/nui.nvim", "nvim-lua/plenary.nvim" },
     opts = {
-      disabled_filetypes = { "FTerm", "netrw", "lazy", "mason" },
+      disabled_filetypes = {
+        "dapui_scopes",
+        "dapui_breakpoints",
+        "dapui_console",
+        "dapui_stacks",
+        "dapui_watches",
+        "dapui_repl",
+        "FTerm",
+        "netrw",
+        "lazy",
+        "mason"
+      },
     }
   },
 

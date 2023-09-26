@@ -125,15 +125,16 @@ return {
     --  If you want to override the default filetypes that your language server will attach to you can
     --  define the property "filetypes" to the map in question.
     local eslint_d = require("efmls-configs.linters.eslint_d")
+    local eslint_d_formatter = require('efmls-configs.formatters.eslint_d')
     local prettier_d = require("efmls-configs.formatters.prettier_d")
     local luacheck = require("efmls-configs.linters.luacheck")
     local stylua = require("efmls-configs.formatters.stylua")
 
     local languages = {
-      typescript = { eslint_d, prettier_d },
-      javascript = { eslint_d, prettier_d },
-      jsx = { eslint_d, prettier_d },
-      tsx = { eslint_d, prettier_d },
+      typescript = { eslint_d, prettier_d, eslint_d_formatter },
+      javascript = { eslint_d, prettier_d, eslint_d_formatter },
+      jsx = { eslint_d, prettier_d, eslint_d_formatter },
+      tsx = { eslint_d, prettier_d, eslint_d_formatter },
       lua = { stylua, luacheck },
     }
 

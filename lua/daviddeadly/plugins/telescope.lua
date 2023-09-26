@@ -16,7 +16,7 @@ return {
       mappings = {
         i = {
           ["<M-p>"] = require("telescope.actions.layout").toggle_preview,
-          ["<C-h>"] = "which_key"
+          ["<M-h>"] = "which_key"
         },
         n = {
           ["<M-p>"] = require("telescope.actions.layout").toggle_preview
