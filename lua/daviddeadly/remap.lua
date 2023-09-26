@@ -1,5 +1,4 @@
 -- luacheck: globals vim
-
 vim.keymap.set("n", "<M-e>", vim.cmd.Ex, { desc = "[e]xplorer" })
 
 vim.keymap.set("n", "<C-Up>", "<cmd>resize +2<cr>", { desc = "Increase window height" })
@@ -27,11 +26,6 @@ vim.keymap.set("i", "<C-c>", "<Esc>", { desc = "Normal mode" })
 
 -- I"ll make my own
 -- vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
-
-vim.keymap.set("n", "<C-t>", "<cmd>tab split<cr>", { desc = "Current buffer on new tab" })
-vim.keymap.set("n", "<C-t><C-n>", "<cmd>tabclose<cr>", { desc = "Close tab" })
-vim.keymap.set("n", "<S-l>", "<cmd>tabnext<cr>", { desc = "Next tab" })
-vim.keymap.set("n", "<S-h>", "<cmd>tabprevious<cr>", { desc = "Previous tab" })
 
 vim.keymap.set("n", "<leader>xq", "<cmd>copen<cr>", { desc = "Quickfix List" })
 vim.keymap.set("n", "<leader>K", "<cmd>cnext<CR>zz", { desc = "Next quickfix list" })
