@@ -6,6 +6,12 @@ return {
 		name = "rose-pine",
 	},
 
+  { "bluz71/vim-nightfly-colors",
+    name = "nightfly",
+    lazy = false,
+    priority = 1000,
+  },
+
   {
     "navarasu/onedark.nvim",
     event = "VeryLazy",

@@ -230,7 +230,7 @@ return {
 								url = pick_url,
 								sourceMaps = true,
 								webRoot = "${workspaceFolder}/code",
-								protocol = "inspector",
+                protocol = "inspector",
 								port = 9222,
 								runtimeExecutable = "/usr/bin/vivaldi-stable",
 								skipFiles = { "**/node_modules/**/*", "**/@vite/*", "**/src/client/*", "**/src/*" },
