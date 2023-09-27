@@ -7,6 +7,8 @@ return {
 
     "nvim-treesitter/nvim-treesitter-context",
 
+    "windwp/nvim-ts-autotag",
+
     {
       "HiPhish/rainbow-delimiters.nvim",
       opts =  function()
@@ -44,6 +46,10 @@ return {
     -- Add languages to be installed here that you want installed for treesitter
     ensure_installed = { "lua", "python", "tsx", "javascript", "typescript", "vimdoc", "vim" },
     modules = {},
+
+    autotag = {
+      enable = true,
+    },
 
     sync_install = false,
     auto_install = true,
