@@ -23,9 +23,9 @@ return {
           ["<M-p>"] = require("telescope.actions.layout").toggle_preview
         },
       },
-      preview = {
-        hide_on_startup = true
-      },
+      -- preview = {
+      --   hide_on_startup = true
+      -- },
     },
     pickers = {
       find_files = {

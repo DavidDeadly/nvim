@@ -1,3 +1,4 @@
+-- luacheck: globals vim
 return {
   "monaqa/dial.nvim",
   dependencies = {
@@ -48,6 +49,10 @@ return {
       },
       typescript = {
         augend.constant.new{ elements = {"let", "const"} },
+        augend.constant.alias.bool,
+        augend.integer.alias.decimal,
+        augend.integer.alias.hex,
+        augend.date.alias["%Y/%m/%d"],
       },
     }
   end
