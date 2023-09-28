@@ -194,6 +194,11 @@ return {
 					version = "1.76.1",
 					build = "npm install --legacy-peer-deps && npx gulp vsDebugServerBundle && mv dist out",
 				},
+
+        {
+          "sultanahamer/nvim-dap-reactnative",
+          build = "npm install && tsc"
+        }
 			},
 			opts = {
 				debugger_path = lazypath .. "/vscode-js-debug",
@@ -213,6 +218,17 @@ return {
 								name = "Launch file",
 								program = "${file}",
 								cwd = "${workspaceFolder}",
+								skipFiles = { "<node_internals>/**" },
+							},
+              {
+								type = "pwa-node",
+								request = "attach",
+								name = "Attach to Nvim React Native",
+								program = "${file}",
+								cwd = vim.fn.getcwd(),
+                sourceMaps = true,
+                protocol = "inspector",
+                port = 35000,
 								skipFiles = { "<node_internals>/**" },
 							},
 							{

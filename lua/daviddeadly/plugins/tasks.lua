@@ -7,7 +7,7 @@ return {
       dap = false,
       templates = {
         "builtin",
-        "npm",
+        "ndm"
       },
     }
 	end,

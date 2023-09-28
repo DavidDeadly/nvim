@@ -1,3 +1,0 @@
-return {
-  "npm.inspect-start"
-}
