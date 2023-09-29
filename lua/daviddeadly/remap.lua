@@ -16,6 +16,8 @@ vim.keymap.set("n", "n", "nzzzv", { desc = "Next search result (keep mouse cente
 vim.keymap.set("n", "N", "Nzzzv", { desc = "Prev search result (keep mouse center)" })
 
 vim.keymap.set("x", "<leader>p", [["_dP]], { desc = "Paste and keep data" })
+vim.keymap.set("n", "<C-M-p>", [["+p]], { desc = "Paste form system clipboard front cursor" })
+vim.keymap.set("n", "<C-M-S-p>", [["+P]], { desc = "Paste form system clipboard behind cursor" })
 
 vim.keymap.set({"n", "v"}, "<leader>y", [["+y]], { desc = "Copy form system clipboard" })
 vim.keymap.set("n", "<leader>Y", [["+Y]], { desc = "Copy line to system clipboard" })
