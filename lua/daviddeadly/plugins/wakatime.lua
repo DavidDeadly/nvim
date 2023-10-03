@@ -1,3 +1,4 @@
+-- luacheck: globals vim
 local lualine = require("lualine")
 local Job = require("plenary.job")
 

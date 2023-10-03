@@ -17,7 +17,7 @@ vim.opt.rtp:prepend(lazy)
 require("lazy").setup("daviddeadly.plugins", {
   install = {
     missing = true,
-    colorscheme = { "tokyonight" },
+    colorscheme = { "catppuccin" },
   },
   checker = {
     enabled = true,

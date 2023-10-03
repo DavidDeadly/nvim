@@ -29,8 +29,35 @@ return {
     },
 
     {
-      "creativenull/efmls-configs-nvim",
-      version = "v1.x.x", -- tag is optional, but recommended
+      "nvimtools/none-ls.nvim",
+      opts = function()
+        local none_ls = require("null-ls")
+
+        return {
+          sources = {
+            -- typescript
+            none_ls.builtins.formatting.prettierd,
+            none_ls.builtins.formatting.eslint_d,
+            none_ls.builtins.code_actions.eslint_d,
+            none_ls.builtins.diagnostics.eslint_d,
+
+            -- lua
+            none_ls.builtins.formatting.stylua,
+            none_ls.builtins.diagnostics.luacheck,
+
+            -- spelling
+            none_ls.builtins.formatting.codespell,
+            none_ls.builtins.diagnostics.codespell,
+            none_ls.builtins.completion.spell,
+            none_ls.builtins.diagnostics.misspell,
+
+            -- general
+            none_ls.builtins.code_actions.gitsigns,
+            none_ls.builtins.completion.luasnip,
+            none_ls.builtins.hover.dictionary
+          }
+        }
+      end
     },
 
     -- Useful status updates for LSP
@@ -73,10 +100,6 @@ return {
           border = "rounded",
         },
       }, bufnr)
-
-      -- if client.server_capabilities.documentSymbolProvider then
-      --   navic.attach(client, bufnr)
-      -- end
 
       local nmap = function(keys, func, desc, modes)
         if desc then
@@ -134,25 +157,13 @@ return {
     --
     --  If you want to override the default filetypes that your language server will attach to you can
     --  define the property "filetypes" to the map in question.
-    local eslint_d = require("efmls-configs.linters.eslint_d")
-    local eslint_d_formatter = require('efmls-configs.formatters.eslint_d')
-    local prettier_d = require("efmls-configs.formatters.prettier_d")
-    local luacheck = require("efmls-configs.linters.luacheck")
-    local stylua = require("efmls-configs.formatters.stylua")
-
-    local languages = {
-      typescript = { eslint_d, prettier_d, eslint_d_formatter },
-      javascript = { eslint_d, prettier_d, eslint_d_formatter },
-      jsx = { eslint_d, prettier_d, eslint_d_formatter },
-      tsx = { eslint_d, prettier_d, eslint_d_formatter },
-      lua = { stylua, luacheck },
-    }
 
     local servers = {
       pyright = {},
       tsserver = {},
       angularls = {},
       html = { filetypes = { "html", "twig", "hbs" } },
+      cssls = {},
 
       lua_ls = {
         Lua = {
@@ -162,22 +173,7 @@ return {
           workspace = { checkThirdParty = false },
           telemetry = { enable = false },
         },
-      },
-
-      efm = {
-        filetypes = vim.tbl_keys(languages),
-        settings = {
-          rootMarkers = { ".git/" },
-          languages = languages,
-        },
-        init_options = {
-          documentFormatting = true,
-          documentRangeFormatting = true,
-          hover = true,
-          codeAction = true,
-          completion = true,
-        },
-      },
+      }
     }
 
     -- Setup neovim lua configuration
@@ -196,15 +192,6 @@ return {
 
     mason_lspconfig.setup_handlers({
       function(server_name)
-        if server_name == "efm" then
-          require("lspconfig")[server_name].setup(vim.tbl_extend("force", servers[server_name], {
-            on_attach = on_attach,
-            capabilities = capabilities,
-          }))
-
-          return
-        end
-
         require("lspconfig")[server_name].setup({
           capabilities = capabilities,
           on_attach = on_attach,

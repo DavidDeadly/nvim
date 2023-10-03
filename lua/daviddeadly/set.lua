@@ -25,6 +25,7 @@ vim.opt.hlsearch = false
 vim.opt.incsearch = true
 
 vim.opt.scrolloff = 8
+vim.opt.sidescrolloff = 8
 vim.opt.signcolumn = "yes"
 
 vim.opt.updatetime = 50

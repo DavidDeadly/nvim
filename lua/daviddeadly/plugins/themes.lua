@@ -31,20 +31,15 @@ return {
   {
     "folke/tokyonight.nvim",
     lazy = false,
-    priority = 1000,
     opts = {
       style = "night"
-    },
-		config = function(_, opts)
-		    require("tokyonight").setup(opts)
-
-			vim.cmd[[colorscheme tokyonight-night]]
-		end,
+    }
   },
 
 	{
 		"catppuccin/nvim",
 		name = "catppuccin",
+    priority = 1000,
     event = "VeryLazy",
 		opts = {
 			flavour = "mocha",
@@ -52,7 +47,14 @@ return {
 			dim_inactive = {
 				enabled = true,
 			},
-			integrations = {
+      color_overrides = {
+				mocha = {
+					base = "#000000",
+					mantle = "#000000",
+					crust = "#000000",
+				},
+			},
+      integrations = {
         cmp = true,
         mini = true,
         gitsigns = true,
@@ -70,5 +72,10 @@ return {
         telescope = true,
 			},
 		},
-	}
+    config = function(_, opts)
+      require("catppuccin").setup(opts)
+
+      vim.cmd[[colorscheme catppuccin]]
+    end,
+  }
 }
