@@ -31,6 +31,17 @@ return {
       find_files = {
         prompt_prefix = "🔍 ",
       },
+      buffers = {
+        prompt_prefix = "📁 ",
+        mappings = {
+          n = {
+            ['d'] = require('telescope.actions').delete_buffer
+          },
+          i = {
+            ['<C-S-D>'] = require('telescope.actions').delete_buffer
+          }
+        }
+      },
     },
     extensions = {
       file_browser = {
