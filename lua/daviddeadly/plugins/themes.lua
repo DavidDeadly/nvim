@@ -2,19 +2,18 @@
 return {
 	{
 		"rose-pine/neovim",
-    event = "VeryLazy",
+    lazy = true,
 		name = "rose-pine",
 	},
 
   { "bluz71/vim-nightfly-colors",
+    lazy = true,
     name = "nightfly",
-    lazy = false,
-    priority = 1000,
   },
 
   {
     "navarasu/onedark.nvim",
-    event = "VeryLazy",
+    lazy = true,
     opts = {
       transparent = vim.g.tranparend_enabled,
       style = "deep",
@@ -30,7 +29,7 @@ return {
 
   {
     "folke/tokyonight.nvim",
-    lazy = false,
+    lazy = true,
     opts = {
       style = "night"
     }
@@ -40,7 +39,6 @@ return {
 		"catppuccin/nvim",
 		name = "catppuccin",
     priority = 1000,
-    event = "VeryLazy",
 		opts = {
 			flavour = "mocha",
       term_colors = true,

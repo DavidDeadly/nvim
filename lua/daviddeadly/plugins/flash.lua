@@ -1,3 +1,4 @@
+-- luacheck: globals vim
 local telescope_integration = function (_, opts)
   local hasFlash = require("lazy.core.config").spec.plugins["flash.nvim"] ~= nil;
 
@@ -36,8 +37,6 @@ return {
   {
     "folke/flash.nvim",
     opts = {},
-    event = "VeryLazy",
-    -- stylua: ignore
     keys = {
       { "<M-s>", mode = { "n", "o", "x" }, function() require("flash").jump() end, desc = "Flash" },
       { "<M-S>", mode = { "n", "o", "x" }, function() require("flash").treesitter() end, desc = "Flash Treesitter" },

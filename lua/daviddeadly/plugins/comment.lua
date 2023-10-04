@@ -1,7 +1,9 @@
 return {
   {
     "echasnovski/mini.comment",
-    event = { "BufReadPre", "BufNewFile" },
+    keys = {
+      "gcc", "gc"
+    },
     version = "*",
     opts = {
       options = {
@@ -16,8 +18,7 @@ return {
 
   {
     "folke/todo-comments.nvim",
-    cmd = { "TodoTrouble", "TodoTelescope" },
-    event = { "BufReadPost", "BufNewFile" },
+    cmd = { "TodoTelescope" },
     config = true,
     -- stylua: ignore
     keys = {

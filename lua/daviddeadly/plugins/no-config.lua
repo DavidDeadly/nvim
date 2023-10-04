@@ -31,7 +31,9 @@ return {
 
   {
     "echasnovski/mini.move",
-    event = { "BufReadPost", "BufNewFile" },
+    keys = {
+      "<M-j>", "<M-k>", "<M-h>", "<M-l>"
+    },
     version = "*",
     opts = {}
   },

@@ -18,10 +18,35 @@ return {
     "hrsh7th/cmp-buffer",
     "hrsh7th/cmp-path",
     "hrsh7th/cmp-cmdline",
-    "rcarriga/cmp-dap",
 
     -- Adds a number of user-friendly snippets
     "rafamadriz/friendly-snippets",
+
+    {
+      "zbirenbaum/copilot-cmp",
+      dependencies = {
+        {
+          "zbirenbaum/copilot.lua",
+          cmd = "Copilot",
+          build = ":Copilot auth",
+          opts = {
+            suggestion = { enabled = false },
+            panel = { enabled = false },
+            filetypes = {
+              markdown = true,
+              help = true,
+            },
+          },
+        }
+      },
+      opts = {
+        event = { "InsertEnter" },
+        fix_pairs = true,
+      },
+      config = function(_, opts)
+        require("copilot_cmp").setup(opts)
+      end,
+    }
   },
 
   config = function()

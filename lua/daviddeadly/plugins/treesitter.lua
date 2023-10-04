@@ -10,6 +10,17 @@ return {
     "windwp/nvim-ts-autotag",
 
     {
+      "RRethy/vim-illuminate",
+      opts = {
+        delay = 200,
+        large_file_cutoff = 2000,
+      },
+      config = function(_, opts)
+        require("illuminate").configure(opts)
+      end
+    },
+
+    {
       "HiPhish/rainbow-delimiters.nvim",
       opts =  function()
         local rainbow_delimiters = require 'rainbow-delimiters';
