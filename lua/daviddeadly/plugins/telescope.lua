@@ -49,14 +49,6 @@ return {
     { "nvim-lua/plenary.nvim" },
 
     {
-      "ahmedkhalf/project.nvim",
-      main = "project_nvim",
-      keys = {
-        { "<leader>fp", function() require("telescope").extensions.projects.projects() end, desc = "Projects" },
-      },
-    },
-
-    {
       "nvim-telescope/telescope-dap.nvim",
       keys = {
         { "<leader>DB", function() require("telescope").extensions.dap.list_breakpoints() end, desc = "Dap - Breakpoints" },
@@ -89,7 +81,6 @@ return {
 
     require("telescope").load_extension("dap")
     require("telescope").load_extension("notify")
-    require("telescope").load_extension("projects")
     require("telescope").load_extension("file_browser")
   end,
   keys = {

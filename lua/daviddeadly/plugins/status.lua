@@ -26,6 +26,7 @@ return {
 	dependencies = { "nvim-tree/nvim-web-devicons" },
 	opts = {
 		globalstatus = true,
+    theme = "catppuccin",
 		tabline = {
       lualine_a = {
 				{

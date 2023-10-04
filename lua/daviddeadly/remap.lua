@@ -26,8 +26,7 @@ vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]], { desc = "Delete to empty reg
 
 vim.keymap.set("i", "<C-c>", "<Esc>", { desc = "Normal mode" })
 
--- I"ll make my own
--- vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
+vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
 
 vim.keymap.set("n", "<leader>xq", "<cmd>copen<cr>", { desc = "Quickfix List" })
 vim.keymap.set("n", "<leader>K", "<cmd>cnext<CR>zz", { desc = "Next quickfix list" })
