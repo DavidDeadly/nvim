@@ -47,13 +47,6 @@ return {
 			dim_inactive = {
 				enabled = true,
 			},
-      color_overrides = {
-				mocha = {
-					base = "#000000",
-					mantle = "#000000",
-					crust = "#000000",
-				},
-			},
       integrations = {
         cmp = true,
         mini = true,

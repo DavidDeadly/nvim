@@ -5,6 +5,10 @@ return {
   },
 
   {
+    "christoomey/vim-tmux-navigator",
+  },
+
+  {
     "m4xshen/hardtime.nvim",
     event = { "BufReadPost", "BufNewFile" },
     dependencies = { "MunifTanjim/nui.nvim", "nvim-lua/plenary.nvim" },

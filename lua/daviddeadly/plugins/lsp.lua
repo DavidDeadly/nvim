@@ -93,7 +93,7 @@ return {
       local signature = require("lsp_signature")
       signature.on_attach({
         bind = true, -- This is mandatory, otherwise border config won"t get registered.
-        toggle_key = "<C-k>",
+        toggle_key = "<M-x>",
         toggle_key_flip_floatwin_setting = true,
         noice = true,
         handler_opts = {
@@ -122,7 +122,7 @@ return {
 
       -- See `:help K` for why this keymap
       nmap("K", vim.lsp.buf.hover, "Hover Documentation")
-      nmap("<C-k>", signature.toggle_float_win, "Toggle Signature Documentation")
+      nmap("<M-x>", signature.toggle_float_win, "Toggle Signature Documentation")
 
       nmap("<leader>vws", vim.lsp.buf.workspace_symbol, "[V]iew [W]orkspace [S]ymbols")
       nmap("<leader>vd", function()
