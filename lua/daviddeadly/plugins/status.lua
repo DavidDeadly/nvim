@@ -2,9 +2,9 @@
 local lazy_status = require("lazy.status")
 
 local function fg(name)
-	local hl = vim.api.nvim_get_hl and vim.api.nvim_get_hl(0, { name = name })
-	local foreground = hl and hl.fg
-	return foreground and { fg = string.format("#%06x", foreground) }
+  local hl = vim.api.nvim_get_hl and vim.api.nvim_get_hl(0, { name = name })
+  local foreground = hl and hl.fg
+  return foreground and { fg = string.format("#%06x", foreground) }
 end
 
 local colors = {
@@ -74,6 +74,12 @@ return {
 				"mode",
 			},
 			lualine_c = {
+        {
+          function() return require("lualine.components.wakatime").today_time() end,
+          cond = function() return vim.g["loaded_wakatime"] == 1 end,
+          icon = "󱑆",
+          color = { fg = "#00ffff" },
+        },
 				"selectioncount",
 			},
 			lualine_x = {
