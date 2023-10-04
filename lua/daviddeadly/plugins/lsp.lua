@@ -72,25 +72,25 @@ return {
         vim.keymap.set(modes or "n", keys, func, { buffer = bufnr, desc = desc })
       end
 
-      nmap("<leader>rn", vim.lsp.buf.rename, "[r]e[n]ame")
-      nmap("<leader>ca", vim.lsp.buf.code_action, "[c]ode [a]ction", { "n", "v" })
+      nmap("<leader>rn", vim.lsp.buf.rename, "rename")
+      nmap("<leader>ca", vim.lsp.buf.code_action, "code action", { "n", "v" })
 
-      nmap("gd", vim.lsp.buf.definition, "[g]oto [d]efinition")
-      nmap("gr", require("telescope.builtin").lsp_references, "[g]oto [r]eferences")
-      nmap("gI", require("telescope.builtin").lsp_implementations, "[g]oto [I]mplementation")
-      nmap("<leader>D", vim.lsp.buf.type_definition, "Type [D]efinition")
-      nmap("<leader>dS", require("telescope.builtin").lsp_document_symbols, "[d]ocument [s]ymbols")
-      nmap("<leader>ds", require("nvim-navbuddy").open, "[w]orspaces [s]ymbols")
-      nmap("<leader>ws", require("telescope.builtin").lsp_dynamic_workspace_symbols, "[w]orkspace [s]ymbols")
+      nmap("gd", vim.lsp.buf.definition, "goto definition")
+      nmap("gr", require("telescope.builtin").lsp_references, "goto references")
+      nmap("gI", require("telescope.builtin").lsp_implementations, "goto implementations")
+      nmap("<leader>D", vim.lsp.buf.type_definition, "Type definition")
+      nmap("<leader>dS", require("telescope.builtin").lsp_document_symbols, "Document symbols")
+      nmap("<leader>ds", require("nvim-navbuddy").open, "Workspace symbols (Navbuddy)")
+      nmap("<leader>ws", require("telescope.builtin").lsp_dynamic_workspace_symbols, "Workspace symbols")
 
       -- See `:help K` for why this keymap
       nmap("K", vim.lsp.buf.hover, "Hover Documentation")
       nmap("<M-x>", signature.toggle_float_win, "Toggle Signature Documentation")
 
-      nmap("<leader>vws", vim.lsp.buf.workspace_symbol, "[V]iew [W]orkspace [S]ymbols")
+      nmap("<leader>vws", vim.lsp.buf.workspace_symbol, "Workspace symbol (vim)")
       nmap("<leader>vd", function()
         vim.diagnostic.open_float()
-      end, "[V]iew [D]iagnostic float")
+      end, "Open diagnostics (vim)")
       nmap("[d", function()
         vim.diagnostic.goto_next()
       end, "Next diagnostic")
@@ -98,12 +98,12 @@ return {
         vim.diagnostic.goto_prev()
       end, "Previous diagnostic")
       -- Lesser used LSP functionality
-      nmap("gD", vim.lsp.buf.declaration, "[g]oto [D]eclaration")
-      nmap("<leader>wa", vim.lsp.buf.add_workspace_folder, "[w]orkspace [a]dd Folder")
-      nmap("<leader>wr", vim.lsp.buf.remove_workspace_folder, "[w]orkspace [r]emove Folder")
+      nmap("gD", vim.lsp.buf.declaration, "Goto declaration")
+      nmap("<leader>wa", vim.lsp.buf.add_workspace_folder, "workspace add folder")
+      nmap("<leader>wr", vim.lsp.buf.remove_workspace_folder, "workspace remove folder")
       nmap("<leader>wl", function()
         print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-      end, "[w]orkspace [l]ist Folders")
+      end, "workspace list folders")
 
       nmap("<M-f>", "<CMD>Format<CR>", "Format file")
       -- Create a command `:Format` local to the LSP buffer

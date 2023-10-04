@@ -1,7 +1,13 @@
 return {
   "nvimtools/none-ls.nvim",
+  dependencies = {
+    {
+      "davidmh/cspell.nvim"
+    }
+  },
   opts = function()
     local none_ls = require("null-ls")
+    local cspell = require('cspell')
 
     return {
       sources = {
@@ -18,8 +24,10 @@ return {
         -- spelling
         none_ls.builtins.formatting.codespell,
         none_ls.builtins.diagnostics.codespell,
-        none_ls.builtins.completion.spell,
         none_ls.builtins.diagnostics.misspell,
+        none_ls.builtins.completion.spell,
+        cspell.diagnostics,
+        cspell.code_actions,
 
         -- general
         none_ls.builtins.code_actions.gitsigns,

@@ -57,38 +57,36 @@ return {
 				["<C-d>"] = cmp.mapping.scroll_docs(-4),
 				["<C-f>"] = cmp.mapping.scroll_docs(4),
 				["<C-b>"] = cmp.mapping.abort(),
-				["<C-Space>"] = cmp.mapping.complete({}),
+				["<M-CR>"] = cmp.mapping.complete({}),
 				["<CR>"] = cmp.mapping.confirm({
 					behavior = cmp.ConfirmBehavior.Insert,
 					select = false,
 				}),
-				["<Tab>"] = cmp.mapping(function(fallback)
-					if
-						cmp.visible()
-					then
-						local entry = cmp.get_selected_entry()
+        ["<Tab>"] = cmp.mapping(function(fallback)
+          if luasnip.expand_or_locally_jumpable() then
+            luasnip.expand_or_jump()
+          elseif cmp.visible() then
+            local entry = cmp.get_selected_entry()
 
-						if not entry then
-							cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
-						end
+            if not entry then
+              cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
+            end
 
-						cmp.confirm({
-							behavior = cmp.ConfirmBehavior.Replace,
-							select = true,
-						})
-					elseif luasnip.expand_or_locally_jumpable() then
-						luasnip.expand_or_jump()
-					else
-						fallback()
-					end
-				end, { "i", "s", "c" }),
-			}),
-			sources = {
-				{ name = "nvim_lsp", group_index = 2 },
-				{ name = "luasnip", group_index = 2 },
-				{ name = "path", group_index = 2 },
-				{ name = "buffer", keyword_length = 5, max_item_count = 5 },
-			},
+            cmp.confirm({
+              behavior = cmp.ConfirmBehavior.Replace,
+              select = true,
+            })
+          else
+            fallback()
+          end
+          end, { "i", "s", "c" }),
+      }),
+      sources = cmp.config.sources({
+        { name = "nvim_lsp", group_index = 1 },
+        { name = "luasnip", group_index = 2 },
+        { name = "buffer", keyword_length = 5, max_item_count = 5, group_index = 3 },
+        { name = "path" },
+      }),
 			sorting = {
 				priority_weight = 2,
 				comparators = {
