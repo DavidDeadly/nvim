@@ -38,6 +38,7 @@ return {
     "folke/flash.nvim",
     opts = {},
     keys = {
+      "f", "F", "t", "T",
       { "<M-s>", mode = { "n", "o", "x" }, function() require("flash").jump() end, desc = "Flash" },
       { "<M-S>", mode = { "n", "o", "x" }, function() require("flash").treesitter() end, desc = "Flash Treesitter" },
       { "<M-r>", mode = "o", function() require("flash").remote() end, desc = "Remote Flash" },
