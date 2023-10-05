@@ -8,7 +8,7 @@ return {
   },
   opts = function()
     local none_ls = require("null-ls")
-    local cspell = require('cspell')
+    local cspell = require("cspell")
 
     return {
       sources = {

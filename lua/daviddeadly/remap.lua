@@ -1,5 +1,5 @@
--- luacheck: globals vim
-vim.keymap.set("n", "<M-e>", vim.cmd.Ex, { desc = "[e]xplorer" })
+-- luacheck: globals vim ExecuteMacroOverVisualRange
+vim.keymap.set("n", "<M-e>", vim.cmd.Ex, { desc = "Explorer" })
 
 vim.keymap.set("n", "<C-Up>", "<cmd>resize +2<cr>", { desc = "Increase window height" })
 vim.keymap.set("n", "<C-Down>", "<cmd>resize -2<cr>", { desc = "Decrease window height" })
@@ -37,3 +37,10 @@ vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz", { desc = "Prev location lis
 
 vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = "Search and replace on current buffer" })
 vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true, desc = "Make executable" })
+
+vim.keymap.set('x', '@', [[:<C-u>lua ExecuteMacroOverVisualRange()<CR>]], { noremap = true, silent = true })
+
+function ExecuteMacroOverVisualRange()
+  vim.api.nvim_out_write('@' .. vim.fn.getcmdline() .. '\n')
+  vim.api.nvim_exec(":'<,'>normal @" .. vim.fn.nr2char(vim.fn.getchar()), true)
+end
