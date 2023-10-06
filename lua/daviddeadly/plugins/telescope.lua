@@ -1,4 +1,4 @@
--- luacheck globals vim
+-- luacheck: globals vim
 local find_in_current_buffer = function ()
   local dropdown = require("telescope.themes").get_dropdown {
     winblend = 10,
