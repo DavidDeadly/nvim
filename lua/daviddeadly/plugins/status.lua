@@ -32,7 +32,7 @@ return {
       lualine_a = {
 				{
 					"buffers",
-					hide_filename_extension = true,
+					hide_filename_extension = false,
 				},
       },
 			lualine_c = {
@@ -41,14 +41,6 @@ return {
           cond = function() return package.loaded["noice"] and require("noice").api.status.mode.has() end,
           color = { fg = "#ff9e64" },
         },
-				{
-					function()
-						return require("nvim-navic").get_location()
-					end,
-					cond = function()
-						return package.loaded["nvim-navic"] and require("nvim-navic").is_available()
-					end,
-				},
 			},
       lualine_y = {
         {

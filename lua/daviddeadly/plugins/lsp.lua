@@ -30,17 +30,7 @@ return {
 
     {
       "SmiteshP/nvim-navbuddy",
-      dependencies = {
-        {
-          "SmiteshP/nvim-navic",
-          opts = {
-            highlight = true,
-            depth_limit = 5,
-            lsp = { auto_attach = true },
-          },
-        },
-        { "MunifTanjim/nui.nvim" },
-      },
+      dependencies = { "SmiteshP/nvim-navic", "MunifTanjim/nui.nvim" },
       opts = { lsp = { auto_attach = true } },
       keys = {
         { "<leader>nb", "<CMD>Navbuddy<CR>", desc = "Navbuddy breadcrumbs" },

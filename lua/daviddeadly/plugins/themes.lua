@@ -49,14 +49,9 @@ return {
         cmp = true,
         mini = true,
         gitsigns = true,
-        nvimtree = true,
         which_key = true,
         treesitter = true,
         treesitter_context = true,
-        navic = {
-          enabled = true,
-          custom_bg = "lualine"
-        },
         mason = true,
         flash = true,
         noice = true,
