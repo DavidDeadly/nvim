@@ -9,6 +9,8 @@ return {
 
     "windwp/nvim-ts-autotag",
 
+    "JoosepAlviste/nvim-ts-context-commentstring",
+
     {
       "RRethy/vim-illuminate",
       opts = {
@@ -60,6 +62,11 @@ return {
 
     autotag = {
       enable = true,
+    },
+
+    context_commentstring = {
+      enable = true,
+      enable_autocmd = false,
     },
 
     sync_install = false,
