@@ -121,10 +121,15 @@ return {
       end
     },
 
-		{
-			"nvim-telescope/telescope.nvim",
-			branch = "0.1.x",
-		},
+    {
+      "nvim-telescope/telescope-dap.nvim",
+      keys = {
+        { "<leader>DB", function() require("telescope").extensions.dap.list_breakpoints() end, desc = "Dap - Breakpoints" },
+        { "<leader>dv", function() require("telescope").extensions.dap.variables() end, desc = "Dap - Variables" },
+        { "<leader>df", function() require("telescope").extensions.dap.frames() end, desc = "Dap - Frames" },
+        { "<leader>DC", function() require("telescope").extensions.dap.commands() end, desc = "Dap - Commands" },
+      }
+    },
 
 		{
 			"rcarriga/nvim-dap-ui",

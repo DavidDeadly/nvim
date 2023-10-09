@@ -60,12 +60,15 @@ return {
     { "nvim-lua/plenary.nvim" },
 
     {
-      "nvim-telescope/telescope-dap.nvim",
+      "sanathks/workspace.nvim",
+      opts = {
+        workspaces = {
+          { name = "Summa",  path = "~/Dev/Sofka/Summa",  keymap = { "<leader>S" } },
+          { name = "Isa", path = "~/Dev/Isa", keymap = { "<leader>I" } },
+        }
+      },
       keys = {
-        { "<leader>DB", function() require("telescope").extensions.dap.list_breakpoints() end, desc = "Dap - Breakpoints" },
-        { "<leader>dv", function() require("telescope").extensions.dap.variables() end, desc = "Dap - Variables" },
-        { "<leader>df", function() require("telescope").extensions.dap.frames() end, desc = "Dap - Frames" },
-        { "<leader>DC", function() require("telescope").extensions.dap.commands() end, desc = "Dap - Commands" },
+        {'<leader>ps', function() require("workspace").tmux_sessions() end, desc = "List tmux sessions" }
       }
     },
 
