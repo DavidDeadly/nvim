@@ -31,7 +31,10 @@ return {
 		local cmp_autopairs = require("nvim-autopairs.completion.cmp")
 
 		require("luasnip.loaders.from_vscode").lazy_load()
-		luasnip.config.setup({})
+    luasnip.config.setup({
+      region_check_events = "CursorMoved",
+      delete_check_events = "TextChanged",
+    })
 
 		cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
 
@@ -63,9 +66,7 @@ return {
 					select = false,
 				}),
         ["<Tab>"] = cmp.mapping(function(fallback)
-          if luasnip.expand_or_locally_jumpable() then
-            luasnip.expand_or_jump()
-          elseif cmp.visible() then
+          if cmp.visible() then
             local entry = cmp.get_selected_entry()
 
             if not entry then
@@ -76,33 +77,38 @@ return {
               behavior = cmp.ConfirmBehavior.Replace,
               select = true,
             })
+          elseif luasnip.expand_or_locally_jumpable() then
+            luasnip.expand_or_jump()
           else
             fallback()
           end
           end, { "i", "s", "c" }),
       }),
       sources = cmp.config.sources({
-        { name = "nvim_lsp", group_index = 1 },
-        { name = "luasnip", group_index = 2 },
-        { name = "buffer", keyword_length = 5, max_item_count = 5, group_index = 3 },
-        { name = "path" },
+        {
+          name = "nvim_lsp",
+          priority = 2,
+          max_item_count = 8,
+          keyword_length = 2,
+          entry_filter = function(entry, _) return entry:get_kind() ~= 15 end
+        },
+        { name = "luasnip", priority = 1 },
+        { name = "path", priority = 1 },
+        { name = "buffer", priority = 1, keyword_length = 5, max_item_count = 3 }
       }),
-			sorting = {
-				priority_weight = 2,
-				comparators = {
-					cmp.config.compare.exact,
-					cmp.config.compare.offset,
-					cmp.config.compare.scopes,
-					cmp.config.compare.score,
-					cmp.config.compare.recently_used,
-					cmp.config.compare.locality,
-					cmp.config.compare.kind,
-					cmp.config.compare.sort_text,
-					cmp.config.compare.length,
-					cmp.config.compare.order,
-				},
-			},
-			formatting = {
+      sorting = {
+        priority_weight = 1.0,
+        comparators = {
+          cmp.config.compare.exact,
+          cmp.config.compare.locality,
+          cmp.config.compare.recently_used,
+          cmp.config.compare.score, -- based on :  score = score + ((#sources - (source_index - 1)) * sorting.priority_weight)
+          cmp.config.compare.offset,
+          cmp.config.compare.order,
+          cmp.config.compare.kind,
+        }
+      },
+      formatting = {
 				fields = {
 					cmp.ItemField.Kind,
 					cmp.ItemField.Abbr,
@@ -112,7 +118,6 @@ return {
 					mode = "symbol", -- show only symbol annotations
 					maxwidth = 50, -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
 					ellipsis_char = "...", -- when popup menu exceed maxwidth, the truncated part would show ellipsis_char instead (must define maxwidth first)
-					symbol_map = { Copilot = "" },
 					-- The function below will be called before any actual modifications from lspkind
 					-- so that you can provide more controls on popup customization. (See [#30](https://github.com/onsails/lspkind-nvim/pull/30))
 					before = function(entry, vim_item)

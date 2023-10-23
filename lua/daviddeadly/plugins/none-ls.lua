@@ -26,6 +26,10 @@ return {
         none_ls.builtins.formatting.stylua,
         none_ls.builtins.diagnostics.luacheck.with(diagnostics_conf),
 
+        -- python
+        none_ls.builtins.diagnostics.flake8,
+        none_ls.builtins.formatting.black,
+
         -- spelling
         none_ls.builtins.formatting.codespell,
         none_ls.builtins.diagnostics.codespell.with(diagnostics_conf),

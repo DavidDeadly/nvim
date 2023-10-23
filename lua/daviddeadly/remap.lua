@@ -6,8 +6,8 @@ vim.keymap.set("n", "<C-Down>", "<cmd>resize -2<cr>", { desc = "Decrease window 
 vim.keymap.set("n", "<C-Left>", "<cmd>vertical resize -2<cr>", { desc = "Decrease window width" })
 vim.keymap.set("n", "<C-Right>", "<cmd>vertical resize +2<cr>", { desc = "Increase window width" })
 
-vim.keymap.set("n", "<S-u>", "zL", { desc = "Scoll half screen to the left" })
-vim.keymap.set("n", "<S-d>", "zH", { desc = "Scoll half screen to the right" })
+vim.keymap.set("n", "<S-u>", "zL", { desc = "Scroll half screen to the left" })
+vim.keymap.set("n", "<S-d>", "zH", { desc = "Scroll half screen to the right" })
 
 vim.keymap.set("n", "J", "mzJ`z", { desc = "Keep course on lines stacking" })
 vim.keymap.set("n", "<C-d>", "<C-d>zz", { desc = "Scroll half page down (keep mouse center)" })
@@ -16,8 +16,8 @@ vim.keymap.set("n", "n", "nzzzv", { desc = "Next search result (keep mouse cente
 vim.keymap.set("n", "N", "Nzzzv", { desc = "Prev search result (keep mouse center)" })
 
 vim.keymap.set("x", "<leader>p", [["_dP]], { desc = "Paste and keep data" })
-vim.keymap.set("n", "<C-M-p>", [["+p]], { desc = "Paste form system clipboard front cursor" })
-vim.keymap.set("n", "<C-M-S-p>", [["+P]], { desc = "Paste form system clipboard behind cursor" })
+vim.keymap.set({ "n", "x" }, "<C-M-p>", [["+p]], { desc = "Paste form system clipboard front cursor" })
+vim.keymap.set({ "n", "x" }, "<C-M-S-p>", [["+P]], { desc = "Paste form system clipboard behind cursor" })
 
 vim.keymap.set({"n", "v"}, "<leader>y", [["+y]], { desc = "Copy form system clipboard" })
 vim.keymap.set("n", "<leader>Y", [["+Y]], { desc = "Copy line to system clipboard" })

@@ -42,7 +42,8 @@ return {
         opts = {
           background_colour = "#000000",
           stages = "fade",
-          render = "compact"
+          render = "compact",
+          top_down = false,
         }
         ,
         keys =  {

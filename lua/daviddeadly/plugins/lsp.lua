@@ -42,7 +42,7 @@ return {
   },
 
   config = function()
-    local on_attach = function(_, bufnr)
+    local on_attach = function(client, bufnr)
       local signature = require("lsp_signature")
       signature.on_attach({
         bind = true, -- This is mandatory, otherwise border config won"t get registered.
