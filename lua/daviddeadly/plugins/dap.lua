@@ -128,7 +128,10 @@ return {
         { "<leader>dv", function() require("telescope").extensions.dap.variables() end, desc = "Dap - Variables" },
         { "<leader>df", function() require("telescope").extensions.dap.frames() end, desc = "Dap - Frames" },
         { "<leader>DC", function() require("telescope").extensions.dap.commands() end, desc = "Dap - Commands" },
-      }
+      },
+      config = function ()
+        require("telescope").load_extension("dap")
+      end
     },
 
 		{
@@ -192,7 +195,6 @@ return {
 
 		{
 			"mxsdev/nvim-dap-vscode-js",
-			ft = node_filetypes,
 			dependencies = {
 				{
 					"microsoft/vscode-js-debug",

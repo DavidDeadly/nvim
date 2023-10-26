@@ -28,7 +28,8 @@ return {
         "FTerm",
         "netrw",
         "lazy",
-        "mason"
+        "mason",
+        "minifiles"
       },
     }
   },
@@ -36,7 +37,10 @@ return {
   {
     "echasnovski/mini.move",
     keys = {
-      "<M-j>", "<M-k>", "<M-h>", "<M-l>"
+      { "<M-j>", mode = { "n", "v" } },
+      { "<M-k>", mode = { "n", "v" } },
+      { "<M-h>", mode = { "n", "v" } },
+      { "<M-l>", mode = { "n", "v" } },
     },
     version = "*",
     opts = {}

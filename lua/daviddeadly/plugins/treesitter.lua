@@ -132,9 +132,11 @@ return {
         enable = true,
         swap_next = {
           ["<leader>a"] = "@parameter.inner",
+          ["<leader>p"] = "@function.outer",
         },
         swap_previous = {
           ["<leader>A"] = "@parameter.inner",
+          ["<leader>P"] = "@function.outer",
         },
       },
     },

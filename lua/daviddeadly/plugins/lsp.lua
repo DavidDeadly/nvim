@@ -16,7 +16,7 @@ return {
     {
       "ray-x/lsp_signature.nvim",
       opts = {},
-      main = "lsp_signature",
+      main = "lsp_signature"
     },
 
     {
@@ -31,10 +31,7 @@ return {
     {
       "SmiteshP/nvim-navbuddy",
       dependencies = { "SmiteshP/nvim-navic", "MunifTanjim/nui.nvim" },
-      opts = { lsp = { auto_attach = true } },
-      keys = {
-        { "<leader>nb", "<CMD>Navbuddy<CR>", desc = "Navbuddy breadcrumbs" },
-      },
+      opts = { lsp = { auto_attach = true } }
     },
 
     -- Additional lua configuration, makes nvim stuff amazing!
@@ -42,12 +39,13 @@ return {
   },
 
   config = function()
-    local on_attach = function(client, bufnr)
+    local on_attach = function(_, bufnr)
       local signature = require("lsp_signature")
       signature.on_attach({
         bind = true, -- This is mandatory, otherwise border config won"t get registered.
         toggle_key = "<M-x>",
         toggle_key_flip_floatwin_setting = true,
+        floating_window = false,
         noice = true,
         handler_opts = {
           border = "rounded",

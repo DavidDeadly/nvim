@@ -43,19 +43,7 @@ return {
           }
         }
       },
-    },
-    extensions = {
-      file_browser = {
-        hijack_netrw = true,
-        layout_strategy = "horizontal",
-        layout_config = {
-          horizontal = {
-            prompt_position = "top",
-          },
-        },
-        sorting_strategy = "ascending",
-      },
-    },
+    }
   },
   dependencies = {
     { "nvim-lua/plenary.nvim" },
@@ -72,31 +60,11 @@ return {
         {'<leader>ps', function() require("workspace").tmux_sessions() end, desc = "List tmux sessions" }
       }
     },
-
-    {
-      "nvim-telescope/telescope-file-browser.nvim",
-      dependencies = { "antosha417/nvim-lsp-file-operations" },
-      keys = {
-        { "<leader>fE", function() require("telescope").extensions.file_browser.file_browser() end, desc = "[f]ind [e]xplorer" },
-        { "<leader>fe", function()
-          require("telescope").extensions.file_browser.file_browser({
-            path = "%:p:h",
-            cwd = vim.fn.expand("%:p:h"),
-            select_buffer = true,
-            respect_git_ignore = false,
-            grouped = true,
-            hidden = true,
-          })
-        end, desc = "[f]ind [e]xplorer on current buffer" }
-      },
-    }
   },
   config = function (_, opts)
     require("telescope").setup(opts)
 
-    require("telescope").load_extension("dap")
     require("telescope").load_extension("notify")
-    require("telescope").load_extension("file_browser")
   end,
   keys = {
     {  "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "[f]ind [f]iles" },
