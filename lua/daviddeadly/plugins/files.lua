@@ -27,6 +27,7 @@ return {
 
   {
     "nvim-tree/nvim-tree.lua",
+    lazy = false,
     opts = {
       sort_by = "case_sensitive",
       view = {
@@ -71,7 +72,6 @@ return {
     keys = {
       { "<leader>fT", "<cmd>NvimTreeToggle<cr>", desc = "[f]ile [t]ree" },
       { "<leader>ft", "<cmd>NvimTreeFindFileToggle<cr>", desc = "find [f]ile [t]ree" },
-      { "<leader>rt", "<cmd>NvimTreeCollapse<cr>", desc = "reset file tree" }
     },
     config = function(_, opts)
       require("nvim-tree").setup(opts)

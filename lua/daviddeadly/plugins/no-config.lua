@@ -29,7 +29,8 @@ return {
         "netrw",
         "lazy",
         "mason",
-        "minifiles"
+        "minifiles",
+        "NvimTree"
       },
     }
   },
