@@ -27,8 +27,9 @@ return {
 		local str = require("cmp.utils.str")
 
 		local luasnip = require("luasnip")
+    local cmp_autopairs = require("nvim-autopairs.completion.cmp")
+
 		local lspkind = require("lspkind")
-		local cmp_autopairs = require("nvim-autopairs.completion.cmp")
 
 		require("luasnip.loaders.from_vscode").lazy_load()
     luasnip.config.setup({
@@ -88,13 +89,11 @@ return {
         {
           name = "nvim_lsp",
           priority = 2,
-          max_item_count = 8,
-          keyword_length = 2,
           entry_filter = function(entry, _) return entry:get_kind() ~= 15 end
         },
         { name = "luasnip", priority = 1 },
         { name = "path", priority = 1 },
-        { name = "buffer", priority = 1, keyword_length = 5, max_item_count = 3 }
+        { name = "buffer", priority = 1, keyword_length = 3, max_item_count = 3 }
       }),
       sorting = {
         priority_weight = 1.0,
@@ -110,18 +109,25 @@ return {
       },
       formatting = {
 				fields = {
+          cmp.ItemField.Abbr,
 					cmp.ItemField.Kind,
-					cmp.ItemField.Abbr,
 					cmp.ItemField.Menu,
 				},
 				format = lspkind.cmp_format({
-					mode = "symbol", -- show only symbol annotations
+          mode = 'symbol', -- options: 'text', 'text_symbol', 'symbol_text', 'symbol'
 					maxwidth = 50, -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
 					ellipsis_char = "...", -- when popup menu exceed maxwidth, the truncated part would show ellipsis_char instead (must define maxwidth first)
+          preset = 'codicons',
+          menu = ({ -- showing type in menu
+            nvim_lsp = "[LSP]",
+            path = "[Path]",
+            buffer = "[Buffer]",
+            luasnip = "[LuaSnip]",
+          }),
 					-- The function below will be called before any actual modifications from lspkind
 					-- so that you can provide more controls on popup customization. (See [#30](https://github.com/onsails/lspkind-nvim/pull/30))
 					before = function(entry, vim_item)
-						local word = entry:get_insert_text() -- The word being completed.
+            local word = entry:get_insert_text() -- The word being completed.
 
 						word = entry.completion_item.InsertTextFormat == types.lsp.InsertTextFormat
 								and vim.lsp.util.parse_snippet(word)

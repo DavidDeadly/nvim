@@ -23,6 +23,17 @@ return {
       "nvimtools/none-ls.nvim"
     },
 
+    {
+      "NvChad/nvim-colorizer.lua",
+      opts = {
+        user_default_options = {
+          tailwind = true,
+          mode = "foreground",
+          always_update = true
+        }
+      }
+    },
+
     -- Useful status updates for LSP
     { "j-hui/fidget.nvim", tag = "legacy", opts = {} },
 
@@ -39,7 +50,7 @@ return {
   },
 
   config = function()
-    local on_attach = function(_, bufnr)
+    local on_attach = function(client, bufnr)
       local signature = require("lsp_signature")
       signature.on_attach({
         bind = true, -- This is mandatory, otherwise border config won"t get registered.
@@ -51,6 +62,10 @@ return {
           border = "rounded",
         },
       }, bufnr)
+
+      if client.name == "tailwindcss" or client.name == "cssls" then
+        require("colorizer").attach_to_buffer(0)
+      end
 
       local nmap = function(keys, func, desc, modes)
         if desc then
@@ -115,6 +130,7 @@ return {
       angularls = {},
       html = { filetypes = { "html", "twig", "hbs" } },
       cssls = {},
+      tailwindcss = {},
 
       lua_ls = {
         Lua = {
