@@ -70,8 +70,8 @@ return {
       "NvimTreeCollapse"
     },
     keys = {
-      { "<leader>fT", "<cmd>NvimTreeToggle<cr>", desc = "[f]ile [t]ree" },
-      { "<leader>ft", "<cmd>NvimTreeFindFileToggle<cr>", desc = "find [f]ile [t]ree" },
+      { "<leader>ft", "<cmd>NvimTreeToggle<cr>", desc = "[f]ile [t]ree" },
+      { "<leader>fT", "<cmd>NvimTreeFindFileToggle<cr>", desc = "find [f]ile [t]ree" },
     },
     config = function(_, opts)
       require("nvim-tree").setup(opts)
