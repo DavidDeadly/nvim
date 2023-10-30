@@ -1,3 +1,4 @@
+-- luacheck: globals vim
 local function lazy_git()
   local fterm = require("FTerm")
 
@@ -21,8 +22,8 @@ return {
   keys = {
     { "<M-g><M-g>", vim.cmd.LazyGit, desc = "toggle LazyGit" },
     { "<M-g><M-g>", "<C-\\><C-n><CMD>LazyGit<CR>", mode = "t", desc = "toggle LazyGit" },
-    { "<M-ñ>", function() require("FTerm").toggle() end, desc = "toggle FTerminal" },
-    { "<M-ñ>", "<C-\\><C-n><CMD>lua require('FTerm').toggle()<CR>", mode = "t", desc = "toggle FTerminal" },
+    { "ñ", function() require("FTerm").toggle() end, desc = "toggle FTerminal" },
+    { "ñ", "<C-\\><C-n><CMD>lua require('FTerm').toggle()<CR>", mode = "t", desc = "toggle FTerminal" },
     { "<M-c>", "<C-\\><C-n><CMD>lua require('FTerm').exit()<CR>", mode = "t", desc = "toggle FTerminal" },
   }
 }
