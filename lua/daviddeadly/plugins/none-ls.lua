@@ -1,3 +1,12 @@
+local eslint_filetypes = {
+  "javascript",
+  "javascriptreact",
+  "typescript",
+  "typescriptreact",
+  "vue",
+  "html"
+}
+
 return {
   "nvimtools/none-ls.nvim",
   event = { "BufReadPre", "BufNewFile" },
@@ -18,9 +27,16 @@ return {
       sources = {
         -- typescript
         none_ls.builtins.formatting.prettierd,
-        none_ls.builtins.formatting.eslint_d,
-        none_ls.builtins.code_actions.eslint_d,
-        none_ls.builtins.diagnostics.eslint_d.with(diagnostics_conf),
+        -- none_ls.builtins.formatting.eslint_d,
+        -- none_ls.builtins.code_actions.eslint_d,
+        none_ls.builtins.formatting.eslint,
+        none_ls.builtins.code_actions.eslint.with({
+          filetypes = eslint_filetypes
+        }),
+        none_ls.builtins.diagnostics.eslint.with({
+          method = none_ls.methods.DIAGNOSTICS_ON_SAVE,
+          filetypes = eslint_filetypes
+        }),
 
         -- lua
         none_ls.builtins.formatting.stylua,
