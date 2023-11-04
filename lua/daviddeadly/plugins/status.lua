@@ -2,9 +2,9 @@
 local lazy_status = require("lazy.status")
 
 local function fg(name)
-  local hl = vim.api.nvim_get_hl and vim.api.nvim_get_hl(0, { name = name })
-  local foreground = hl and hl.fg
-  return foreground and { fg = string.format("#%06x", foreground) }
+	local hl = vim.api.nvim_get_hl and vim.api.nvim_get_hl(0, { name = name })
+	local foreground = hl and hl.fg
+	return foreground and { fg = string.format("#%06x", foreground) }
 end
 
 local colors = {
@@ -23,42 +23,68 @@ local icons = {
 
 return {
 	"nvim-lualine/lualine.nvim",
-  event = "VeryLazy",
+	event = "VeryLazy",
 	dependencies = { "nvim-tree/nvim-web-devicons" },
 	opts = {
 		globalstatus = true,
-    theme = "catppuccin",
+		theme = "catppuccin",
 		tabline = {
-      lualine_a = {
+			lualine_a = {
+				{
+					function()
+						local formatters = require("conform").list_formatters()
+						local formatters_name = {}
+						for _, x in ipairs(formatters) do
+							table.insert(formatters_name, x.name)
+						end
+
+						return table.concat(formatters_name, " ") or "None"
+					end,
+					icon = "",
+					separator = { left = "", right = "" },
+					color = {
+						bg = "#e785e2",
+						fg = "#2c092a",
+						gui = "italic,bold",
+					},
+					cond = function()
+						return type(package.loaded["conform"]) == "table"
+					end,
+				},
 				{
 					"buffers",
 					hide_filename_extension = false,
 				},
-      },
-			lualine_c = {
-        {
-          function() return require("noice").api.status.mode.get() end,
-          cond = function() return package.loaded["noice"] and require("noice").api.status.mode.has() end,
-          color = { fg = "#ff9e64" },
-        },
 			},
-      lualine_y = {
-        {
-          function() return "overseer" end,
-          cond = function()
-						return package.loaded["overseer"]
-					end
-        },
+			lualine_c = {
 				{
 					function()
-						return "  " .. require("dap").status()
+						return require("noice").api.status.mode.get()
+					end,
+					cond = function()
+						return package.loaded["noice"] and require("noice").api.status.mode.has()
+					end,
+					color = { fg = "#ff9e64" },
+				},
+			},
+			lualine_y = {
+				{
+					"overseer",
+					cond = function()
+						return type(package.loaded["overseer"]) == "table"
+					end,
+				},
+				{
+					function()
+						return require("dap").status()
 					end,
 					cond = function()
 						return package.loaded["dap"] and require("dap").status() ~= ""
 					end,
+					icon = "",
 					color = fg("Debug"),
-				}
-      },
+				},
+			},
 			lualine_z = { "tabs" },
 		},
 		sections = {
@@ -66,20 +92,26 @@ return {
 				"mode",
 			},
 			lualine_c = {
-        {
-          function() return require("lualine.components.wakatime").today_time() end,
-          cond = function() return vim.g["loaded_wakatime"] == 1 end,
-          icon = "󱑆",
-          color = { fg = "#00ffff" },
-        },
+				{
+					require("lualine.components.wakatime").today_time,
+					cond = function()
+						return vim.g["loaded_wakatime"] == 1
+					end,
+					icon = "󱑆",
+					color = { fg = "#00ffff" },
+				},
 				"selectioncount",
 			},
 			lualine_x = {
-        {
-          function() return require("noice").api.status.command.get() end,
-          cond = function() return package.loaded["noice"] and require("noice").api.status.command.has() end,
-          color = { fg = "#ff9e64" },
-        },
+				{
+					function()
+						return require("noice").api.status.command.get()
+					end,
+					cond = function()
+						return package.loaded["noice"] and require("noice").api.status.command.has()
+					end,
+					color = { fg = "#ff9e64" },
+				},
 				{
 					lazy_status.updates,
 					cond = lazy_status.has_updates,
@@ -101,7 +133,7 @@ return {
 						local status = require("copilot.api").status.data
 						return colors[status.status] or colors[""]
 					end,
-				}
+				},
 			},
 			lualine_z = {
 				"location",
