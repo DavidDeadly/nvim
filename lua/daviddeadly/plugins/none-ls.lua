@@ -20,15 +20,15 @@ return {
 			})
 
 			require("lint").linters_by_ft = {
-				javascript = { "eslint", "cspell" },
-				typescript = { "eslint", "cspell" },
-				javascriptreact = { "eslint", "cspell" },
-				typescriptreact = { "eslint", "cspell" },
-				html = { "eslint", "cspell" },
+				javascript = { "eslint" },
+				typescript = { "eslint" },
+				javascriptreact = { "eslint" },
+				typescriptreact = { "eslint" },
+				html = { "eslint" },
 
-				lua = { "luacheck", "cspell" },
+				lua = { "luacheck" },
 
-				python = { "flake8", "cspell" },
+				python = { "flake8" },
 			}
 		end,
 	},
@@ -83,6 +83,10 @@ return {
 			local none_ls = require("null-ls")
 			local cspell = require("cspell")
 
+			local diagnostics_conf = {
+				method = none_ls.methods.DIAGNOSTICS_ON_SAVE,
+			}
+
 			return {
 				sources = {
 					-- typescript
@@ -91,7 +95,8 @@ return {
 						filetypes = eslint_filetypes,
 					}),
 
-          -- spelling
+					-- spelling
+					cspell.diagnostics.with(diagnostics_conf),
 					cspell.code_actions,
 
 					-- general
