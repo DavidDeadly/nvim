@@ -32,13 +32,29 @@ return {
 			lualine_a = {
 				{
 					function()
+						local formatters = require("lint").linters_by_ft[vim.bo.filetype]
+						return table.concat(formatters, ", ") or "None"
+					end,
+					icon = "󱏚",
+					separator = { left = "", right = "" },
+					color = {
+						bg = "#1be471",
+						fg = "#2c092a",
+						gui = "italic,bold",
+					},
+					cond = function()
+						return type(package.loaded["lint"]) == "table"
+					end,
+				},
+				{
+					function()
 						local formatters = require("conform").list_formatters()
 						local formatters_name = {}
 						for _, x in ipairs(formatters) do
 							table.insert(formatters_name, x.name)
 						end
 
-						return table.concat(formatters_name, " ") or "None"
+						return table.concat(formatters_name, "; ") or "None"
 					end,
 					icon = "",
 					separator = { left = "", right = "" },
