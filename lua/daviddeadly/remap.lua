@@ -16,10 +16,20 @@ vim.keymap.set("n", "n", "nzzzv", { desc = "Next search result (keep mouse cente
 vim.keymap.set("n", "N", "Nzzzv", { desc = "Prev search result (keep mouse center)" })
 
 vim.keymap.set("x", "<leader>p", [["_dP]], { desc = "Paste and keep data" })
-vim.keymap.set({ "n", "x" }, "<C-M-p>", [["+p]], { desc = "Paste form system clipboard front cursor" })
-vim.keymap.set({ "n", "x" }, "<C-M-S-p>", [["+P]], { desc = "Paste form system clipboard behind cursor" })
+vim.keymap.set(
+	{ "n", "x", "i" },
+	"<C-M-p>",
+	[[<cmd>normal "+p<cr>]],
+	{ desc = "Paste form system clipboard front cursor" }
+)
+vim.keymap.set(
+	{ "n", "x", "i" },
+	"<C-M-S-p>",
+	[[<cmd>normal "+P<cr>]],
+	{ desc = "Paste form system clipboard behind cursor" }
+)
 
-vim.keymap.set({"n", "v"}, "<leader>y", [["+y]], { desc = "Copy form system clipboard" })
+vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]], { desc = "Copy form system clipboard" })
 vim.keymap.set("n", "<leader>Y", [["+Y]], { desc = "Copy line to system clipboard" })
 
 vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]], { desc = "Delete to empty register" })
@@ -35,12 +45,17 @@ vim.keymap.set("n", "<leader>xl", "<cmd>lopen<cr>", { desc = "Location List" })
 vim.keymap.set("n", "<leader>k", "<cmd>lnext<CR>zz", { desc = "Next location list" })
 vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz", { desc = "Prev location list" })
 
-vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = "Search and replace on current buffer" })
+vim.keymap.set(
+	"n",
+	"<leader>s",
+	[[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]],
+	{ desc = "Search and replace on current buffer" }
+)
 vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true, desc = "Make executable" })
 
-vim.keymap.set('x', '@', [[:<C-u>lua ExecuteMacroOverVisualRange()<CR>]], { noremap = true, silent = true })
+vim.keymap.set("x", "@", [[:<C-u>lua ExecuteMacroOverVisualRange()<CR>]], { noremap = true, silent = true })
 
 function ExecuteMacroOverVisualRange()
-  vim.api.nvim_out_write('@' .. vim.fn.getcmdline() .. '\n')
-  vim.api.nvim_exec(":'<,'>normal @" .. vim.fn.nr2char(vim.fn.getchar()), true)
+	vim.api.nvim_out_write("@" .. vim.fn.getcmdline() .. "\n")
+	vim.api.nvim_exec(":'<,'>normal @" .. vim.fn.nr2char(vim.fn.getchar()), true)
 end
