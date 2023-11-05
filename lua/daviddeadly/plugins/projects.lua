@@ -13,15 +13,6 @@ return {
 				end,
 			})
 
-			-- Switch to project if vim was started in a project dir
-			vim.api.nvim_create_autocmd({ "VimEnter" }, {
-				callback = function()
-					if vim.fn.argc() == 0 then
-						require("projections.switcher").switch(vim.loop.cwd() or "")
-					end
-				end,
-			})
-
 			vim.api.nvim_create_user_command("StoreProjectSession", function()
 				require("projections.session").store(vim.loop.cwd() or "")
 			end, {})
