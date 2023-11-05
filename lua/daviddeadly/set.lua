@@ -43,3 +43,6 @@ vim.opt.linespace = 10
 
 -- popup menu, ex: cmp suggest menu
 vim.opt.pumheight = 15
+
+-- For projections.nvim save localoptions to session file
+vim.opt.sessionoptions:append("localoptions")
