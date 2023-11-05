@@ -79,12 +79,12 @@ return {
       nmap("<leader>ca", vim.lsp.buf.code_action, "code action", { "n", "v" })
 
       nmap("gd", vim.lsp.buf.definition, "goto definition")
-      nmap("gr", require("telescope.builtin").lsp_references, "goto references")
-      nmap("gI", require("telescope.builtin").lsp_implementations, "goto implementations")
+      nmap("gr", function() require("telescope.builtin").lsp_references() end, "goto references")
+      nmap("gI", function() require("telescope.builtin").lsp_implementations() end, "goto implementations")
       nmap("<leader>D", vim.lsp.buf.type_definition, "Type definition")
-      nmap("<leader>dS", require("telescope.builtin").lsp_document_symbols, "Document symbols")
+      nmap("<leader>dS", function() require("telescope.builtin").lsp_document_symbols() end, "Document symbols")
       nmap("<leader>ds", require("nvim-navbuddy").open, "Workspace symbols (Navbuddy)")
-      nmap("<leader>ws", require("telescope.builtin").lsp_dynamic_workspace_symbols, "Workspace symbols")
+      nmap("<leader>ws", function() require("telescope.builtin").lsp_dynamic_workspace_symbols() end, "Workspace symbols")
 
       -- See `:help K` for why this keymap
       nmap("K", vim.lsp.buf.hover, "Hover Documentation")
