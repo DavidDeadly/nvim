@@ -13,22 +13,13 @@ return {
 				end,
 			})
 
-			-- Automatically restore last session
+			-- Switch to project if vim was started in a project dir
 			vim.api.nvim_create_autocmd({ "VimEnter" }, {
 				callback = function()
-					local Session = require("projections.session")
-          print("entering")
-					if vim.fn.argc() ~= 0 then
-						return
-					end
-					local session_info = Session.info(vim.loop.cwd() or "")
-					if session_info == nil then
-						Session.restore_latest()
-					else
-						Session.restore(vim.loop.cwd() or "")
+					if vim.fn.argc() == 0 then
+						require("projections.switcher").switch(vim.loop.cwd() or "")
 					end
 				end,
-				desc = "Restore last session automatically",
 			})
 
 			vim.api.nvim_create_user_command("StoreProjectSession", function()
