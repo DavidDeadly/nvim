@@ -32,11 +32,7 @@ return {
 				end,
 				desc = "Create git worktree",
 			},
-		},
-		config = function(_, opts)
-			require("git-worktree").setup(opts)
-			require("telescope").load_extension("git_worktree")
-		end,
+		}
 	},
 
 	{
