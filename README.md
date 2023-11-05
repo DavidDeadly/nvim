@@ -1,4 +1,4 @@
-# nvim/
+# DaVim/
 
 <a href="https://dotfyle.com/DavidDeadly/nvim"><img src="https://dotfyle.com/DavidDeadly/nvim/badges/plugins?style=flat" /></a>
 <a href="https://dotfyle.com/DavidDeadly/nvim"><img src="https://dotfyle.com/DavidDeadly/nvim/badges/leaderkey?style=flat" /></a>
