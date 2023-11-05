@@ -2,28 +2,43 @@
 
 return {
 	{
-		"sanathks/workspace.nvim",
-		opts = {
-			workspaces = {
-				{ name = "Summa", path = "~/Dev/Sofka/Summa", keymap = { "<leader>S" } },
-				{ name = "Isa", path = "~/Dev/Isa", keymap = { "<leader>I" } },
-			},
-		},
-		keys = {
-			{
-				"<leader>ps",
-				function()
-					require("workspace").tmux_sessions()
-				end,
-				desc = "List tmux sessions",
-			},
-		},
-	},
-
-	{
 		"gnikdroy/projections.nvim",
 		event = "VeryLazy",
-    branch = "pre_release",
+		branch = "pre_release",
+		init = function()
+			-- Autostore session on VimExit
+			vim.api.nvim_create_autocmd({ "VimLeavePre" }, {
+				callback = function()
+					require("projections.session").store(vim.loop.cwd() or "")
+				end,
+			})
+
+			-- Automatically restore last session
+			vim.api.nvim_create_autocmd({ "VimEnter" }, {
+				callback = function()
+					local Session = require("projections.session")
+          print("entering")
+					if vim.fn.argc() ~= 0 then
+						return
+					end
+					local session_info = Session.info(vim.loop.cwd() or "")
+					if session_info == nil then
+						Session.restore_latest()
+					else
+						Session.restore(vim.loop.cwd() or "")
+					end
+				end,
+				desc = "Restore last session automatically",
+			})
+
+			vim.api.nvim_create_user_command("StoreProjectSession", function()
+				require("projections.session").store(vim.loop.cwd() or "")
+			end, {})
+
+			vim.api.nvim_create_user_command("RestoreProjectSession", function()
+				require("projections.session").restore(vim.loop.cwd() or "")
+			end, {})
+		end,
 		opts = {
 			workspaces = {
 				"~/Dev/Sofka/Summa",
@@ -40,26 +55,5 @@ return {
 				desc = "Find project",
 			},
 		},
-		config = function(_, opts)
-			require("projections").setup(opts)
-
-			-- Autostore session on VimExit
-			local Session = require("projections.session")
-			vim.api.nvim_create_autocmd({ "VimLeavePre" }, {
-				callback = function()
-					Session.store(vim.loop.cwd())
-				end,
-			})
-
-			-- Switch to project if vim was started in a project dir
-			local switcher = require("projections.switcher")
-			vim.api.nvim_create_autocmd({ "VimEnter" }, {
-				callback = function()
-					if vim.fn.argc() == 0 then
-						switcher.switch(vim.loop.cwd())
-					end
-				end,
-			})
-		end,
 	},
 }
