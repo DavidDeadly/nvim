@@ -133,6 +133,7 @@ return {
       html = { filetypes = { "html", "twig", "hbs" } },
       cssls = {},
       tailwindcss = {},
+      eslint = {},
 
       lua_ls = {
         Lua = {
