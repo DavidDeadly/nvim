@@ -13,45 +13,7 @@ return {
 	"nvim-telescope/telescope.nvim",
 	cmd = "Telescope",
 	branch = "0.1.x",
-	opts = {
-		defaults = {
-			file_ignore_patterns = { "node_modules" },
-			mappings = {
-				i = {
-					["<M-p>"] = require("telescope.actions.layout").toggle_preview,
-					["<M-h>"] = "which_key",
-				},
-				n = {
-					["<M-p>"] = require("telescope.actions.layout").toggle_preview,
-				},
-			},
-			-- preview = {
-			--   hide_on_startup = true
-			-- },
-		},
-		pickers = {
-			find_files = {
-				prompt_prefix = "🔍 ",
-			},
-			buffers = {
-				prompt_prefix = "📁 ",
-				mappings = {
-					n = {
-						["d"] = require("telescope.actions").delete_buffer,
-					},
-					i = {
-						["<C-S-D>"] = require("telescope.actions").delete_buffer,
-					},
-				},
-			},
-		},
-	},
 	dependencies = { { "nvim-lua/plenary.nvim" } },
-	config = function(_, opts)
-		require("telescope").setup(opts)
-
-		require("telescope").load_extension("notify")
-	end,
 	keys = {
 		{ "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "[f]ind [f]iles" },
 		{ "<leader>fF", "<cmd>Telescope find_files hidden=true no_ignore=true<cr>", desc = "[f]ind All [F]iles" },
@@ -69,4 +31,41 @@ return {
 		{ "<leader><space>", "<cmd>Telescope oldfiles only_cwd=true<cr>", desc = "[?] recently open files (cwd)" },
 		{ "<leader>/", find_in_current_buffer, desc = "[/] Search in current buffer" },
 	},
+  config = function()
+    require("telescope").setup({
+      defaults = {
+        file_ignore_patterns = { "node_modules" },
+        mappings = {
+          i = {
+            ["<M-p>"] = require("telescope.actions.layout").toggle_preview,
+            ["<M-h>"] = "which_key",
+          },
+          n = {
+            ["<M-p>"] = require("telescope.actions.layout").toggle_preview,
+          },
+        },
+        -- preview = {
+        --   hide_on_startup = true
+        -- },
+      },
+      pickers = {
+        find_files = {
+          prompt_prefix = "🔍 ",
+        },
+        buffers = {
+          prompt_prefix = "📁 ",
+          mappings = {
+            n = {
+              ["d"] = require("telescope.actions").delete_buffer,
+            },
+            i = {
+              ["<C-S-D>"] = require("telescope.actions").delete_buffer,
+            },
+          },
+        },
+      },
+    })
+
+    require("telescope").load_extension("notify")
+  end,
 }
