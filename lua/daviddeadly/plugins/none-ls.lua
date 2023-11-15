@@ -98,9 +98,6 @@ return {
 					-- spelling
 					cspell.diagnostics.with(diagnostics_conf),
 					cspell.code_actions,
-
-					-- general
-					none_ls.builtins.code_actions.gitsigns,
 				},
 			}
 		end,
