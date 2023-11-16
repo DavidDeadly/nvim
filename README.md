@@ -4,6 +4,7 @@
 <a href="https://dotfyle.com/DavidDeadly/nvim"><img src="https://dotfyle.com/DavidDeadly/nvim/badges/leaderkey?style=flat" /></a>
 <a href="https://dotfyle.com/DavidDeadly/nvim"><img src="https://dotfyle.com/DavidDeadly/nvim/badges/plugin-manager?style=flat" /></a>
 
+![image](https://github.com/DavidDeadly/nvim/assets/88601542/38210187-4556-4c79-8d61-7803578c0bc9)
 
 ## Install Instructions
 
