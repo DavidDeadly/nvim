@@ -36,9 +36,6 @@ vim.opt.cursorline = true
 
 vim.opt.laststatus = 3
 
-vim.opt.spelllang = "en_us,es"
-vim.opt.spell = true
-
 vim.opt.linespace = 10
 
 -- popup menu, ex: cmp suggest menu
