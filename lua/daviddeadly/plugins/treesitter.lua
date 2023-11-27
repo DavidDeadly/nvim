@@ -9,8 +9,6 @@ return {
 
     "windwp/nvim-ts-autotag",
 
-    "JoosepAlviste/nvim-ts-context-commentstring",
-
     {
       "RRethy/vim-illuminate",
       opts = {
