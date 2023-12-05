@@ -81,4 +81,3 @@
   "vim-wakatime": { "branch": "master", "commit": "87c6861ea81700ec4a6a27c81413cf07cb2c883c" },
   "vscode-js-debug": { "branch": "main", "commit": "390a741b50e6765f37f57e05dfd27fdafe0c03d6" },
   "which-key.nvim": { "branch": "main", "commit": "4433e5ec9a507e5097571ed55c02ea9658fb268a" }
-}
