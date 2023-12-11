@@ -29,6 +29,8 @@ return {
 				lua = { "luacheck" },
 
 				python = { "flake8" },
+
+        sh = { "shellcheck" }
 			}
 		end,
 	},
@@ -61,6 +63,8 @@ return {
 				lua = { "stylua" },
 
 				python = { "isort", "black" },
+
+				sh = { "beautysh" },
 
 				javascript = { { "prettierd", "prettier" } },
 				typescript = { { "prettierd", "prettier" } },
