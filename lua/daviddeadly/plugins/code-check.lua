@@ -1,13 +1,4 @@
 -- luacheck: globals vim
-local eslint_filetypes = {
-	"javascript",
-	"javascriptreact",
-	"typescript",
-	"typescriptreact",
-	"vue",
-	"html",
-}
-
 return {
 	{
 		"mfussenegger/nvim-lint",
@@ -30,7 +21,7 @@ return {
 
 				python = { "flake8" },
 
-        sh = { "shellcheck" }
+				sh = { "shellcheck" },
 			}
 		end,
 	},
@@ -73,37 +64,5 @@ return {
 				html = { { "prettierd", "prettier" } },
 			},
 		},
-	},
-
-	{
-		"nvimtools/none-ls.nvim",
-		event = { "BufReadPre", "BufNewFile" },
-		dependencies = {
-			{
-				"davidmh/cspell.nvim",
-			},
-		},
-		opts = function()
-			local none_ls = require("null-ls")
-			local cspell = require("cspell")
-
-			local diagnostics_conf = {
-				method = none_ls.methods.DIAGNOSTICS_ON_SAVE,
-			}
-
-			return {
-				sources = {
-					-- typescript
-					-- none_ls.builtins.code_actions.eslint_d,
-					none_ls.builtins.code_actions.eslint.with({
-						filetypes = eslint_filetypes,
-					}),
-
-					-- spelling
-					cspell.diagnostics.with(diagnostics_conf),
-					cspell.code_actions,
-				},
-			}
-		end,
 	},
 }

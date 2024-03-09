@@ -19,9 +19,10 @@ return {
       main = "lsp_signature"
     },
 
-    {
-      "nvimtools/none-ls.nvim"
-    },
+    -- {
+    --   'creativenull/efmls-configs-nvim',
+    --   version = 'v1.x.x', -- version is optional, but recommended
+    -- },
 
     {
       "NvChad/nvim-colorizer.lua",
@@ -109,9 +110,9 @@ return {
       end, "workspace list folders")
 
       -- nmap("<M-f>", "<CMD>Format<CR>", "Format file", { "n", "v" })
-
-      -- Create a command `:Format` local to the LSP buffer
-
+      --
+      -- -- Create a command `:Format` local to the LSP buffer
+      --
       -- vim.api.nvim_buf_create_user_command(bufnr, "Format", function(_)
       --   vim.lsp.buf.format({ async = true })
       -- end, { desc = "Format current buffer with LSP (async)" })
@@ -125,6 +126,17 @@ return {
     --
     --  If you want to override the default filetypes that your language server will attach to you can
     --  define the property "filetypes" to the map in question.
+
+    -- EFM language server configs
+    -- local eslint = require('efmls-configs.linters.eslint')
+    -- local prettier = require('efmls-configs.formatters.prettier')
+    -- local stylua = require('efmls-configs.formatters.stylua')
+    -- local luacheck = require('efmls-configs.linters.luacheck')
+    --
+    -- local languages = {
+    --   typescript = { eslint, prettier },
+    --   lua = { luacheck, stylua },
+    -- }
 
     local servers = {
       pyright = {},
@@ -143,8 +155,19 @@ return {
           workspace = { checkThirdParty = false },
           telemetry = { enable = false },
         },
-      }
+      },
+
+      -- linting and formatting
+      -- efm = {
+      --   filetypes = vim.tbl_keys(languages),
+      --   init_options = { documentFormatting = true, documentRangeFormatting = true },
+      --   settings = {
+      --     rootMarkers = { ".git/" },
+      --     languages = languages
+      --   }
+      -- }
     }
+
 
     -- Setup neovim lua configuration
     require("neodev").setup()
