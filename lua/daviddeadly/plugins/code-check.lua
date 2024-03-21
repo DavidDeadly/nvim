@@ -11,17 +11,19 @@ return {
 			})
 
 			require("lint").linters_by_ft = {
-				javascript = { "eslint" },
-				typescript = { "eslint" },
-				javascriptreact = { "eslint" },
-				typescriptreact = { "eslint" },
-				html = { "eslint" },
+				javascript = { "eslint", "cspell" },
+				typescript = { "eslint", "cspell" },
+				javascriptreact = { "eslint", "cspell"  },
+				typescriptreact = { "eslint", "cspell"  },
+				html = { "eslint", "cspell"  },
 
-				lua = { "luacheck" },
+				lua = { "luacheck", "cspell" },
 
-				python = { "flake8" },
+				python = { "flake8", "cspell" },
 
-				sh = { "shellcheck" },
+        go = { "golangcilint", "cspell" },
+
+				sh = { "shellcheck", "cspell" },
 			}
 		end,
 	},
@@ -54,6 +56,8 @@ return {
 				lua = { "stylua" },
 
 				python = { "isort", "black" },
+
+        go = {  "goimports", "gofumpt" },
 
 				sh = { "beautysh" },
 
