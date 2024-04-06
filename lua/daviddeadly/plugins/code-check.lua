@@ -59,6 +59,8 @@ return {
 
         go = {  "goimports", "gofumpt" },
 
+        rust = { "rustfmt" },
+
 				sh = { "beautysh" },
 
 				javascript = { { "prettierd", "prettier" } },

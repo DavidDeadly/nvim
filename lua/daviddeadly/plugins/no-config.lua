@@ -1,8 +1,8 @@
 return {
-	{
-		"theprimeagen/vim-be-good",
-		cmd = "VimBeGood",
-	},
+  {
+    "theprimeagen/vim-be-good",
+    cmd = "VimBeGood",
+  },
 
 	{
 		"wakatime/vim-wakatime",
@@ -38,12 +38,32 @@ return {
 	{
 		"echasnovski/mini.move",
 		keys = {
-			{ "<M-j>", mode = { "n", "v" } },
-			{ "<M-k>", mode = { "n", "v" } },
-			{ "<M-h>", mode = { "n", "v" } },
-			{ "<M-l>", mode = { "n", "v" } },
+			{ "<M-S-j>", mode = { "n", "v" } },
+			{ "<M-S-k>", mode = { "n", "v" } },
+			{ "<M-S-h>", mode = { "n", "v" } },
+			{ "<M-S-l>", mode = { "n", "v" } },
 		},
 		version = "*",
-		opts = {},
+		opts = {
+			mappings = {
+				-- Move visual selection in Visual mode. Defaults are Alt (Meta) + hjkl.
+				left = "<M-S-h>",
+				right = "<M-S-l>",
+				down = "<M-S-j>",
+				up = "<M-S-k>",
+
+				-- Move current line in Normal mode
+				line_left = "<M-S-h>",
+				line_right = "<M-S-l>",
+				line_down = "<M-S-j>",
+				line_up = "<M-S-k>",
+			},
+
+			-- Options which control moving behavior
+			options = {
+				-- Automatically reindent selection during linewise vertical move
+				reindent_linewise = true,
+			},
+		},
 	},
 }
