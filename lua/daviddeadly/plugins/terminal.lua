@@ -13,7 +13,8 @@ end
 
 return {
   "numToStr/FTerm.nvim",
-  opts = function()
+  enabled = false,
+  pts = function()
     local lazygit = lazy_git()
     vim.api.nvim_create_user_command("LazyGit", function() lazygit:toggle() end, { bang = true })
 
