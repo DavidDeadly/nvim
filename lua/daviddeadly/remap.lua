@@ -29,7 +29,7 @@ vim.keymap.set(
 	{ desc = "Paste form system clipboard behind cursor" }
 )
 
-vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]], { desc = "Copy form system clipboard" })
+vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]], { desc = "Copy from system clipboard" })
 vim.keymap.set("n", "<leader>Y", [["+Y]], { desc = "Copy line to system clipboard" })
 
 vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]], { desc = "Delete to empty register" })

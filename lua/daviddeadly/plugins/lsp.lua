@@ -142,10 +142,11 @@ return {
       pyright = {},
       tsserver = {},
       angularls = {},
+      astro = {},
       html = { filetypes = { "html", "twig", "hbs" } },
       cssls = {},
       tailwindcss = {},
-      eslint = {},
+      -- eslint = {}, -- lsp in favor of nvim_lint?? double errors
 
       lua_ls = {
         Lua = {
