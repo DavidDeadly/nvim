@@ -27,6 +27,7 @@ return {
     local str = require("cmp.utils.str")
 
     local luasnip = require("luasnip")
+    local suggestion = require('supermaven-nvim.completion_preview')
     local cmp_autopairs = require("nvim-autopairs.completion.cmp")
 
     local lspkind = require("lspkind")
@@ -70,14 +71,18 @@ return {
           if cmp.visible() then
             local entry = cmp.get_selected_entry()
 
-            if not entry then
-              cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
+            if entry then
+              cmp.confirm({
+                behavior = cmp.ConfirmBehavior.Replace,
+                select = true,
+              })
             end
 
-            cmp.confirm({
-              behavior = cmp.ConfirmBehavior.Replace,
-              select = true,
-            })
+            if suggestion.has_suggestion() then
+              return suggestion.on_accept_suggestion()
+            end
+
+            cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
           elseif luasnip.expand_or_locally_jumpable() then
             luasnip.expand_or_jump()
           else
