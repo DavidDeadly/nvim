@@ -71,18 +71,14 @@ return {
           if cmp.visible() then
             local entry = cmp.get_selected_entry()
 
-            if entry then
-              cmp.confirm({
-                behavior = cmp.ConfirmBehavior.Replace,
-                select = true,
-              })
+            if not entry then
+              cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
             end
 
-            if suggestion.has_suggestion() then
-              return suggestion.on_accept_suggestion()
-            end
-
-            cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
+            cmp.confirm({
+              behavior = cmp.ConfirmBehavior.Replace,
+              select = true,
+            })
           elseif luasnip.expand_or_locally_jumpable() then
             luasnip.expand_or_jump()
           else
