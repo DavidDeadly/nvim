@@ -61,6 +61,8 @@ return {
         rust = { "rustfmt" },
 
         sh = { "beautysh" },
+        
+        nix = { "nixpkgs_fmt" },
 
         javascript = { { "eslint_d", "prettierd", "prettier" } },
         typescript = { { "eslint_d", "prettierd", "prettier" } },
