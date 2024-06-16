@@ -5,35 +5,56 @@ local height = 20
 
 return {
 	{
-		"echasnovski/mini.files",
-		version = "*",
-		dependencies = {
-			{ "nvim-tree/nvim-web-devicons" },
-			{ "antosha417/nvim-lsp-file-operations" },
-		},
+		"stevearc/oil.nvim",
+		lazy = false,
+		dependencies = { "nvim-tree/nvim-web-devicons" },
 		opts = {
-			options = {
-				permanent_delete = false,
-				use_as_default_explorer = true,
+			default_file_explorer = true,
+			delete_to_trash = true,
+			skip_confirm_for_simple_files = true,
+			keymaps = {
+				["h"] = "actions.parent",
+				["l"] = "actions.select",
 			},
-			windows = {
-				preview = true,
+			view_options = {
+				show_hidden = false,
+				natural_order = true,
+				is_always_hidden = function(name, _)
+					return name == ".." or name == ".git"
+				end,
+			},
+			win_options = {
+				wrap = true,
+			},
+			float = {
+				padding = 5,
+				max_width = 80,
+				border = "rounded",
+				win_options = {
+					winblend = 0,
+				},
 			},
 		},
 		keys = {
 			{
-				"<leader>e",
+				"-",
 				function()
-					MiniFiles.open()
+					require("oil").open()
 				end,
-				desc = "Mini [E]xplorer",
+				desc = "open [-]il file explorer",
+			},
+			{
+				"_",
+				function()
+					require("oil").open_float()
+				end,
+				desc = "open [_]il float file explorer",
 			},
 		},
 	},
 
 	{
 		"nvim-tree/nvim-tree.lua",
-		lazy = false,
 		opts = function()
 			local nvim_tree = vim.api.nvim_create_augroup("NvimTreeResized", { clear = true })
 
