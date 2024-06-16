@@ -1,5 +1,3 @@
--- luacheck: globals vim
-
 local find_in_current_buffer = function()
 	local dropdown = require("telescope.themes").get_dropdown({
 		winblend = 10,
@@ -31,39 +29,39 @@ return {
 		{ "<leader><space>", "<cmd>Telescope oldfiles only_cwd=true<cr>", desc = "[?] recently open files (cwd)" },
 		{ "<leader>/", find_in_current_buffer, desc = "[/] Search in current buffer" },
 	},
-  config = function()
-    require("telescope").setup({
-      defaults = {
-        file_ignore_patterns = { "node_modules" },
-        mappings = {
-          i = {
-            ["<M-p>"] = require("telescope.actions.layout").toggle_preview,
-            ["<M-h>"] = "which_key",
-          },
-          n = {
-            ["<M-p>"] = require("telescope.actions.layout").toggle_preview,
-          },
-        },
-        -- preview = {
-        --   hide_on_startup = true
-        -- },
-      },
-      pickers = {
-        find_files = {
-          prompt_prefix = "🔍 ",
-        },
-        buffers = {
-          prompt_prefix = "📁 ",
-          mappings = {
-            n = {
-              ["d"] = require("telescope.actions").delete_buffer,
-            },
-            i = {
-              ["<C-S-D>"] = require("telescope.actions").delete_buffer,
-            },
-          },
-        },
-      },
-    })
-  end,
+	config = function()
+		require("telescope").setup({
+			defaults = {
+				file_ignore_patterns = { "node_modules" },
+				mappings = {
+					i = {
+						["<M-p>"] = require("telescope.actions.layout").toggle_preview,
+						["<M-h>"] = "which_key",
+					},
+					n = {
+						["<M-p>"] = require("telescope.actions.layout").toggle_preview,
+					},
+				},
+				-- preview = {
+				--   hide_on_startup = true
+				-- },
+			},
+			pickers = {
+				find_files = {
+					prompt_prefix = "🔍 ",
+				},
+				buffers = {
+					prompt_prefix = "📁 ",
+					mappings = {
+						n = {
+							["d"] = require("telescope.actions").delete_buffer,
+						},
+						i = {
+							["<C-S-D>"] = require("telescope.actions").delete_buffer,
+						},
+					},
+				},
+			},
+		})
+	end,
 }

@@ -1,5 +1,3 @@
--- luacheck: globals vim
-
 local function get_restore_session_item()
 	local session_info = require("projections.session").info(vim.loop.cwd() or "")
 	if type(session_info) == "table" then

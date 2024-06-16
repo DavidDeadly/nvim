@@ -1,4 +1,3 @@
--- luacheck: globals vim
 local lazy_status = require("lazy.status")
 
 local function fg(name)

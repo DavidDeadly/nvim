@@ -1,4 +1,3 @@
--- luacheck: globals vim ExecuteMacroOverVisualRange
 vim.keymap.set("n", "<M-e>", vim.cmd.Ex, { desc = "Explorer" })
 
 vim.keymap.set("n", "<C-Up>", "<cmd>resize +2<cr>", { desc = "Increase window height" })

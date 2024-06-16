@@ -1,4 +1,3 @@
--- luacheck: globals vim lazypath
 local localhost = {
 	"http://localhost:3000",
 	"http://localhost:8080",
@@ -72,19 +71,91 @@ local node_filetypes = { "javascriptreact", "typescriptreact", "typescript", "ja
 return {
 	"mfussenegger/nvim-dap",
 	keys = {
-		{ "<leader>dB", function() require("dap").set_breakpoint(vim.fn.input("Breakpoint condition: ")) end, desc = "Breakpoint Condition" },
-		{ "<leader>db", function() require("dap").toggle_breakpoint() end, desc = "Toggle Breakpoint" },
-		{ "<leader>cb", function() require("dap").clear_breakpoints() end, desc = "Clear all breakpoints" },
-		{ "<leader>dC", function() require("dap").run_to_cursor() end, desc = "Run to Cursor" },
-		{ "<leader>dc", function() require("dap").continue() end, desc = "Continue" },
-		{ "<leader>d_", function() require("dap").run_last() end, desc = "Run last adapter" },
-		{ "<leader>dt", function() require("dap").terminate() end, desc = "Terminate" },
-		{ "<leader>di", function() require("dap").step_into() end, desc = "Step Into" },
-		{ "<leader>dO", function() require("dap").step_out() end, desc = "Step Out" },
-		{ "<leader>do", function() require("dap").step_over() end, desc = "Step Over" },
-		{ "<leader>dp", function() require("dap").pause() end, desc = "Pause" },
-		{ "<leader>dE", function() require("dap").set_exception_breakpoints({ "all" }) end, desc = "Exception breakpoints all" },
-    { "<leader>dr", ':lua require"dap".repl.toggle({}, "vsplit")<CR><C-w>l', desc = "Toggle REPL" },
+		{
+			"<leader>dB",
+			function()
+				require("dap").set_breakpoint(vim.fn.input("Breakpoint condition: "))
+			end,
+			desc = "Breakpoint Condition",
+		},
+		{
+			"<leader>db",
+			function()
+				require("dap").toggle_breakpoint()
+			end,
+			desc = "Toggle Breakpoint",
+		},
+		{
+			"<leader>cb",
+			function()
+				require("dap").clear_breakpoints()
+			end,
+			desc = "Clear all breakpoints",
+		},
+		{
+			"<leader>dC",
+			function()
+				require("dap").run_to_cursor()
+			end,
+			desc = "Run to Cursor",
+		},
+		{
+			"<leader>dc",
+			function()
+				require("dap").continue()
+			end,
+			desc = "Continue",
+		},
+		{
+			"<leader>d_",
+			function()
+				require("dap").run_last()
+			end,
+			desc = "Run last adapter",
+		},
+		{
+			"<leader>dt",
+			function()
+				require("dap").terminate()
+			end,
+			desc = "Terminate",
+		},
+		{
+			"<leader>di",
+			function()
+				require("dap").step_into()
+			end,
+			desc = "Step Into",
+		},
+		{
+			"<leader>dO",
+			function()
+				require("dap").step_out()
+			end,
+			desc = "Step Out",
+		},
+		{
+			"<leader>do",
+			function()
+				require("dap").step_over()
+			end,
+			desc = "Step Over",
+		},
+		{
+			"<leader>dp",
+			function()
+				require("dap").pause()
+			end,
+			desc = "Pause",
+		},
+		{
+			"<leader>dE",
+			function()
+				require("dap").set_exception_breakpoints({ "all" })
+			end,
+			desc = "Exception breakpoints all",
+		},
+		{ "<leader>dr", ':lua require"dap".repl.toggle({}, "vsplit")<CR><C-w>l', desc = "Toggle REPL" },
 		{ "<leader>dk", ':lua require"dap".up()<CR>zz', desc = "Upstairs the callstack" },
 		{ "<leader>dj", ':lua require"dap".down()<CR>zz', desc = "Downstairs the callstack" },
 		{
@@ -102,37 +173,60 @@ return {
 			opts = {},
 		},
 
-    {
-      "rcarriga/cmp-dap",
-      opts = {
-        enabled = function()
-          return vim.api.nvim_buf_get_option(0, "buftype") ~= "prompt"
-            or require("cmp_dap").is_dap_buffer()
-        end
-      },
-      config = function (_, opts)
-        require("cmp").setup(opts)
+		{
+			"rcarriga/cmp-dap",
+			opts = {
+				enabled = function()
+					return vim.api.nvim_buf_get_option(0, "buftype") ~= "prompt" or require("cmp_dap").is_dap_buffer()
+				end,
+			},
+			config = function(_, opts)
+				require("cmp").setup(opts)
 
-        require("cmp").setup.filetype({ "dap-repl", "dapui_watches", "dapui_hover" }, {
-          sources = {
-            { name = "dap" },
-          },
-        })
-      end
-    },
+				require("cmp").setup.filetype({ "dap-repl", "dapui_watches", "dapui_hover" }, {
+					sources = {
+						{ name = "dap" },
+					},
+				})
+			end,
+		},
 
-    {
-      "nvim-telescope/telescope-dap.nvim",
-      keys = {
-        { "<leader>DB", function() require("telescope").extensions.dap.list_breakpoints() end, desc = "Dap - Breakpoints" },
-        { "<leader>dv", function() require("telescope").extensions.dap.variables() end, desc = "Dap - Variables" },
-        { "<leader>df", function() require("telescope").extensions.dap.frames() end, desc = "Dap - Frames" },
-        { "<leader>DC", function() require("telescope").extensions.dap.commands() end, desc = "Dap - Commands" },
-      },
-      config = function ()
-        require("telescope").load_extension("dap")
-      end
-    },
+		{
+			"nvim-telescope/telescope-dap.nvim",
+			keys = {
+				{
+					"<leader>DB",
+					function()
+						require("telescope").extensions.dap.list_breakpoints()
+					end,
+					desc = "Dap - Breakpoints",
+				},
+				{
+					"<leader>dv",
+					function()
+						require("telescope").extensions.dap.variables()
+					end,
+					desc = "Dap - Variables",
+				},
+				{
+					"<leader>df",
+					function()
+						require("telescope").extensions.dap.frames()
+					end,
+					desc = "Dap - Frames",
+				},
+				{
+					"<leader>DC",
+					function()
+						require("telescope").extensions.dap.commands()
+					end,
+					desc = "Dap - Commands",
+				},
+			},
+			config = function()
+				require("telescope").load_extension("dap")
+			end,
+		},
 
 		{
 			"rcarriga/nvim-dap-ui",
@@ -144,7 +238,7 @@ return {
 								id = "stacks",
 								size = 0.25,
 							},
-              {
+							{
 								id = "breakpoints",
 								size = 0.25,
 							},
@@ -152,7 +246,7 @@ return {
 								id = "watches",
 								size = 0.25,
 							},
-              {
+							{
 								id = "scopes",
 								size = 0.25,
 							},
@@ -164,7 +258,7 @@ return {
 						elements = {
 							{
 								id = "repl",
-								size = 1
+								size = 1,
 							},
 						},
 						position = "bottom",
@@ -173,9 +267,28 @@ return {
 				},
 			},
 			keys = {
-				{ "<leader>du", function() require("dapui").toggle({}) end, desc = "Dap UI" },
-				{ "<leader>dR", function() require("dapui").open({ reset = true }) end, desc = "Dap UI (reset)" },
-				{ "<leader>de", function() require("dapui").eval() end, desc = "Eval", mode = { "n", "v" } },
+				{
+					"<leader>du",
+					function()
+						require("dapui").toggle({})
+					end,
+					desc = "Dap UI",
+				},
+				{
+					"<leader>dR",
+					function()
+						require("dapui").open({ reset = true })
+					end,
+					desc = "Dap UI (reset)",
+				},
+				{
+					"<leader>de",
+					function()
+						require("dapui").eval()
+					end,
+					desc = "Eval",
+					mode = { "n", "v" },
+				},
 			},
 			config = function(_, opts)
 				local dap = require("dap")
@@ -202,10 +315,10 @@ return {
 					build = "npm install --legacy-peer-deps && npx gulp vsDebugServerBundle && mv dist out",
 				},
 
-        {
-          "sultanahamer/nvim-dap-reactnative",
-          build = "npm install && tsc"
-        }
+				{
+					"sultanahamer/nvim-dap-reactnative",
+					build = "npm install && tsc",
+				},
 			},
 			opts = {
 				debugger_path = lazypath .. "/vscode-js-debug",
@@ -227,15 +340,15 @@ return {
 								cwd = "${workspaceFolder}",
 								skipFiles = { "<node_internals>/**" },
 							},
-              {
+							{
 								type = "pwa-node",
 								request = "attach",
 								name = "Attach to Nvim React Native",
 								program = "${file}",
 								cwd = vim.fn.getcwd(),
-                sourceMaps = true,
-                protocol = "inspector",
-                port = 35000,
+								sourceMaps = true,
+								protocol = "inspector",
+								port = 35000,
 								skipFiles = { "<node_internals>/**" },
 							},
 							{
@@ -253,7 +366,7 @@ return {
 								url = pick_url,
 								sourceMaps = true,
 								webRoot = "${workspaceFolder}/code",
-                protocol = "inspector",
+								protocol = "inspector",
 								port = 9222,
 								runtimeExecutable = "/usr/bin/vivaldi-stable",
 								skipFiles = { "**/node_modules/**/*", "**/@vite/*", "**/src/client/*", "**/src/*" },

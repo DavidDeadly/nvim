@@ -1,8 +1,7 @@
--- luacheck: globals vim
 return {
 	{
 		"tpope/vim-fugitive",
-    cmd = { "Git", "G" },
+		cmd = { "Git", "G" },
 		keys = {
 			{ "<leader>gf", vim.cmd.Git, desc = "Git fugitive" },
 		},
@@ -10,7 +9,7 @@ return {
 
 	{
 		"akinsho/git-conflict.nvim",
-    cmd = { "GitConflictRefresh" },
+		cmd = { "GitConflictRefresh" },
 		version = "*",
 		config = true,
 	},
@@ -33,7 +32,7 @@ return {
 				end,
 				desc = "Create git worktree",
 			},
-		}
+		},
 	},
 
 	{
