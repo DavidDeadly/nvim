@@ -156,6 +156,12 @@ return {
 			pyright = {},
 			tsserver = {},
 			angularls = {},
+			nil_ls = {
+				testSetting = 42,
+				formatting = {
+					command = { "nixpkgs-fmt" },
+				},
+			},
 			astro = {},
 			html = { filetypes = { "html", "twig", "hbs" } },
 			cssls = {},
