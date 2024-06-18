@@ -4,28 +4,50 @@ return {
 		"mfussenegger/nvim-lint",
 		event = { "BufReadPre", "BufNewFile" },
 		config = function()
+			local check_spelling = true
+
 			vim.api.nvim_create_autocmd({ "BufWritePost" }, {
 				callback = function()
 					require("lint").try_lint()
+
+					if check_spelling then
+						require("lint").try_lint("cspell")
+					end
 				end,
 			})
 
+			vim.keymap.set("n", "<leader>sp", function()
+				require("lint").try_lint("cspell")
+			end, { desc = "Check spelling on the current buffer" })
+
+			vim.keymap.set("n", "<leader>ts", function()
+				check_spelling = not check_spelling
+
+				if not check_spelling then
+					vim.diagnostic.reset()
+				end
+
+				local msg = "Spell checking " .. (check_spelling and "ON" or "OFF")
+
+				vim.notify(msg, vim.log.levels.INFO)
+			end, { desc = "Toggle spelling" })
+
 			require("lint").linters_by_ft = {
-				javascript = { "eslint_d", "cspell" },
-				typescript = { "eslint_d", "cspell" },
-				javascriptreact = { "eslint_d", "cspell" },
-				typescriptreact = { "eslint_d", "cspell" },
-				html = { "eslint_d", "cspell" },
+				javascript = { "eslint_d" },
+				typescript = { "eslint_d" },
+				javascriptreact = { "eslint_d" },
+				typescriptreact = { "eslint_d" },
+				html = { "eslint_d" },
 
-				lua = { "selene", "cspell" },
+				lua = { "selene" },
 
-				nix = { "statix", "cspell" },
+				nix = { "statix" },
 
-				python = { "flake8", "cspell" },
+				python = { "flake8" },
 
-				go = { "golangcilint", "cspell" },
+				go = { "golangcilint" },
 
-				sh = { "shellcheck", "cspell" },
+				sh = { "shellcheck" },
 			}
 		end,
 	},
