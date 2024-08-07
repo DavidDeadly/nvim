@@ -6,7 +6,10 @@ return {
 
 		"nvim-treesitter/nvim-treesitter-context",
 
-		"windwp/nvim-ts-autotag",
+		{
+			"windwp/nvim-ts-autotag",
+			opts = {},
+		},
 
 		{
 			"RRethy/vim-illuminate",

@@ -25,11 +25,6 @@ return {
 			main = "lsp_signature",
 		},
 
-		-- {
-		--   'creativenull/efmls-configs-nvim',
-		--   version = 'v1.x.x', -- version is optional, but recommended
-		-- },
-
 		{
 			"NvChad/nvim-colorizer.lua",
 			opts = {
@@ -138,17 +133,6 @@ return {
 		--  If you want to override the default filetypes that your language server will attach to you can
 		--  define the property "filetypes" to the map in question.
 
-		-- EFM language server configs
-		-- local eslint = require('efmls-configs.linters.eslint')
-		-- local prettier = require('efmls-configs.formatters.prettier')
-		-- local stylua = require('efmls-configs.formatters.stylua')
-		-- local luacheck = require('efmls-configs.linters.luacheck')
-		--
-		-- local languages = {
-		--   typescript = { eslint, prettier },
-		--   lua = { luacheck, stylua },
-		-- }
-
 		local servers = {
 			pyright = {},
 			tsserver = {},
@@ -178,15 +162,7 @@ return {
 				},
 			},
 
-			-- linting and formatting
-			-- efm = {
-			--   filetypes = vim.tbl_keys(languages),
-			--   init_options = { documentFormatting = true, documentRangeFormatting = true },
-			--   settings = {
-			--     rootMarkers = { ".git/" },
-			--     languages = languages
-			--   }
-			-- }
+			gopls = {},
 		}
 
 		-- Setup neovim lua configuration
