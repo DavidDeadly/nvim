@@ -135,7 +135,7 @@ return {
 
 		local servers = {
 			pyright = {},
-			tsserver = {},
+			ts_ls = {},
 			angularls = {},
 			nil_ls = {
 				testSetting = 42,
