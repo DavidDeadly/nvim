@@ -174,9 +174,24 @@ return {
 		},
 
 		{
+			"jay-babu/mason-nvim-dap.nvim",
+			dependencies = {
+				"williamboman/mason.nvim",
+			},
+			opts = {
+				handlers = {},
+				ensure_installed = {
+					"codelldb",
+					"delve",
+				},
+			},
+		},
+
+		{
 			"rcarriga/cmp-dap",
 			opts = {
 				enabled = function()
+					print(vim.api.nvim_buf_get_option(0, "buftype"))
 					return vim.api.nvim_buf_get_option(0, "buftype") ~= "prompt" or require("cmp_dap").is_dap_buffer()
 				end,
 			},
@@ -230,6 +245,9 @@ return {
 
 		{
 			"rcarriga/nvim-dap-ui",
+			dependencies = {
+				"nvim-neotest/nvim-nio",
+			},
 			opts = {
 				layouts = {
 					{
@@ -296,6 +314,10 @@ return {
 
 				---@diagnostic disable-next-line: missing-fields
 				dapui.setup(opts)
+
+				dap.listeners.after.event_initialized["dapui_config"] = function()
+					dapui.open({ reset = true })
+				end
 
 				dap.listeners.before.event_terminated["dapui_config"] = function()
 					dapui.close({})
@@ -415,7 +437,69 @@ return {
 		},
 	},
 	config = function()
-		require("overseer").patch_dap(true)
+		require("overseer").enable_dap(true)
+		local dap = require("dap")
+
+		local cpp_port = 13123
+		dap.adapters.codelldb = {
+			type = "server",
+			port = cpp_port,
+			executable = {
+				command = "codelldb",
+				args = { "--port", cpp_port },
+			},
+		}
+
+		dap.configurations.cpp = {
+			{
+				name = "Launch file",
+				type = "codelldb",
+				request = "launch",
+				program = function()
+					local dir = vim.fn.getcwd() .. "/build"
+					local command = "find " .. dir .. " -maxdepth 1 -type f -executable"
+					local binaries = {}
+
+					local handle = io.popen(command)
+					if handle == nil then
+						print("Could not run command: " .. command)
+						return
+					end
+
+					for line in handle:lines() do
+						table.insert(binaries, line)
+					end
+
+					if #binaries == 0 then
+						print("No binaries found in " .. dir)
+						return
+					end
+
+					vim.ui.select(binaries, {
+						prompt = "Select executable: ",
+						format_item = function(executable)
+							return executable
+						end,
+					}, function(executable)
+						if executable == nil then
+							print("No executable selected")
+							return
+						end
+
+						dap.run({
+							name = "Launch file",
+							type = "codelldb",
+							request = "launch",
+							program = executable,
+							cwd = "${workspaceFolder}",
+							stopOnEntry = false,
+						})
+					end)
+				end,
+				cwd = "${workspaceFolder}",
+				stopOnEntry = false,
+			},
+		}
 
 		dap_colors()
 	end,

@@ -1,6 +1,35 @@
 -- selene: allow(mixed_table)
 return {
 	{
+		"williamboman/mason.nvim",
+		enabled = not Running_on_nix,
+		config = true,
+		ensure_installed = {
+			-- web
+			"eslint_d",
+			"prettierd",
+			"prettier",
+
+			-- lua
+			"stylua",
+			"selene",
+
+			-- python
+			"flake8",
+			"black",
+
+			-- go
+			"goimports",
+			"gofumpt",
+			"golangcilint",
+
+			-- c/c++
+			"cpplint",
+			"clang-format",
+		},
+	},
+
+	{
 		"mfussenegger/nvim-lint",
 		event = { "BufReadPre", "BufNewFile" },
 		config = function()
@@ -45,6 +74,8 @@ return {
 
 				python = { "flake8" },
 
+				cpp = { "cpplint" },
+
 				go = { "golangcilint" },
 
 				sh = { "shellcheck" },
@@ -76,23 +107,25 @@ return {
 				timeout_ms = 500,
 			},
 			formatters_by_ft = {
+				javascript = { { "eslint_d", "prettierd", "prettier" } },
+				typescript = { { "eslint_d", "prettierd", "prettier" } },
+				javascriptreact = { { "eslint_d", "prettierd", "prettier" } },
+				typescriptreact = { { "eslint_d", "prettierd", "prettier" } },
+				html = { { "prettierd", "prettier" } },
+
+				nix = { "nixpkgs_fmt" },
+
 				lua = { "stylua" },
 
 				python = { "isort", "black" },
 
 				go = { "goimports", "gofumpt" },
 
+				cpp = { "clang-format" },
+
 				rust = { "rustfmt" },
 
 				sh = { "beautysh" },
-
-				nix = { "nixpkgs_fmt" },
-
-				javascript = { { "eslint_d", "prettierd", "prettier" } },
-				typescript = { { "eslint_d", "prettierd", "prettier" } },
-				javascriptreact = { { "eslint_d", "prettier", "prettierd" } },
-				typescriptreact = { { "eslint_d", "prettierd", "prettier" } },
-				html = { { "prettierd", "prettier" } },
 			},
 		},
 	},

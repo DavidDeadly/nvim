@@ -1,4 +1,4 @@
-local running_on_nix = vim.fn.executable("nix") == 1
+Running_on_nix = vim.fn.executable("nix") == 1
 
 return {
 	"neovim/nvim-lspconfig",
@@ -7,12 +7,13 @@ return {
 		-- Automatically install LSPs to stdpath for neovim
 		{
 			"williamboman/mason.nvim",
-			enabled = not running_on_nix,
+			enabled = not Running_on_nix,
 			config = true,
 		},
+
 		{
 			"williamboman/mason-lspconfig.nvim",
-			enabled = not running_on_nix,
+			enabled = not Running_on_nix,
 		},
 
 		{
@@ -134,7 +135,6 @@ return {
 		--  define the property "filetypes" to the map in question.
 
 		local servers = {
-			pyright = {},
 			ts_ls = {},
 			angularls = {},
 			nil_ls = {
@@ -147,7 +147,6 @@ return {
 			html = { filetypes = { "html", "twig", "hbs" } },
 			cssls = {},
 			tailwindcss = {},
-			-- eslint = {}, -- lsp in favor of nvim_lint?? double errors
 
 			lua_ls = {
 				Lua = {
@@ -162,6 +161,8 @@ return {
 				},
 			},
 
+			clangd = {},
+			pyright = {},
 			gopls = {},
 		}
 
@@ -174,7 +175,7 @@ return {
 
 		-- mannually installing lsp servers
 		-- mason is not necessary in nixos
-		if running_on_nix then
+		if Running_on_nix then
 			for server_name, _ in pairs(servers) do
 				require("lspconfig")[server_name].setup({
 					capabilities = capabilities,
