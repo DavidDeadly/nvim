@@ -102,12 +102,7 @@ return {
 			nmap("<leader>vd", function()
 				vim.diagnostic.open_float()
 			end, "Open diagnostics (vim)")
-			nmap("[d", function()
-				vim.diagnostic.goto_next()
-			end, "Next diagnostic")
-			nmap("]d", function()
-				vim.diagnostic.goto_prev()
-			end, "Previous diagnostic")
+
 			-- Lesser used LSP functionality
 			nmap("gD", vim.lsp.buf.declaration, "Goto declaration")
 			nmap("<leader>wa", vim.lsp.buf.add_workspace_folder, "workspace add folder")
@@ -115,24 +110,7 @@ return {
 			nmap("<leader>wl", function()
 				print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
 			end, "workspace list folders")
-
-			-- nmap("<M-f>", "<CMD>Format<CR>", "Format file", { "n", "v" })
-			--
-			-- -- Create a command `:Format` local to the LSP buffer
-			--
-			-- vim.api.nvim_buf_create_user_command(bufnr, "Format", function(_)
-			--   vim.lsp.buf.format({ async = true })
-			-- end, { desc = "Format current buffer with LSP (async)" })
 		end
-
-		-- Enable the following language servers
-		--  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
-		--
-		--  Add any additional override configuration in the following tables. They will be passed to
-		--  the `settings` field of the server config. You must look up that documentation yourself.
-		--
-		--  If you want to override the default filetypes that your language server will attach to you can
-		--  define the property "filetypes" to the map in question.
 
 		local servers = {
 			ts_ls = {},

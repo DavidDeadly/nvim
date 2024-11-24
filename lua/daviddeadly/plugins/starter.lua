@@ -11,10 +11,12 @@ end
 
 local function get_themes_items()
 	local themes = { "rose-pine", "nightfly", "tokyonight", "catppuccin", "onedark" }
-	local current_theme = vim.api.nvim_exec("colorscheme", true) or ""
+	local current_theme = vim.api.nvim_exec2("colorscheme", {
+		output = true,
+	}).output or ""
 
 	themes = vim.tbl_filter(function(theme)
-		return not string.find(current_theme or "", theme)
+		return not string.find(current_theme, theme)
 	end, themes)
 
 	local themes_items = {}

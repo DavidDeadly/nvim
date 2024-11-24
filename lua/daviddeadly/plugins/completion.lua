@@ -25,7 +25,6 @@ return {
 		local str = require("cmp.utils.str")
 
 		local luasnip = require("luasnip")
-		local suggestion = require("supermaven-nvim.completion_preview")
 		local cmp_autopairs = require("nvim-autopairs.completion.cmp")
 
 		local lspkind = require("lspkind")
@@ -108,6 +107,7 @@ return {
 					cmp.config.compare.kind,
 				},
 			},
+			---@diagnostic disable-next-line: missing-fields
 			formatting = {
 				fields = {
 					cmp.ItemField.Abbr,

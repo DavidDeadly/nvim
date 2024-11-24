@@ -52,8 +52,10 @@ local function dap_colors()
 
 	for name, sign in pairs(dap_icons) do
 		sign = type(sign) == "table" and sign or { sign }
+
 		vim.fn.sign_define(
 			"Dap" .. name,
+			---@diagnostic disable-next-line: assign-type-mismatch
 			{ text = sign[1], texthl = sign[2] or "DiagnosticInfo", linehl = sign[3], numhl = sign[3] }
 		)
 	end
@@ -191,8 +193,9 @@ return {
 			"rcarriga/cmp-dap",
 			opts = {
 				enabled = function()
-					print(vim.api.nvim_buf_get_option(0, "buftype"))
-					return vim.api.nvim_buf_get_option(0, "buftype") ~= "prompt" or require("cmp_dap").is_dap_buffer()
+					local is_not_prompt = vim.api.nvim_get_option_value("buftype", { buf = 0 }) ~= "prompt"
+
+					return is_not_prompt or require("cmp_dap").is_dap_buffer()
 				end,
 			},
 			config = function(_, opts)

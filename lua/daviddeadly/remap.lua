@@ -56,5 +56,7 @@ vim.keymap.set("x", "@", [[:<C-u>lua ExecuteMacroOverVisualRange()<CR>]], { nore
 
 function ExecuteMacroOverVisualRange()
 	vim.api.nvim_out_write("@" .. vim.fn.getcmdline() .. "\n")
-	vim.api.nvim_exec(":'<,'>normal @" .. vim.fn.nr2char(vim.fn.getchar()), true)
+	vim.api.nvim_exec2(":'<,'>normal @" .. vim.fn.nr2char(vim.fn.getchar()), {
+		output = true,
+	})
 end
