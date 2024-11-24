@@ -1,14 +1,12 @@
-local overseer = require("overseer")
-
 local function file_exists(name)
-	local f = io.open(name, "r")
+	local file = io.open(name, "r")
 
-	if f ~= nil then
-		io.close(f)
-		return true
+	if not file then
+		return false
 	end
 
-	return false
+	io.close(file)
+	return true
 end
 
 return {
@@ -25,21 +23,13 @@ return {
 		}
 	end,
 	desc = "Inpect on React Native",
-	tags = { overseer.TAG.BUILD },
+	tags = { require("overseer").TAG.BUILD },
 	priority = 50,
 	condition = {
 		filetype = { "typescriptreact", "javascriptreact" },
 		dir = "~/Dev",
 		callback = function()
-			local cwd = vim.fn.getcwd()
-
-			local react_native_config = file_exists(cwd .. "/metro.config.js")
-
-			if not react_native_config then
-				return false
-			end
-
-			return true
+			return file_exists(vim.fn.getcwd() .. "/metro.config.js")
 		end,
 	},
 }

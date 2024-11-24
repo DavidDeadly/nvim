@@ -501,6 +501,7 @@ return {
 							program = executable,
 							cwd = "${workspaceFolder}",
 							stopOnEntry = false,
+							preLaunchTask = "Make project",
 						})
 					end)
 				end,
