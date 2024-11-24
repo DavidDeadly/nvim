@@ -176,6 +176,11 @@ return {
 		},
 
 		{
+			"LiadOz/nvim-dap-repl-highlights",
+			opts = {},
+		},
+
+		{
 			"jay-babu/mason-nvim-dap.nvim",
 			dependencies = {
 				"williamboman/mason.nvim",

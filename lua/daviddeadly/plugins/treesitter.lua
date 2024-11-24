@@ -57,7 +57,7 @@ return {
 	---@type TSConfig
 	opts = {
 		-- Add languages to be installed here that you want installed for treesitter
-		ensure_installed = { "lua", "python", "tsx", "javascript", "typescript", "vimdoc", "vim" },
+		ensure_installed = { "lua", "python", "tsx", "javascript", "typescript", "vimdoc", "vim", "dap_repl" },
 		modules = {},
 
 		autotag = {
