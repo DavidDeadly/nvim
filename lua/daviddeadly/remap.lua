@@ -1,4 +1,7 @@
-vim.keymap.set("n", "<M-e>", vim.cmd.Ex, { desc = "Explorer" })
+vim.keymap.set("i", "<C-c>", "<Esc>", { desc = "Normal mode" })
+vim.keymap.set("n", "<leader><space>x", "<cmd>source %<CR>")
+vim.keymap.set("n", "<leader>x", ":.lua<CR>")
+vim.keymap.set("v", "<leader>x", ":lua<CR>")
 
 vim.keymap.set("n", "<C-Up>", "<cmd>resize +2<cr>", { desc = "Increase window height" })
 vim.keymap.set("n", "<C-Down>", "<cmd>resize -2<cr>", { desc = "Decrease window height" })
@@ -14,6 +17,8 @@ vim.keymap.set("n", "<C-u>", "<C-u>zz", { desc = "Scroll half page up (keep mous
 vim.keymap.set("n", "n", "nzzzv", { desc = "Next search result (keep mouse center)" })
 vim.keymap.set("n", "N", "Nzzzv", { desc = "Prev search result (keep mouse center)" })
 
+vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]], { desc = "Copy from system clipboard" })
+vim.keymap.set("n", "<leader>Y", [["+Y]], { desc = "Copy line to system clipboard" })
 vim.keymap.set("x", "<leader>p", [["_dP]], { desc = "Paste and keep data" })
 vim.keymap.set(
 	{ "n", "x", "i" },
@@ -28,14 +33,7 @@ vim.keymap.set(
 	{ desc = "Paste form system clipboard behind cursor" }
 )
 
-vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]], { desc = "Copy from system clipboard" })
-vim.keymap.set("n", "<leader>Y", [["+Y]], { desc = "Copy line to system clipboard" })
-
 vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]], { desc = "Delete to empty register" })
-
-vim.keymap.set("i", "<C-c>", "<Esc>", { desc = "Normal mode" })
-
-vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
 
 vim.keymap.set("n", "<leader>xq", "<cmd>copen<cr>", { desc = "Quickfix List" })
 vim.keymap.set("n", "<leader>K", "<cmd>cnext<CR>zz", { desc = "Next quickfix list" })
@@ -50,7 +48,6 @@ vim.keymap.set(
 	[[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]],
 	{ desc = "Search and replace on current buffer" }
 )
-vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true, desc = "Make executable" })
 
 vim.keymap.set("x", "@", [[:<C-u>lua ExecuteMacroOverVisualRange()<CR>]], { noremap = true, silent = true })
 

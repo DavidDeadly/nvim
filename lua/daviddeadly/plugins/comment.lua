@@ -3,12 +3,6 @@ vim.g.skip_ts_context_commentstring_module = true
 return {
 	{
 		"numToStr/Comment.nvim",
-		dependencies = {
-			{
-				"JoosepAlviste/nvim-ts-context-commentstring",
-				main = "ts_context_commentstring",
-			},
-		},
 		keys = {
 			"gcc",
 			"gc",
@@ -24,7 +18,7 @@ return {
 
 	{
 		"folke/todo-comments.nvim",
-		cmd = { "TodoTelescope" },
+		event = "BufReadPost",
 		config = true,
     -- stylua: ignore
     keys = {

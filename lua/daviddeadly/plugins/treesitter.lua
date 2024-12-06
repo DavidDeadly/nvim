@@ -12,6 +12,15 @@ return {
 		},
 
 		{
+			"JoosepAlviste/nvim-ts-context-commentstring",
+			main = "ts_context_commentstring",
+			opts = {
+				enable = true,
+				enable_autocmd = false,
+			},
+		},
+
+		{
 			"RRethy/vim-illuminate",
 			opts = {
 				delay = 200,
@@ -59,15 +68,6 @@ return {
 		-- Add languages to be installed here that you want installed for treesitter
 		ensure_installed = { "lua", "python", "tsx", "javascript", "typescript", "vimdoc", "vim", "dap_repl" },
 		modules = {},
-
-		autotag = {
-			enable = true,
-		},
-
-		context_commentstring = {
-			enable = true,
-			enable_autocmd = false,
-		},
 
 		sync_install = false,
 		auto_install = true,

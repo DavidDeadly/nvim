@@ -140,6 +140,7 @@ return {
 			},
 
 			clangd = {},
+
 			pyright = {},
 			gopls = {},
 		}

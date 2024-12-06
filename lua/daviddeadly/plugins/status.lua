@@ -134,6 +134,25 @@ return {
 				},
 				{
 					function()
+						local status = require("supermaven-nvim.api").is_running()
+						local msg = status and "Normal" and "Warning"
+
+						return icons[msg] .. " " .. msg
+					end,
+					cond = function()
+						return type(package.loaded["supermaven-nvim"]) == "table"
+					end,
+					color = function()
+						if not package.loaded["supermaven-nvim"] then
+							return
+						end
+
+						local status = require("supermaven-nvim.api").is_running()
+						return status and colors["Normal"] or colors["Warning"]
+					end,
+				},
+				{
+					function()
 						local status = require("copilot.api").status.data
 						return (icons[status.status] or icons[""]) .. (status.message or "")
 					end,

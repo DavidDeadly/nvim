@@ -1,15 +1,11 @@
 return {
-  {
-    "theprimeagen/vim-be-good",
-    cmd = "VimBeGood",
-  },
-
 	{
-		"wakatime/vim-wakatime",
+		"theprimeagen/vim-be-good",
+		cmd = "VimBeGood",
 	},
 
 	{
-		"christoomey/vim-tmux-navigator",
+		"wakatime/vim-wakatime",
 	},
 
 	{

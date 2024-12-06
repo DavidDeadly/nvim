@@ -16,21 +16,31 @@ return {
 		local builtin = require("telescope.builtin")
 
 		return {
-			{ "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "[f]ind [f]iles" },
-			{ "<leader>fF", "<cmd>Telescope find_files hidden=true no_ignore=true<cr>", desc = "[f]ind All [F]iles" },
-			{ "<leader>fw", "<cmd>Telescope grep_string<cr>", desc = "[f]ind [w]ord" },
-			{ "<leader>fW", "<cmd>Telescope live_grep<cr>", desc = "[f]ind [W]ords" },
-			{ "<leader>fb", "<cmd>Telescope buffers<cr>", desc = "[f]ind [b]uffers" },
-			{ "<leader>fh", "<cmd>Telescope help_tags<cr>", desc = "[f]ind [h]elp tags" },
-			{ "<leader>fg", "<cmd>Telescope git_files<cr>", desc = "[f]ind [g]it files" },
-			{ "<leader>fc", "<cmd>Telescope colorscheme enable_preview=true<cr>", desc = "[f]ind [c]olorscheme" },
-			{ "<leader>ltb", "<cmd>Telescope builtin<cr>", desc = "[l]ist [t]elescope [b]uiltin" },
-			{ "<leader>ks", "<cmd>Telescope keymaps<cr>", desc = "[k]ey[m]aps" },
-			{ "<leader>fr", "<cmd>Telescope resume<cr>", desc = "[r]esume telescope" },
-			-- TODO: migrate to builtin instead of vim commands
+			{ "<leader>ff", builtin.find_files, desc = "[f]ind [f]iles" },
+			{ "<leader>fw", builtin.grep_string, desc = "[f]ind [w]ord" },
+			{ "<leader>fW", builtin.live_grep, desc = "[f]ind [W]ords" },
+			{ "<leader>fh", builtin.help_tags, desc = "[f]ind [h]elp tags" },
+			{ "<leader>fg", builtin.git_files, desc = "[f]ind [g]it files" },
+			{ "<leader>ltb", builtin.builtin, desc = "[l]ist [t]elescope [b]uiltin" },
+			{ "<leader>ks", builtin.keymaps, desc = "[k]ey[m]aps" },
+			{ "<leader>fr", builtin.resume, desc = "[r]esume telescope" },
 			{ "<leader>f.", builtin.buffers, desc = "[F]ind existing buffers" },
 			{ "<leader>fd", builtin.diagnostics, desc = "[f]ind [d]iagnostics" },
 			{ "<leader><C-space>", builtin.oldfiles, desc = "[?] Global recently open files" },
+			{
+				"<leader>fc",
+				function()
+					builtin.colorscheme({ enable_preview = true })
+				end,
+				desc = "[f]ind [c]olorscheme",
+			},
+			{
+				"<leader>fF",
+				function()
+					builtin.find_files({ hidden = true })
+				end,
+				desc = "[f]ind All [F]iles",
+			},
 			{
 				"<leader><space>",
 				function()
