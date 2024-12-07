@@ -1,37 +1,12 @@
 -- selene: allow(mixed_table)
 return {
 	{
-		"williamboman/mason.nvim",
-		enabled = not Running_on_nix,
-		config = true,
-		ensure_installed = {
-			-- web
-			"eslint_d",
-			"prettierd",
-			"prettier",
-
-			-- lua
-			"stylua",
-			"selene",
-
-			-- python
-			"flake8",
-			"black",
-
-			-- go
-			"goimports",
-			"gofumpt",
-			"golangcilint",
-
-			-- c/c++
-			"cpplint",
-			"clang-format",
-		},
-	},
-
-	{
 		"mfussenegger/nvim-lint",
 		event = { "BufReadPre", "BufNewFile" },
+		dependencies = {
+			{ "williamboman/mason.nvim", config = true },
+			{ "rshkarin/mason-nvim-lint", config = true },
+		},
 		config = function()
 			local check_spelling = true
 
@@ -87,6 +62,10 @@ return {
 
 		"stevearc/conform.nvim",
 		event = { "BufReadPre", "BufNewFile" },
+		dependencies = {
+			{ "williamboman/mason.nvim", config = true },
+			{ "zapling/mason-conform.nvim", config = true },
+		},
 		keys = {
 			{
 				"<M-f>",
@@ -107,10 +86,10 @@ return {
 				timeout_ms = 500,
 			},
 			formatters_by_ft = {
-				javascript = { { "eslint_d", "prettierd", "prettier" } },
-				typescript = { { "eslint_d", "prettierd", "prettier" } },
-				javascriptreact = { { "eslint_d", "prettierd", "prettier" } },
-				typescriptreact = { { "eslint_d", "prettierd", "prettier" } },
+				javascript = { "eslint_d", "prettierd", "prettier", stop_after_first = true },
+				typescript = { "eslint_d", "prettierd", "prettier", stop_after_first = true },
+				javascriptreact = { "eslint_d", "prettierd", "prettier", stop_after_first = true },
+				typescriptreact = { "eslint_d", "prettierd", "prettier", stop_after_first = true },
 				html = { { "prettierd", "prettier" } },
 
 				nix = { "nixpkgs_fmt" },
