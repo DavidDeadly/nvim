@@ -9,9 +9,11 @@ end
 
 return {
 	"nvim-telescope/telescope.nvim",
-	cmd = "Telescope",
 	branch = "0.1.x",
-	dependencies = { { "nvim-lua/plenary.nvim" } },
+	dependencies = {
+		{ "nvim-lua/plenary.nvim" },
+		{ "echasnovski/mini.icons", config = MiniIconsSetup },
+	},
 	keys = function()
 		local builtin = require("telescope.builtin")
 

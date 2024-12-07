@@ -16,7 +16,7 @@ return {
 
 	{
 		"ThePrimeagen/git-worktree.nvim",
-		opts = {},
+		config = true,
 		keys = {
 			{
 				"<leader>gw",

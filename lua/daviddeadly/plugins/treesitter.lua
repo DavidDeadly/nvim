@@ -6,10 +6,7 @@ return {
 
 		"nvim-treesitter/nvim-treesitter-context",
 
-		{
-			"windwp/nvim-ts-autotag",
-			opts = {},
-		},
+		{ "windwp/nvim-ts-autotag", config = true },
 
 		{
 			"JoosepAlviste/nvim-ts-context-commentstring",

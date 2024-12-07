@@ -3,11 +3,17 @@ local gheight = vim.api.nvim_list_uis()[1].height
 local width = 60
 local height = 20
 
+MiniIconsSetup = function(_, opts)
+	require("mini.icons").setup(opts)
+	MiniIcons.mock_nvim_web_devicons()
+end
+
 return {
 	{
 		"stevearc/oil.nvim",
-		lazy = false,
-		dependencies = { "nvim-tree/nvim-web-devicons" },
+		dependencies = {
+			{ "echasnovski/mini.icons", config = MiniIconsSetup },
+		},
 		opts = {
 			default_file_explorer = true,
 			delete_to_trash = true,
@@ -37,24 +43,38 @@ return {
 		},
 		keys = {
 			{
-				"-",
+				"<leader>O",
 				function()
 					require("oil").open()
 				end,
-				desc = "open [-]il file explorer",
+				desc = "open [O]il file explorer",
 			},
 			{
-				"_",
+				"<leader>o",
 				function()
 					require("oil").open_float()
 				end,
-				desc = "open [_]il float file explorer",
+				desc = "open [o]il float file explorer",
 			},
 		},
 	},
 
 	{
 		"nvim-tree/nvim-tree.lua",
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			"antosha417/nvim-lsp-file-operations",
+			{ "echasnovski/mini.icons", config = MiniIconsSetup },
+		},
+		cmd = {
+			"NvimTreeToggle",
+			"NvimTreeFindFile",
+			"NvimTreeCollapse",
+		},
+		keys = {
+			{ "<leader>ft", "<cmd>NvimTreeToggle<cr>", desc = "[f]ile [t]ree" },
+			{ "<leader>fT", "<cmd>NvimTreeFindFileToggle<cr>", desc = "find [f]ile [t]ree" },
+		},
 		opts = function()
 			local nvim_tree = vim.api.nvim_create_augroup("NvimTreeResized", { clear = true })
 
@@ -106,20 +126,6 @@ return {
 				reload_on_bufenter = true,
 			}
 		end,
-		dependencies = {
-			"nvim-tree/nvim-web-devicons",
-			"nvim-lua/plenary.nvim",
-			"antosha417/nvim-lsp-file-operations",
-		},
-		cmd = {
-			"NvimTreeToggle",
-			"NvimTreeFindFile",
-			"NvimTreeCollapse",
-		},
-		keys = {
-			{ "<leader>ft", "<cmd>NvimTreeToggle<cr>", desc = "[f]ile [t]ree" },
-			{ "<leader>fT", "<cmd>NvimTreeFindFileToggle<cr>", desc = "find [f]ile [t]ree" },
-		},
 		config = function(_, opts)
 			require("nvim-tree").setup(opts)
 			require("lsp-file-operations").setup()

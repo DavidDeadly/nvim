@@ -11,9 +11,13 @@ return {
 
 	{
 		"j-hui/fidget.nvim",
+		event = "BufReadPre",
 		opts = {
 			notification = {
 				override_vim_notify = true,
+			},
+			integration = {
+				["nvim-tree"] = { enable = false },
 			},
 		},
 	},

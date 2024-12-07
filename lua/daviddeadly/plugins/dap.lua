@@ -170,20 +170,14 @@ return {
 		},
 	},
 	dependencies = {
-		{
-			"theHamsta/nvim-dap-virtual-text",
-			opts = {},
-		},
+		{ "theHamsta/nvim-dap-virtual-text", config = true },
 
-		{
-			"LiadOz/nvim-dap-repl-highlights",
-			opts = {},
-		},
+		{ "LiadOz/nvim-dap-repl-highlights", config = true },
 
 		{
 			"jay-babu/mason-nvim-dap.nvim",
 			dependencies = {
-				"williamboman/mason.nvim",
+				{ "williamboman/mason.nvim", config = true },
 			},
 			opts = {
 				handlers = {},
@@ -196,6 +190,7 @@ return {
 
 		{
 			"rcarriga/cmp-dap",
+			enabled = false,
 			opts = {
 				enabled = function()
 					local is_not_prompt = vim.api.nvim_get_option_value("buftype", { buf = 0 }) ~= "prompt"

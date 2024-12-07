@@ -23,7 +23,9 @@ local icons = {
 return {
 	"nvim-lualine/lualine.nvim",
 	event = "VeryLazy",
-	dependencies = { "nvim-tree/nvim-web-devicons" },
+	dependencies = {
+		{ "echasnovski/mini.icons", config = MiniIconsSetup },
+	},
 	opts = {
 		globalstatus = true,
 		theme = "catppuccin",
@@ -135,7 +137,7 @@ return {
 				{
 					function()
 						local status = require("supermaven-nvim.api").is_running()
-						local msg = status and "Normal" and "Warning"
+						local msg = status and "Normal" or "Warning"
 
 						return icons[msg] .. " " .. msg
 					end,
