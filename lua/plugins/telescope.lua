@@ -12,7 +12,7 @@ return {
     return {
       { "<leader>ff", builtin.find_files, desc = "[f]ind [f]iles" },
       { "<leader>fw", builtin.grep_string, desc = "[f]ind [w]ord" },
-      { "<leader>fW", builtin.live_grep, desc = "[f]ind [W]ords" },
+      { "<leader>fW", require("telescope.custom").live_multigrep, desc = "[f]ind [W]ords" },
       { "<leader>fh", builtin.help_tags, desc = "[f]ind [h]elp tags" },
       { "<leader>fg", builtin.git_files, desc = "[f]ind [g]it files" },
       { "<leader>ltb", builtin.builtin, desc = "[l]ist [t]elescope [b]uiltin" },
@@ -66,7 +66,6 @@ return {
         end,
         desc = "[/] Search in current buffer",
       },
-
       {
         "<leader>ep",
         function()
