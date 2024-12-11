@@ -1,14 +1,3 @@
-local function get_restore_session_item()
-  local session_info = require("projections.session").info(vim.loop.cwd() or "")
-  if type(session_info) == "table" then
-    return {
-      action = "RestoreProjectSession",
-      name = "R: Restore session",
-      section = "Sessions",
-    }
-  end
-end
-
 local function get_themes_items()
   local themes = { "rose-pine", "nightfly", "tokyonight", "catppuccin", "onedark" }
   local current_theme = vim.api.nvim_exec2("colorscheme", {
@@ -66,7 +55,6 @@ return {
         query_updaters = [[abcdefghilmoqrstuvwxyz0123456789_-,.ABCDEFGHIJKLMOQRSTUVWXYZ]],
         items = {
           { action = "tab G", name = "G: Fugitive", section = "Git" },
-          get_restore_session_item(),
           { action = "Lazy update", name = "U: Update Plugins", section = "Plugins" },
           { action = "Lazy profile", name = "T: Lazy time", section = "Plugins" },
           get_themes_items(),
