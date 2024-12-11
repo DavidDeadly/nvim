@@ -1,6 +1,6 @@
 return {
-	"echasnovski/mini.surround",
-	event = "InsertEnter",
-	version = "*",
-	config = true,
+  "echasnovski/mini.surround",
+  event = "InsertEnter",
+  version = "*",
+  config = true,
 }

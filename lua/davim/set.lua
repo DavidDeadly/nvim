@@ -14,7 +14,7 @@ vim.opt.wrap = false
 
 vim.opt.swapfile = false
 vim.opt.backup = false
-vim.opt.undodir = vim.fn.stdpath("data") .. "/vim/undodir"
+vim.opt.undodir = vim.fn.stdpath "data" .. "/vim/undodir"
 vim.opt.undofile = true
 
 vim.opt.termguicolors = true
@@ -40,4 +40,4 @@ vim.opt.linespace = 10
 vim.opt.pumheight = 15
 
 -- For projections.nvim save localoptions to session file
-vim.opt.sessionoptions:append("localoptions")
+vim.opt.sessionoptions:append "localoptions"

@@ -1,4 +1,4 @@
 return {
-	"npm.inspect-start",
-	"npm.debug-react-native",
+  "npm.inspect-start",
+  "npm.debug-react-native",
 }

@@ -3,7 +3,7 @@ return {
   event = { "BufReadPost", "BufNewFile" },
   version = "*",
   opts = {
-    options = { try_as_border = true }
+    options = { try_as_border = true },
   },
   init = function()
     vim.api.nvim_create_autocmd("FileType", {
@@ -11,11 +11,11 @@ return {
         "help",
         "lazy",
         "mason",
-        "NvimTree"
+        "NvimTree",
       },
       callback = function()
         vim.b.miniindentscope_disable = true
       end,
     })
-  end
+  end,
 }

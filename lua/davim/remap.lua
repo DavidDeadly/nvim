@@ -21,16 +21,16 @@ vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]], { desc = "Copy from system cl
 vim.keymap.set("n", "<leader>Y", [["+Y]], { desc = "Copy line to system clipboard" })
 vim.keymap.set("x", "<leader>p", [["_dP]], { desc = "Paste and keep data" })
 vim.keymap.set(
-	{ "n", "x", "i" },
-	"<C-M-p>",
-	[[<cmd>normal "+p<cr>]],
-	{ desc = "Paste form system clipboard front cursor" }
+  { "n", "x", "i" },
+  "<C-M-p>",
+  [[<cmd>normal "+p<cr>]],
+  { desc = "Paste form system clipboard front cursor" }
 )
 vim.keymap.set(
-	{ "n", "x", "i" },
-	"<C-M-S-p>",
-	[[<cmd>normal "+P<cr>]],
-	{ desc = "Paste form system clipboard behind cursor" }
+  { "n", "x", "i" },
+  "<C-M-S-p>",
+  [[<cmd>normal "+P<cr>]],
+  { desc = "Paste form system clipboard behind cursor" }
 )
 
 vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]], { desc = "Delete to empty register" })
@@ -43,17 +43,17 @@ vim.keymap.set("n", "<leader>k", "<cmd>lnext<CR>zz", { desc = "Next location lis
 vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz", { desc = "Prev location list" })
 
 vim.keymap.set(
-	"n",
-	"<leader>s",
-	[[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]],
-	{ desc = "Search and replace on current buffer" }
+  "n",
+  "<leader>s",
+  [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]],
+  { desc = "Search and replace on current buffer" }
 )
 
 vim.keymap.set("x", "@", [[:<C-u>lua ExecuteMacroOverVisualRange()<CR>]], { noremap = true, silent = true })
 
 function ExecuteMacroOverVisualRange()
-	vim.api.nvim_out_write("@" .. vim.fn.getcmdline() .. "\n")
-	vim.api.nvim_exec2(":'<,'>normal @" .. vim.fn.nr2char(vim.fn.getchar()), {
-		output = true,
-	})
+  vim.api.nvim_out_write("@" .. vim.fn.getcmdline() .. "\n")
+  vim.api.nvim_exec2(":'<,'>normal @" .. vim.fn.nr2char(vim.fn.getchar()), {
+    output = true,
+  })
 end
