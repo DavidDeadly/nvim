@@ -23,6 +23,18 @@ return {
 	},
 
 	{
+		"NvChad/nvim-colorizer.lua",
+		event = "BufReadPost",
+		opts = {
+			user_default_options = {
+				tailwind = true,
+				mode = "foreground",
+				always_update = true,
+			},
+		},
+	},
+
+	{
 		"gen740/SmoothCursor.nvim",
 		event = "VeryLazy",
 		init = function()
