@@ -1,7 +1,7 @@
-lazypath = vim.fn.stdpath("data") .. "/lazy"
-local lazy = lazypath .. "/lazy.nvim"
+LAZY_PATH = vim.fs.joinpath(vim.fn.stdpath("data"), "lazy")
+local lazy = vim.fs.joinpath(LAZY_PATH, "/lazy.nvim")
 
-if not vim.loop.fs_stat(lazypath) then
+if not vim.loop.fs_stat(LAZY_PATH) then
 	vim.fn.system({
 		"git",
 		"clone",
@@ -11,9 +11,10 @@ if not vim.loop.fs_stat(lazypath) then
 		lazy,
 	})
 end
+
 vim.opt.rtp:prepend(lazy)
 
-require("lazy").setup("daviddeadly.plugins", {
+require("lazy").setup("plugins", {
 	install = {
 		missing = true,
 		colorscheme = { "catppuccin" },

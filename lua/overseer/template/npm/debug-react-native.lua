@@ -16,7 +16,7 @@ return {
 			cmd = { "node" },
 			args = { "src/standalone.js" },
 			name = "node react-native debug",
-			cwd = lazypath .. "/nvim-dap-reactnative",
+			cwd = vim.fs.joinpath(LAZY_PATH, "/nvim-dap-reactnative"),
 			env = {
 				RN_DEBBUGER_WD = vim.fn.getcwd(),
 			},

@@ -346,7 +346,7 @@ return {
 				},
 			},
 			opts = {
-				debugger_path = lazypath .. "/vscode-js-debug",
+				debugger_path = vim.fs.joinpath(LAZY_PATH, "/vscode-js-debug"),
 				debugger_cmd = { "vsDebugServer" },
 				adapters = { "pwa-node", "pwa-chrome", "pwa-msedge", "node-terminal", "pwa-extensionHost" },
 			},
