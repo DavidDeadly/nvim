@@ -1,12 +1,3 @@
-local find_in_current_buffer = function()
-	local dropdown = require("telescope.themes").get_dropdown({
-		winblend = 10,
-		previewer = false,
-	})
-
-	require("telescope.builtin").current_buffer_fuzzy_find(dropdown)
-end
-
 return {
 	"nvim-telescope/telescope.nvim",
 	branch = "0.1.x",
@@ -34,6 +25,7 @@ return {
 			{ "gI", builtin.lsp_implementations, "[g]oto [I]mplementations" },
 			{ "<leader>dS", builtin.lsp_document_symbols, "[d]ocument [S]ymbols" },
 			{ "<leader>ws", builtin.lsp_dynamic_workspace_symbols, "[w]orkspace [s]ymbols" },
+			{ "<leader>/", builtin.current_buffer_fuzzy_find, desc = "[/] Search in current buffer" },
 			{
 				"<leader>fc",
 				function()
@@ -58,11 +50,12 @@ return {
 			{
 				"<leader>sn",
 				function()
-					builtin.find_files({ cwd = vim.fn.stdpath("config") })
+					builtin.find_files({
+						cwd = vim.fn.stdpath("config"),
+					})
 				end,
 				desc = "[S]earch [N]eovim files",
 			},
-			{ "<leader>/", find_in_current_buffer, desc = "[/] Search in current buffer" },
 			{
 				"<leader>s/",
 				function()
@@ -73,9 +66,21 @@ return {
 				end,
 				desc = "[/] Search in current buffer",
 			},
+
+			{
+				"<leader>ep",
+				function()
+					builtin.find_files({
+						cwd = vim.fs.joinpath(vim.fn.stdpath("data"), "lazy"),
+					})
+				end,
+				desc = "[e]dit [p]ackages",
+			},
 		}
 	end,
 	config = function()
+		require("telescope").load_extension("fzf")
+
 		require("telescope").setup({
 			defaults = {
 				file_ignore_patterns = { "node_modules" },
@@ -92,9 +97,17 @@ return {
 				--   hide_on_startup = true
 				-- },
 			},
+			extensions = {
+				fzf = {},
+			},
 			pickers = {
 				find_files = {
 					prompt_prefix = "🔍 ",
+				},
+				current_buffer_fuzzy_find = {
+					winblend = 10,
+					previewer = false,
+					theme = "dropdown",
 				},
 				buffers = {
 					prompt_prefix = "📁 ",
