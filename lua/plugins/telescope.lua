@@ -21,10 +21,6 @@ return {
       { "<leader>f.", builtin.buffers, desc = "[F]ind existing buffers" },
       { "<leader>fd", builtin.diagnostics, desc = "[f]ind [d]iagnostics" },
       { "<leader><C-space>", builtin.oldfiles, desc = "[?] Global recently open files" },
-      { "gr", builtin.lsp_references, "[g]oto [r]eferences" },
-      { "gI", builtin.lsp_implementations, "[g]oto [I]mplementations" },
-      { "<leader>dS", builtin.lsp_document_symbols, "[d]ocument [S]ymbols" },
-      { "<leader>ws", builtin.lsp_dynamic_workspace_symbols, "[w]orkspace [s]ymbols" },
       { "<leader>/", builtin.current_buffer_fuzzy_find, desc = "[/] Search in current buffer" },
       {
         "<leader>fc",
