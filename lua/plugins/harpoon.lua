@@ -17,28 +17,28 @@ return {
     },
 
     {
-      "<M-r>",
+      "<leader>1",
       function()
         require("harpoon.ui").nav_file(1)
       end,
       desc = "harpoon first file",
     },
     {
-      "<M-c>",
+      "<leader>2",
       function()
         require("harpoon.ui").nav_file(2)
       end,
       desc = "harpoon second file",
     },
     {
-      "<M-y>",
+      "<leader>3",
       function()
         require("harpoon.ui").nav_file(3)
       end,
       desc = "harpoon third file",
     },
     {
-      "<M-b>",
+      "<leader>4",
       function()
         require("harpoon.ui").nav_file(4)
       end,

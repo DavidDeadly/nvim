@@ -36,11 +36,11 @@ vim.keymap.set(
 vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]], { desc = "Delete to empty register" })
 
 vim.keymap.set("n", "<leader>xq", "<cmd>copen<cr>", { desc = "Quickfix List" })
-vim.keymap.set("n", "<leader>K", "<cmd>cnext<CR>zz", { desc = "Next quickfix list" })
-vim.keymap.set("n", "<leader>J", "<cmd>cprev<CR>zz", { desc = "Prev quickfix list" })
+vim.keymap.set("n", "<M-j>", "<cmd>cnext<CR>zz", { desc = "Next quickfix list" })
+vim.keymap.set("n", "<M-k>", "<cmd>cprev<CR>zz", { desc = "Prev quickfix list" })
 vim.keymap.set("n", "<leader>xl", "<cmd>lopen<cr>", { desc = "Location List" })
-vim.keymap.set("n", "<leader>k", "<cmd>lnext<CR>zz", { desc = "Next location list" })
-vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz", { desc = "Prev location list" })
+vim.keymap.set("n", "<leader>j", "<cmd>lnext<CR>zz", { desc = "Next location list" })
+vim.keymap.set("n", "<leader>k", "<cmd>lprev<CR>zz", { desc = "Prev location list" })
 
 vim.keymap.set(
   "n",
