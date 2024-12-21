@@ -1,37 +1,42 @@
-local function lazy_git()
-  local fterm = require "FTerm"
-
-  return fterm:new {
-    cmd = "lazygit",
-    dimensions = {
-      height = 0.8,
-      width = 0.8,
-    },
-  }
-end
-
 return {
-  "numToStr/FTerm.nvim",
-  enabled = false,
-  pts = function()
-    local lazygit = lazy_git()
-    vim.api.nvim_create_user_command("LazyGit", function()
-      lazygit:toggle()
-    end, { bang = true })
-
-    return {}
-  end,
-  keys = {
-    { "<M-g><M-g>", vim.cmd.LazyGit, desc = "toggle LazyGit" },
-    { "<M-g><M-g>", "<C-\\><C-n><CMD>LazyGit<CR>", mode = "t", desc = "toggle LazyGit" },
-    {
-      "ñ",
-      function()
-        require("FTerm").toggle()
-      end,
-      desc = "toggle FTerminal",
+  {
+    "numToStr/FTerm.nvim",
+    opts = {
+      border = "rounded",
     },
-    { "ñ", "<C-\\><C-n><CMD>lua require('FTerm').toggle()<CR>", mode = "t", desc = "toggle FTerminal" },
-    { "<M-c>", "<C-\\><C-n><CMD>lua require('FTerm').exit()<CR>", mode = "t", desc = "toggle FTerminal" },
+    keys = function()
+      local fterm = require "FTerm"
+      local lazygit = fterm:new {
+        cmd = "lazygit",
+        dimensions = {
+          height = 0.8,
+          width = 0.8,
+        },
+      }
+
+      vim.api.nvim_create_user_command("LazyGit", function()
+        lazygit:toggle()
+      end, { bang = true })
+      return {
+        {
+          "<M-g><M-g>",
+          function()
+            lazygit:toggle()
+          end,
+          desc = "toggle LazyGit",
+        },
+        {
+          "<M-g><M-g>",
+          function()
+            lazygit:toggle()
+          end,
+          mode = "t",
+          desc = "toggle LazyGit",
+        },
+        { "ñ", fterm.toggle, desc = "toggle FTerminal" },
+        { "ñ", fterm.toggle, mode = "t", desc = "toggle FTerminal" },
+        { "<M-c>", fterm.exit, mode = "t", desc = "toggle FTerminal" },
+      }
+    end,
   },
 }

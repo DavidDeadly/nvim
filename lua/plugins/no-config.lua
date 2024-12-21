@@ -14,6 +14,7 @@ return {
     event = { "BufReadPost", "BufNewFile" },
     dependencies = { "MunifTanjim/nui.nvim", "nvim-lua/plenary.nvim" },
     opts = {
+      disable_mouse = false,
       disabled_filetypes = {
         "dapui_scopes",
         "dapui_breakpoints",
@@ -24,10 +25,7 @@ return {
         "dap-float",
         "FTerm",
         "netrw",
-        "lazy",
         "mason",
-        "minifiles",
-        "NvimTree",
       },
     },
   },

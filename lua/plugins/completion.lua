@@ -25,20 +25,19 @@ return {
       },
 
       sources = {
-        completion = {
-          enabled_providers = { "lsp", "path", "snippets", "buffer", "lazydev" },
-        },
+        default = { "lsp", "path", "snippets", "buffer", "lazydev" },
         providers = {
           -- dont show LuaLS require statements when lazydev has items
-          lsp = { fallback_for = { "lazydev" } },
+          lsp = { fallbacks = { "lazydev" } },
           lazydev = { name = "LazyDev", module = "lazydev.integrations.blink" },
         },
       },
 
       -- experimental auto-brackets support
       completion = {
+        keyword = { range = "full" },
         accept = {
-          auto_brackets = { enabled = true },
+          auto_brackets = { enabled = false },
         },
 
         menu = {
@@ -55,7 +54,7 @@ return {
     },
     -- allows extending the enabled_providers array elsewhere in your config
     -- without having to redefine it
-    opts_extend = { "sources.completion.enabled_providers" },
+    opts_extend = { "sources.default" },
   },
 
   {
