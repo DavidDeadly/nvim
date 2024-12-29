@@ -41,3 +41,6 @@ vim.opt.pumheight = 15
 
 -- For projections.nvim save localoptions to session file
 vim.opt.sessionoptions:append "localoptions"
+
+-- splits to the right
+vim.opt.splitright = true
