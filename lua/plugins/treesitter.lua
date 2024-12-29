@@ -6,6 +6,54 @@ return {
 
     "nvim-treesitter/nvim-treesitter-context",
 
+    {
+      "aaronik/treewalker.nvim",
+      keys = {
+        {
+          "<C-k>",
+          function()
+            vim.cmd.Treewalker "Up"
+          end,
+          desc = "Previous treesitter node",
+        },
+        {
+          "<C-j>",
+          function()
+            vim.cmd.Treewalker "Down"
+          end,
+          desc = "Next treesitter node",
+        },
+        {
+          "<C-l>",
+          function()
+            vim.cmd.Treewalker "Right"
+          end,
+          desc = "Inner treesitter node",
+        },
+        {
+          "<C-h>",
+          function()
+            vim.cmd.Treewalker "Left"
+          end,
+          desc = "Outer treesitter node",
+        },
+        {
+          "<C-S-k>",
+          function()
+            vim.cmd.Treewalker "SwapUp"
+          end,
+          desc = "Swap with previous treesitter node",
+        },
+        {
+          "<C-S-j>",
+          function()
+            vim.cmd.Treewalker "SwapDown"
+          end,
+          desc = "Swap with next treesitter node",
+        },
+      },
+    },
+
     { "windwp/nvim-ts-autotag", config = true },
 
     {
