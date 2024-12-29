@@ -5,7 +5,7 @@ return {
     opts = { lsp = { auto_attach = true } },
     keys = {
       {
-        "<leader>ds",
+        "<leader>dS",
         function()
           require("nvim-navbuddy").open()
         end,
@@ -81,6 +81,7 @@ return {
               },
               diagnostics = {
                 disable = { "missing-fields" },
+                globals = { "vim" },
               },
             },
           },

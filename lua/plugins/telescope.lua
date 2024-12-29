@@ -73,49 +73,50 @@ return {
       },
     }
   end,
-  config = function()
+  opts = {
+    defaults = {
+      file_ignore_patterns = { "node_modules" },
+      mappings = {
+        i = {
+          ["<M-p>"] = require("telescope.actions.layout").toggle_preview,
+          ["<M-h>"] = "which_key",
+        },
+        n = {
+          ["<M-p>"] = require("telescope.actions.layout").toggle_preview,
+        },
+      },
+      -- preview = {
+      --   hide_on_startup = true
+      -- },
+    },
+    extensions = {
+      fzf = {},
+    },
+    pickers = {
+      find_files = {
+        prompt_prefix = "🔍 ",
+      },
+      current_buffer_fuzzy_find = {
+        winblend = 10,
+        previewer = false,
+        theme = "dropdown",
+      },
+      buffers = {
+        prompt_prefix = "📁 ",
+        mappings = {
+          n = {
+            ["d"] = require("telescope.actions").delete_buffer,
+          },
+          i = {
+            ["<C-S-D>"] = require("telescope.actions").delete_buffer,
+          },
+        },
+      },
+    },
+  },
+  config = function(_, opts)
     require("telescope").load_extension "fzf"
 
-    require("telescope").setup {
-      defaults = {
-        file_ignore_patterns = { "node_modules" },
-        mappings = {
-          i = {
-            ["<M-p>"] = require("telescope.actions.layout").toggle_preview,
-            ["<M-h>"] = "which_key",
-          },
-          n = {
-            ["<M-p>"] = require("telescope.actions.layout").toggle_preview,
-          },
-        },
-        -- preview = {
-        --   hide_on_startup = true
-        -- },
-      },
-      extensions = {
-        fzf = {},
-      },
-      pickers = {
-        find_files = {
-          prompt_prefix = "🔍 ",
-        },
-        current_buffer_fuzzy_find = {
-          winblend = 10,
-          previewer = false,
-          theme = "dropdown",
-        },
-        buffers = {
-          prompt_prefix = "📁 ",
-          mappings = {
-            n = {
-              ["d"] = require("telescope.actions").delete_buffer,
-            },
-            i = {
-              ["<C-S-D>"] = require("telescope.actions").delete_buffer,
-            },
-          },
-        },
-      },
-    }
+    require("telescope").setup(opts)
   end,
 }

@@ -1,8 +1,3 @@
-local gwidth = vim.api.nvim_list_uis()[1].width
-local gheight = vim.api.nvim_list_uis()[1].height
-local width = 60
-local height = 20
-
 MiniIconsSetup = function(_, opts)
   require("mini.icons").setup(opts)
   MiniIcons.mock_nvim_web_devicons()
