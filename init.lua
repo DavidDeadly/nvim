@@ -2,3 +2,142 @@ require "davim.set"
 require "davim.remap"
 require "davim.lazy"
 require "davim.autocmd"
+
+-- local M = {
+--   repl = nil,
+--   output_buf = nil,
+-- }
+--
+-- -- Debug logging function
+-- local function log_debug(msg)
+--   vim.schedule(function()
+--     print("DEBUG: " .. vim.inspect(msg))
+--   end)
+-- end
+--
+-- local function create_output_window()
+--   if M.output_buf and vim.api.nvim_buf_is_valid(M.output_buf) then
+--     for _, win in ipairs(vim.api.nvim_list_wins()) do
+--       if vim.api.nvim_win_get_buf(win) == M.output_buf then
+--         vim.api.nvim_set_current_win(win)
+--         return M.output_buf
+--       end
+--     end
+--   end
+--
+--   local buf = vim.api.nvim_create_buf(false, true)
+--   vim.api.nvim_buf_set_option(buf, "buftype", "nofile")
+--   vim.api.nvim_buf_set_option(buf, "modifiable", true)
+--
+--   vim.cmd "vsplit"
+--   vim.cmd "wincmd l"
+--   vim.cmd "resize 10"
+--
+--   vim.api.nvim_win_set_buf(0, buf)
+--   M.output_buf = buf
+--
+--   return buf
+-- end
+--
+-- local function start_repl()
+--   if M.repl then
+--     return
+--   end
+--
+--   -- Let's try using different Node REPL options
+--   M.repl = vim.fn.jobstart({ "node", "--interactive" }, {
+--     stdout_buffered = false, -- Changed to false to get immediate output
+--     on_stdout = function(_, data)
+--       log_debug("stdout received: " .. vim.inspect(data))
+--       if data and M.output_buf and vim.api.nvim_buf_is_valid(M.output_buf) then
+--         local filtered_data = vim.tbl_filter(function(line)
+--           return line ~= "" and not line:match "^%>" and not line:match "^%.%.%."
+--         end, data)
+--
+--         if #filtered_data > 0 then
+--           vim.schedule(function()
+--             local lines = vim.api.nvim_buf_get_lines(M.output_buf, 0, -1, false)
+--             for _, line in ipairs(filtered_data) do
+--               table.insert(lines, line)
+--             end
+--             vim.api.nvim_buf_set_lines(M.output_buf, 0, -1, false, lines)
+--           end)
+--         end
+--       end
+--     end,
+--     on_stderr = function(_, data)
+--       log_debug("stderr received: " .. vim.inspect(data))
+--       if data and M.output_buf and vim.api.nvim_buf_is_valid(M.output_buf) then
+--         vim.schedule(function()
+--           local lines = vim.api.nvim_buf_get_lines(M.output_buf, 0, -1, false)
+--           for _, line in ipairs(data) do
+--             if line ~= "" then
+--               table.insert(lines, "Error: " .. line)
+--             end
+--           end
+--           vim.api.nvim_buf_set_lines(M.output_buf, 0, -1, false, lines)
+--         end)
+--       end
+--     end,
+--     on_exit = function(_, code)
+--       log_debug("REPL exited with code: " .. code)
+--     end,
+--   })
+--
+--   -- Verify job started successfully
+--   if M.repl <= 0 then
+--     print "Failed to start Node REPL"
+--     return
+--   else
+--     print("Node REPL started with job ID: " .. M.repl)
+--   end
+-- end
+--
+-- local function evaluate_code(code)
+--   if not M.repl then
+--     start_repl()
+--   end
+--
+--   local buf = create_output_window()
+--
+--   -- Add debug log before sending code
+--   log_debug "Sending code to REPL: "
+--
+--   -- Send code to REPL with explicit newline
+--   table.insert(code, "\n")
+--   local success = vim.fn.chansend(M.repl, code)
+--   log_debug("chansend result: " .. success)
+-- end
+--
+-- vim.api.nvim_create_user_command("NodeEval", function()
+--   local line = vim.api.nvim_get_current_line()
+--   evaluate_code(line)
+-- end, {})
+--
+-- vim.keymap.set("n", "<Leader>ne", ":NodeEval<CR>", { silent = true })
+-- vim.keymap.set("v", "<Leader>ne", function()
+--   local start_pos = vim.fn.getpos "'<"
+--   local end_pos = vim.fn.getpos "'>"
+--   local lines = vim.api.nvim_buf_get_lines(0, start_pos[2] - 1, end_pos[2], false)
+--   local text = table.concat(lines, "\n")
+--   evaluate_code(text)
+-- end, { silent = true })
+--
+-- vim.api.nvim_create_autocmd("VimLeave", {
+--   callback = function()
+--     if M.repl then
+--       vim.fn.jobstop(M.repl)
+--     end
+--   end,
+-- })
+--
+-- -- Add a test command
+-- vim.api.nvim_create_user_command("NodeTest", function()
+--   evaluate_code {
+--     "42",
+--     "const name = 'daviddeadly'",
+--     "const age = 21 + 2",
+--     "name",
+--     "age + 15",
+--   }
+-- end, {})

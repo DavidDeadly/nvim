@@ -1,3 +1,7 @@
+local accept = "<Tab>"
+local accept_word = "<C-j>"
+local dismiss = "<C-}>"
+
 return {
   {
     "zbirenbaum/copilot.lua",
@@ -8,6 +12,11 @@ return {
     opts = {
       suggestion = {
         auto_trigger = true,
+        keymap = {
+          accept = accept,
+          dismiss = dismiss,
+          accept_word = accept_word,
+        },
       },
       panel = { enabled = false },
     },
@@ -15,13 +24,14 @@ return {
 
   {
     "supermaven-inc/supermaven-nvim",
+    enabled = true,
     event = "InsertEnter",
     opts = {
       {
         keymaps = {
-          accept_suggestion = "Tab",
-          clear_suggestion = "<C-]>",
-          accept_word = "<C-j>",
+          accept_suggestion = accept,
+          clear_suggestion = dismiss,
+          accept_word = accept_word,
         },
       },
     },
