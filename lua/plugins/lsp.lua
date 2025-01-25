@@ -42,52 +42,62 @@ return {
         },
       },
     },
-    opts = {
-      servers = {
-        ts_ls = {},
-        angularls = {},
-        astro = {},
-        html = {},
-        cssls = {},
-        tailwindcss = {},
+    opts = function()
+      local nvim_lsp = require "lspconfig"
 
-        pyright = {},
-        clangd = {},
-        gopls = {},
+      return {
+        servers = {
+          ts_ls = {
+            root_dir = nvim_lsp.util.root_pattern "package.json",
+            single_file_support = false,
+          },
+          denols = {
+            root_dir = nvim_lsp.util.root_pattern("deno.json", "deno.jsonc"),
+          },
+          angularls = {},
+          astro = {},
+          html = {},
+          cssls = {},
+          tailwindcss = {},
 
-        -- NOTE: nix-lsp doesn't working on fedora
-        -- nil_ls = {
-        -- 	settings = {
-        -- 		testSetting = 42,
-        -- 		formatting = {
-        -- 			command = { "nixpkgs-fmt" },
-        -- 		},
-        -- 	},
-        -- },
+          pyright = {},
+          clangd = {},
+          gopls = {},
 
-        lua_ls = {
-          -- cmd = {...},
-          -- filetypes = { ...},
-          -- capabilities = {},
-          settings = {
-            Lua = {
-              runtime = {
-                version = "LuaJIT",
-              },
-              workspace = { checkThirdParty = false },
-              telemetry = { enable = false },
-              completion = {
-                callSnippet = "Replace",
-              },
-              diagnostics = {
-                disable = { "missing-fields" },
-                globals = { "vim" },
+          -- NOTE: nix-lsp doesn't working on fedora
+          -- nil_ls = {
+          -- 	settings = {
+          -- 		testSetting = 42,
+          -- 		formatting = {
+          -- 			command = { "nixpkgs-fmt" },
+          -- 		},
+          -- 	},
+          -- },
+
+          lua_ls = {
+            -- cmd = {...},
+            -- filetypes = { ...},
+            -- capabilities = {},
+            settings = {
+              Lua = {
+                runtime = {
+                  version = "LuaJIT",
+                },
+                workspace = { checkThirdParty = false },
+                telemetry = { enable = false },
+                completion = {
+                  callSnippet = "Replace",
+                },
+                diagnostics = {
+                  disable = { "missing-fields" },
+                  globals = { "vim" },
+                },
               },
             },
           },
         },
-      },
-    },
+      }
+    end,
     config = function(_, opts)
       vim.api.nvim_create_autocmd("LspAttach", {
         callback = function(attach_event)

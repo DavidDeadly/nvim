@@ -38,7 +38,7 @@ return {
 
       require("lint").linters_by_ft = {
         javascript = { "eslint_d" },
-        typescript = { "eslint_d" },
+        typescript = { "biomejs" },
         javascriptreact = { "eslint_d" },
         typescriptreact = { "eslint_d" },
         html = { "eslint_d" },
@@ -49,7 +49,8 @@ return {
 
         python = { "flake8" },
 
-        cpp = { "cpplint" },
+        cpp = { "cppcheck" },
+        c = { "cppcheck" },
 
         go = { "golangcilint" },
 
@@ -87,10 +88,14 @@ return {
       },
       formatters_by_ft = {
         javascript = { "eslint_d", "prettierd", "prettier", stop_after_first = true },
-        typescript = { "eslint_d", "prettierd", "prettier", stop_after_first = true },
+        typescript = {
+          "biome",
+          "biome-organize-imports",
+          -- "eslint_d", "prettierd", "prettier", stop_after_first = true
+        },
         javascriptreact = { "eslint_d", "prettierd", "prettier", stop_after_first = true },
         typescriptreact = { "eslint_d", "prettierd", "prettier", stop_after_first = true },
-        html = { { "prettierd", "prettier" } },
+        html = { "prettierd", "prettier", stop_after_first = true },
 
         nix = { "nixpkgs_fmt" },
 
@@ -101,6 +106,7 @@ return {
         go = { "goimports", "gofumpt" },
 
         cpp = { "clang-format" },
+        c = { "clang-format" },
 
         rust = { "rustfmt" },
 
