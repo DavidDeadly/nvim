@@ -99,6 +99,8 @@ return {
 
         nix = { "nixpkgs_fmt" },
 
+        yaml = { "yamlfmt" },
+
         lua = { "stylua" },
 
         python = { "isort", "black" },
